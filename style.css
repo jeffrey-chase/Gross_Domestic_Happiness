@@ -1,29 +1,48 @@
 header {
   top: 0;
   width: 100%;
-  
+
 }
 
-body div {
-  border: 2px solid black;
+body {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 400;
+}
+
+article {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content:space-around;
+}
+
+body > div {
   position: absolute;
+  border: 1px dashed gray;
 }
 
 #maparea {
-  position: absolute;
+/*  position: absolute;*/
   height: 500px;
-  top: 100px;
-  width: 80%;
-  left: 10%;
+/*  top: 100px;*/
+  width: 800px;
+/*  left: 0%;*/
 }
 
 #bump-chart {
   overflow: scroll;
-  position: relative;
-  top: 550px;
-  height: 200px;
-  width: 80%;
-  left: 10%;
+/*
+  position: fixed;
+  right: 10px;
+*/
+  height: 500px;
+  width: 400px;
 }
 
 #bump-chart svg {
@@ -33,4 +52,42 @@ body div {
 #hello {
   position: absolute;
   top: 500px;
+}
+
+/* Styling the Axes */
+
+.axis path {
+  display: none;
+}
+
+.tick line {
+  stroke: gray;
+}
+
+
+/* Bump Chart Styling */
+text {
+  font-size: 8px;
+  text-transform: uppercase;
+}
+
+path.rank{
+  opacity: 0.4;
+  cursor: pointer;
+}
+
+path.rank:hover{
+  opacity: 1;
+}
+
+path.rank.show {
+  opacity: 1;
+}
+
+text.label.show {
+  font-weight: bold;
+}
+
+circle.point.show {
+  transform: scale(4, 4);
 }
