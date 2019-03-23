@@ -1,0 +1,627 @@
+country,happiness_score,happiness_rank,year
+Switzerland,7.587,1,2015
+Iceland,7.561,2,2015
+Denmark,7.527,3,2015
+Norway,7.522,4,2015
+Canada,7.427,5,2015
+Finland,7.406,6,2015
+Netherlands,7.378,7,2015
+Sweden,7.364,8,2015
+New Zealand,7.286,9,2015
+Australia,7.284,10,2015
+Israel,7.278,11,2015
+Costa Rica,7.226,12,2015
+Austria,7.2,13,2015
+Mexico,7.187,14,2015
+United States,7.119,15,2015
+Brazil,6.983,16,2015
+Luxembourg,6.946,17,2015
+Ireland,6.94,18,2015
+Belgium,6.937,19,2015
+United Arab Emirates,6.901,20,2015
+United Kingdom,6.867,21,2015
+Oman,6.853,22,2015
+Venezuela,6.81,23,2015
+Singapore,6.798,24,2015
+Panama,6.786,25,2015
+Germany,6.75,26,2015
+Chile,6.67,27,2015
+Qatar,6.611,28,2015
+France,6.575,29,2015
+Argentina,6.574,30,2015
+Czech Republic,6.505,31,2015
+Uruguay,6.485,32,2015
+Colombia,6.477,33,2015
+Thailand,6.455,34,2015
+Saudi Arabia,6.411,35,2015
+Spain,6.329,36,2015
+Malta,6.302,37,2015
+Taiwan,6.298,38,2015
+Kuwait,6.295,39,2015
+Suriname,6.269,40,2015
+Trinidad and Tobago,6.168,41,2015
+El Salvador,6.13,42,2015
+Guatemala,6.123,43,2015
+Uzbekistan,6.003,44,2015
+Slovakia,5.995,45,2015
+Japan,5.987,46,2015
+South Korea,5.984,47,2015
+Ecuador,5.975,48,2015
+Bahrain,5.96,49,2015
+Italy,5.948,50,2015
+Bolivia,5.89,51,2015
+Moldova,5.889,52,2015
+Paraguay,5.878,53,2015
+Kazakhstan,5.855,54,2015
+Slovenia,5.848,55,2015
+Lithuania,5.833,56,2015
+Nicaragua,5.828,57,2015
+Peru,5.824,58,2015
+Belarus,5.813,59,2015
+Poland,5.791,60,2015
+Malaysia,5.77,61,2015
+Croatia,5.759,62,2015
+Libya,5.754,63,2015
+Russia,5.716,64,2015
+Jamaica,5.709,65,2015
+North Cyprus,5.695,66,2015
+Cyprus,5.689,67,2015
+Algeria,5.605,68,2015
+Kosovo,5.589,69,2015
+Turkmenistan,5.548,70,2015
+Mauritius,5.477,71,2015
+Hong Kong,5.474,72,2015
+Estonia,5.429,73,2015
+Indonesia,5.399,74,2015
+Vietnam,5.36,75,2015
+Turkey,5.332,76,2015
+Kyrgyzstan,5.286,77,2015
+Nigeria,5.268,78,2015
+Bhutan,5.253,79,2015
+Azerbaijan,5.212,80,2015
+Pakistan,5.194,81,2015
+Jordan,5.192,82,2015
+Montenegro,5.192,82,2015
+China,5.14,84,2015
+Zambia,5.129,85,2015
+Romania,5.124,86,2015
+Serbia,5.123,87,2015
+Portugal,5.102,88,2015
+Latvia,5.098,89,2015
+Philippines,5.073,90,2015
+Somaliland region,5.057,91,2015
+Morocco,5.013,92,2015
+Macedonia,5.007,93,2015
+Mozambique,4.971,94,2015
+Albania,4.959,95,2015
+Bosnia and Herzegovina,4.949,96,2015
+Lesotho,4.898,97,2015
+Dominican Republic,4.885,98,2015
+Laos,4.876,99,2015
+Mongolia,4.874,100,2015
+Swaziland,4.867,101,2015
+Greece,4.857,102,2015
+Lebanon,4.839,103,2015
+Hungary,4.8,104,2015
+Honduras,4.788,105,2015
+Tajikistan,4.786,106,2015
+Tunisia,4.739,107,2015
+Palestinian Territories,4.715,108,2015
+Bangladesh,4.694,109,2015
+Iran,4.686,110,2015
+Ukraine,4.681,111,2015
+Iraq,4.677,112,2015
+South Africa,4.642,113,2015
+Ghana,4.633,114,2015
+Zimbabwe,4.61,115,2015
+Liberia,4.571,116,2015
+India,4.565,117,2015
+Sudan,4.55,118,2015
+Haiti,4.518,119,2015
+Congo (Kinshasa),4.517,120,2015
+Nepal,4.514,121,2015
+Ethiopia,4.512,122,2015
+Sierra Leone,4.507,123,2015
+Mauritania,4.436,124,2015
+Kenya,4.419,125,2015
+Djibouti,4.369,126,2015
+Armenia,4.35,127,2015
+Botswana,4.332,128,2015
+Myanmar,4.307,129,2015
+Georgia,4.297,130,2015
+Malawi,4.292,131,2015
+Sri Lanka,4.271,132,2015
+Cameroon,4.252,133,2015
+Bulgaria,4.218,134,2015
+Egypt,4.194,135,2015
+Yemen,4.077,136,2015
+Angola,4.033,137,2015
+Mali,3.995,138,2015
+Congo (Brazzaville),3.989,139,2015
+Comoros,3.956,140,2015
+Uganda,3.931,141,2015
+Senegal,3.904,142,2015
+Gabon,3.896,143,2015
+Niger,3.845,144,2015
+Cambodia,3.819,145,2015
+Tanzania,3.781,146,2015
+Madagascar,3.681,147,2015
+Central African Republic,3.678,148,2015
+Chad,3.667,149,2015
+Guinea,3.656,150,2015
+Ivory Coast,3.655,151,2015
+Burkina Faso,3.587,152,2015
+Afghanistan,3.575,153,2015
+Rwanda,3.465,154,2015
+Benin,3.34,155,2015
+Syria,3.006,156,2015
+Burundi,2.905,157,2015
+Togo,2.839,158,2015
+Denmark,7.526,1,2016
+Switzerland,7.509,2,2016
+Iceland,7.501,3,2016
+Norway,7.498,4,2016
+Finland,7.413,5,2016
+Canada,7.404,6,2016
+Netherlands,7.339,7,2016
+New Zealand,7.334,8,2016
+Australia,7.313,9,2016
+Sweden,7.291,10,2016
+Israel,7.267,11,2016
+Austria,7.119,12,2016
+United States,7.104,13,2016
+Costa Rica,7.087,14,2016
+Puerto Rico,7.039,15,2016
+Germany,6.994,16,2016
+Brazil,6.952,17,2016
+Belgium,6.929,18,2016
+Ireland,6.907,19,2016
+Luxembourg,6.871,20,2016
+Mexico,6.778,21,2016
+Singapore,6.739,22,2016
+United Kingdom,6.725,23,2016
+Chile,6.705,24,2016
+Panama,6.701,25,2016
+Argentina,6.65,26,2016
+Czech Republic,6.596,27,2016
+United Arab Emirates,6.573,28,2016
+Uruguay,6.545,29,2016
+Malta,6.488,30,2016
+Colombia,6.481,31,2016
+France,6.478,32,2016
+Thailand,6.474,33,2016
+Saudi Arabia,6.379,34,2016
+Taiwan,6.379,34,2016
+Qatar,6.375,36,2016
+Spain,6.361,37,2016
+Algeria,6.355,38,2016
+Guatemala,6.324,39,2016
+Suriname,6.269,40,2016
+Kuwait,6.239,41,2016
+Bahrain,6.218,42,2016
+Trinidad and Tobago,6.168,43,2016
+Venezuela,6.084,44,2016
+Slovakia,6.078,45,2016
+El Salvador,6.068,46,2016
+Malaysia,6.005,47,2016
+Nicaragua,5.992,48,2016
+Uzbekistan,5.987,49,2016
+Italy,5.977,50,2016
+Ecuador,5.976,51,2016
+Belize,5.956,52,2016
+Japan,5.921,53,2016
+Kazakhstan,5.919,54,2016
+Moldova,5.897,55,2016
+Russia,5.856,56,2016
+Poland,5.835,57,2016
+South Korea,5.835,57,2016
+Bolivia,5.822,59,2016
+Lithuania,5.813,60,2016
+Belarus,5.802,61,2016
+North Cyprus,5.771,62,2016
+Slovenia,5.768,63,2016
+Peru,5.743,64,2016
+Turkmenistan,5.658,65,2016
+Mauritius,5.648,66,2016
+Libya,5.615,67,2016
+Latvia,5.56,68,2016
+Cyprus,5.546,69,2016
+Paraguay,5.538,70,2016
+Romania,5.528,71,2016
+Estonia,5.517,72,2016
+Jamaica,5.51,73,2016
+Croatia,5.488,74,2016
+Hong Kong,5.458,75,2016
+Somalia,5.44,76,2016
+Kosovo,5.401,77,2016
+Turkey,5.389,78,2016
+Indonesia,5.314,79,2016
+Jordan,5.303,80,2016
+Azerbaijan,5.291,81,2016
+Philippines,5.279,82,2016
+China,5.245,83,2016
+Bhutan,5.196,84,2016
+Kyrgyzstan,5.185,85,2016
+Serbia,5.177,86,2016
+Bosnia and Herzegovina,5.163,87,2016
+Montenegro,5.161,88,2016
+Dominican Republic,5.155,89,2016
+Morocco,5.151,90,2016
+Hungary,5.145,91,2016
+Pakistan,5.132,92,2016
+Lebanon,5.129,93,2016
+Portugal,5.123,94,2016
+Macedonia,5.121,95,2016
+Vietnam,5.061,96,2016
+Somaliland Region,5.057,97,2016
+Tunisia,5.045,98,2016
+Greece,5.033,99,2016
+Tajikistan,4.996,100,2016
+Mongolia,4.907,101,2016
+Laos,4.876,102,2016
+Nigeria,4.875,103,2016
+Honduras,4.871,104,2016
+Iran,4.813,105,2016
+Zambia,4.795,106,2016
+Nepal,4.793,107,2016
+Palestinian Territories,4.754,108,2016
+Albania,4.655,109,2016
+Bangladesh,4.643,110,2016
+Sierra Leone,4.635,111,2016
+Iraq,4.575,112,2016
+Namibia,4.574,113,2016
+Cameroon,4.513,114,2016
+Ethiopia,4.508,115,2016
+South Africa,4.459,116,2016
+Sri Lanka,4.415,117,2016
+India,4.404,118,2016
+Myanmar,4.395,119,2016
+Egypt,4.362,120,2016
+Armenia,4.36,121,2016
+Kenya,4.356,122,2016
+Ukraine,4.324,123,2016
+Ghana,4.276,124,2016
+Congo (Kinshasa),4.272,125,2016
+Georgia,4.252,126,2016
+Congo (Brazzaville),4.236,127,2016
+Senegal,4.219,128,2016
+Bulgaria,4.217,129,2016
+Mauritania,4.201,130,2016
+Zimbabwe,4.193,131,2016
+Malawi,4.156,132,2016
+Sudan,4.139,133,2016
+Gabon,4.121,134,2016
+Mali,4.073,135,2016
+Haiti,4.028,136,2016
+Botswana,3.974,137,2016
+Comoros,3.956,138,2016
+Ivory Coast,3.916,139,2016
+Cambodia,3.907,140,2016
+Angola,3.866,141,2016
+Niger,3.856,142,2016
+South Sudan,3.832,143,2016
+Chad,3.763,144,2016
+Burkina Faso,3.739,145,2016
+Uganda,3.739,145,2016
+Yemen,3.724,147,2016
+Madagascar,3.695,148,2016
+Tanzania,3.666,149,2016
+Liberia,3.622,150,2016
+Guinea,3.607,151,2016
+Rwanda,3.515,152,2016
+Benin,3.484,153,2016
+Afghanistan,3.36,154,2016
+Togo,3.303,155,2016
+Syria,3.069,156,2016
+Burundi,2.905,157,2016
+Norway,7.54,1,2017
+Denmark,7.52,2,2017
+Iceland,7.5,3,2017
+Switzerland,7.49,4,2017
+Finland,7.47,5,2017
+Netherlands,7.38,6,2017
+Canada,7.32,7,2017
+New Zealand,7.31,8,2017
+Sweden,7.28,9,2017
+Australia,7.28,10,2017
+Israel,7.21,11,2017
+Costa Rica,7.08,12,2017
+Austria,7.01,13,2017
+United States,6.99,14,2017
+Ireland,6.98,15,2017
+Germany,6.95,16,2017
+Belgium,6.89,17,2017
+Luxembourg,6.86,18,2017
+United Kingdom,6.71,19,2017
+Chile,6.65,20,2017
+United Arab Emirates,6.65,21,2017
+Brazil,6.64,22,2017
+Czech Republic,6.61,23,2017
+Argentina,6.6,24,2017
+Mexico,6.58,25,2017
+Singapore,6.57,26,2017
+Malta,6.53,27,2017
+Uruguay,6.45,28,2017
+Guatemala,6.45,29,2017
+Panama,6.45,30,2017
+France,6.44,31,2017
+Thailand,6.42,32,2017
+Taiwan Province of China,6.42,33,2017
+Spain,6.4,34,2017
+Qatar,6.38,35,2017
+Colombia,6.36,36,2017
+Saudi Arabia,6.34,37,2017
+Trinidad and Tobago,6.17,38,2017
+Kuwait,6.11,39,2017
+Slovakia,6.1,40,2017
+Bahrain,6.09,41,2017
+Malaysia,6.08,42,2017
+Nicaragua,6.07,43,2017
+Ecuador,6.01,44,2017
+El Salvador,6,45,2017
+Poland,5.97,46,2017
+Uzbekistan,5.97,47,2017
+Italy,5.96,48,2017
+Russia,5.96,49,2017
+Belize,5.96,50,2017
+Japan,5.92,51,2017
+Lithuania,5.9,52,2017
+Algeria,5.87,53,2017
+Latvia,5.85,54,2017
+South Korea,5.84,55,2017
+Moldova,5.84,56,2017
+Romania,5.82,57,2017
+Bolivia,5.82,58,2017
+Turkmenistan,5.82,59,2017
+Kazakhstan,5.82,60,2017
+North Cyprus,5.81,61,2017
+Slovenia,5.76,62,2017
+Peru,5.72,63,2017
+Mauritius,5.63,64,2017
+Cyprus,5.62,65,2017
+Estonia,5.61,66,2017
+Belarus,5.57,67,2017
+Libya,5.53,68,2017
+Turkey,5.5,69,2017
+Paraguay,5.49,70,2017
+"Hong Kong S.A.R., China",5.47,71,2017
+Philippines,5.43,72,2017
+Serbia,5.39,73,2017
+Jordan,5.34,74,2017
+Hungary,5.32,75,2017
+Jamaica,5.31,76,2017
+Croatia,5.29,77,2017
+Kosovo,5.28,78,2017
+China,5.27,79,2017
+Pakistan,5.27,80,2017
+Indonesia,5.26,81,2017
+Venezuela,5.25,82,2017
+Montenegro,5.24,83,2017
+Morocco,5.24,84,2017
+Azerbaijan,5.23,85,2017
+Dominican Republic,5.23,86,2017
+Greece,5.23,87,2017
+Lebanon,5.22,88,2017
+Portugal,5.2,89,2017
+Bosnia and Herzegovina,5.18,90,2017
+Honduras,5.18,91,2017
+Macedonia,5.18,92,2017
+Somalia,5.15,93,2017
+Vietnam,5.07,94,2017
+Nigeria,5.07,95,2017
+Tajikistan,5.04,96,2017
+Bhutan,5.01,97,2017
+Kyrgyzstan,5,98,2017
+Nepal,4.96,99,2017
+Mongolia,4.95,100,2017
+South Africa,4.83,101,2017
+Tunisia,4.8,102,2017
+Palestinian Territories,4.78,103,2017
+Egypt,4.74,104,2017
+Bulgaria,4.71,105,2017
+Sierra Leone,4.71,106,2017
+Cameroon,4.7,107,2017
+Iran,4.69,108,2017
+Albania,4.64,109,2017
+Bangladesh,4.61,110,2017
+Namibia,4.57,111,2017
+Kenya,4.55,112,2017
+Mozambique,4.55,113,2017
+Myanmar,4.55,114,2017
+Senegal,4.53,115,2017
+Zambia,4.51,116,2017
+Iraq,4.5,117,2017
+Gabon,4.47,118,2017
+Ethiopia,4.46,119,2017
+Sri Lanka,4.44,120,2017
+Armenia,4.38,121,2017
+India,4.32,122,2017
+Mauritania,4.29,123,2017
+Congo (Brazzaville),4.29,124,2017
+Georgia,4.29,125,2017
+Congo (Kinshasa),4.28,126,2017
+Mali,4.19,127,2017
+Ivory Coast,4.18,128,2017
+Cambodia,4.17,129,2017
+Sudan,4.14,130,2017
+Ghana,4.12,131,2017
+Ukraine,4.1,132,2017
+Uganda,4.08,133,2017
+Burkina Faso,4.03,134,2017
+Niger,4.03,135,2017
+Malawi,3.97,136,2017
+Chad,3.94,137,2017
+Zimbabwe,3.88,138,2017
+Lesotho,3.81,139,2017
+Angola,3.8,140,2017
+Afghanistan,3.79,141,2017
+Botswana,3.77,142,2017
+Benin,3.66,143,2017
+Madagascar,3.64,144,2017
+Haiti,3.6,145,2017
+Yemen,3.59,146,2017
+South Sudan,3.59,147,2017
+Liberia,3.53,148,2017
+Guinea,3.51,149,2017
+Togo,3.49,150,2017
+Rwanda,3.47,151,2017
+Syria,3.46,152,2017
+Tanzania,3.35,153,2017
+Burundi,2.9,154,2017
+Central African Republic,2.69,155,2017
+Finland,7.769,1,2018
+Denmark,7.6,2,2018
+Norway,7.554,3,2018
+Iceland,7.494,4,2018
+Netherlands,7.488,5,2018
+Switzerland,7.48,6,2018
+Sweden,7.343,7,2018
+New Zealand,7.307,8,2018
+Canada,7.278,9,2018
+Austria,7.246,10,2018
+Australia,7.228,11,2018
+Costa Rica,7.167,12,2018
+Israel,7.139,13,2018
+Luxembourg,7.09,14,2018
+United Kingdom,7.054,15,2018
+Ireland,7.021,16,2018
+Germany,6.985,17,2018
+Belgium,6.923,18,2018
+United States,6.892,19,2018
+Czech Republic,6.852,20,2018
+United Arab Emirates,6.825,21,2018
+Malta,6.726,22,2018
+Mexico,6.595,23,2018
+France,6.592,24,2018
+Taiwan Province of China,6.446,25,2018
+Chile,6.444,26,2018
+Guatemala,6.436,27,2018
+Saudi Arabia,6.375,28,2018
+Qatar,6.374,29,2018
+Spain,6.354,30,2018
+Panama,6.321,31,2018
+Brazil,6.3,32,2018
+Uruguay,6.293,33,2018
+Singapore,6.262,34,2018
+El Salvador,6.253,35,2018
+Italy,6.223,36,2018
+Bahrain,6.199,37,2018
+Slovakia,6.198,38,2018
+Trinidad and Tobago,6.192,39,2018
+Poland,6.182,40,2018
+Uzbekistan,6.174,41,2018
+Lithuania,6.149,42,2018
+Colombia,6.125,43,2018
+Slovenia,6.118,44,2018
+Nicaragua,6.105,45,2018
+Kosovo,6.1,46,2018
+Argentina,6.086,47,2018
+Romania,6.07,48,2018
+Cyprus,6.046,49,2018
+Ecuador,6.028,50,2018
+Kuwait,6.021,51,2018
+Thailand,6.008,52,2018
+Latvia,5.94,53,2018
+South Korea,5.895,54,2018
+Estonia,5.893,55,2018
+Jamaica,5.89,56,2018
+Mauritius,5.888,57,2018
+Japan,5.886,58,2018
+Honduras,5.86,59,2018
+Kazakhstan,5.809,60,2018
+Bolivia,5.779,61,2018
+Hungary,5.758,62,2018
+Paraguay,5.743,63,2018
+North Cyprus,5.718,64,2018
+Peru,5.697,65,2018
+Portugal,5.693,66,2018
+Pakistan,5.653,67,2018
+Russia,5.648,68,2018
+Philippines,5.631,69,2018
+Serbia,5.603,70,2018
+Moldova,5.529,71,2018
+Libya,5.525,72,2018
+Montenegro,5.523,73,2018
+Tajikistan,5.467,74,2018
+Croatia,5.432,75,2018
+Hong Kong S.A.R. of China,5.43,76,2018
+Dominican Republic,5.425,77,2018
+Bosnia and Herzegovina,5.386,78,2018
+Turkey,5.373,79,2018
+Malaysia,5.339,80,2018
+Belarus,5.323,81,2018
+Greece,5.287,82,2018
+Mongolia,5.285,83,2018
+Macedonia,5.274,84,2018
+Nigeria,5.265,85,2018
+Kyrgyzstan,5.261,86,2018
+Turkmenistan,5.247,87,2018
+Algeria,5.211,88,2018
+Morocco,5.208,89,2018
+Azerbaijan,5.208,90,2018
+Lebanon,5.197,91,2018
+Indonesia,5.192,92,2018
+China,5.191,93,2018
+Vietnam,5.175,94,2018
+Bhutan,5.082,95,2018
+Cameroon,5.044,96,2018
+Bulgaria,5.011,97,2018
+Ghana,4.996,98,2018
+Ivory Coast,4.944,99,2018
+Nepal,4.913,100,2018
+Jordan,4.906,101,2018
+Benin,4.883,102,2018
+Congo (Brazzaville),4.812,103,2018
+Gabon,4.799,104,2018
+Laos,4.796,105,2018
+South Africa,4.722,106,2018
+Albania,4.719,107,2018
+Venezuela,4.707,108,2018
+Cambodia,4.7,109,2018
+Palestinian Territories,4.696,110,2018
+Senegal,4.681,111,2018
+Somalia,4.668,112,2018
+Namibia,4.639,113,2018
+Niger,4.628,114,2018
+Burkina Faso,4.587,115,2018
+Armenia,4.559,116,2018
+Iran,4.548,117,2018
+Guinea,4.534,118,2018
+Georgia,4.519,119,2018
+Gambia,4.516,120,2018
+Kenya,4.509,121,2018
+Mauritania,4.49,122,2018
+Mozambique,4.466,123,2018
+Tunisia,4.461,124,2018
+Bangladesh,4.456,125,2018
+Iraq,4.437,126,2018
+Congo (Kinshasa),4.418,127,2018
+Mali,4.39,128,2018
+Sierra Leone,4.374,129,2018
+Sri Lanka,4.366,130,2018
+Myanmar,4.36,131,2018
+Chad,4.35,132,2018
+Ukraine,4.332,133,2018
+Ethiopia,4.286,134,2018
+Swaziland,4.212,135,2018
+Uganda,4.189,136,2018
+Egypt,4.166,137,2018
+Zambia,4.107,138,2018
+Togo,4.085,139,2018
+India,4.015,140,2018
+Liberia,3.975,141,2018
+Comoros,3.973,142,2018
+Madagascar,3.933,143,2018
+Lesotho,3.802,144,2018
+Burundi,3.775,145,2018
+Zimbabwe,3.663,146,2018
+Haiti,3.597,147,2018
+Botswana,3.488,148,2018
+Syria,3.462,149,2018
+Malawi,3.41,150,2018
+Yemen,3.38,151,2018
+Rwanda,3.334,152,2018
+Tanzania,3.231,153,2018
+Afghanistan,3.203,154,2018
+Central African Republic,3.083,155,2018
+South Sudan,2.853,156,2018

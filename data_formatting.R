@@ -15,7 +15,7 @@ makeSafeNames <- function (headers) {
 
 
 for (i in 2015:2018) {
-  data <- read_csv(paste0('data/data_files/',i, '.csv'))
+  data <- read_csv(paste0('data/raw_data/',i, '.csv'))
   names(data) <- makeSafeNames(names(data))
   
   data <- data %>%
