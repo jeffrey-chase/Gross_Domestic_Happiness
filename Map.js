@@ -15,4 +15,7 @@ var mymap = L.map('maparea').setView(au, 2);
                 "pk.eyJ1IjoiamFnb2R3aW4iLCJhIjoiY2lnOGQxaDhiMDZzMXZkbHYzZmN4ZzdsYiJ9.Uwh_L37P-qUoeC-MBSDteA"
         }
     ).addTo(mymap);
+
+    var countrieslayer = L.geoJson(countries.geo.json)
+    countriesLayer.addTo(mymap);
 }
