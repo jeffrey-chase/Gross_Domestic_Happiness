@@ -1,0 +1,32 @@
+header {
+  top: 0;
+  width: 100%;
+  
+}
+
+body div {
+  border: 2px solid black;
+  position: absolute;
+}
+
+#maparea {
+  position: absolute;
+  height: 500px;
+  top: 100px;
+  width: 80%;
+  left: 10%;
+}
+
+#bump-chart {
+  overflow: scroll;
+  position: relative;
+  top: 550px;
+  height: 200px;
+  width: 80%;
+  left: 10%;
+}
+
+#hello {
+  position: absolute;
+  top: 500px;
+}
