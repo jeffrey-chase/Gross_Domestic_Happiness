@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Maps</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.1/d3.min.js"></script>
+
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js"></script>
+<style>
+#map {
+  max-width: 600px;
+  margin:10px;
+  height:400px;
+}
+.btn {
+  margin:10px;
+  border: none;
+  background: red;
+  font-family: Arial;
+  font-size:18px;
+  color: #fff;
+  padding:6px 10px;
+  border-radius:3px;
+  outline:0;
+}
+.btn:hover {
+  background: #960000;
+}
+.table-container {
+    overflow-y: scroll;
+    margin: 10px;
+    height: 500px;
+    border: 2px solid #000;
+}
+table {
+  padding:10px;
+}
+th {
+  text-align: left;
+}
+</style>
+</head>
+<body>
+  <div id="map"></div>
+  <div>
+  <button id='netbutton' class="btn">Nodes and Links</button>
+  <button id='statebutton' class="btn">States</button>
+  <button id='hexbutton' class="btn">Hexbins</button>
+  </div>
+  <div>
+    <button id='eunetbutton' class="btn">EU Nodes and Links</button>
+    <button id='eustatebutton' class="btn">EU States</button>
+    <button id='euhexbutton' class="btn">EU Hexbins</button>
+  </div>
+  <div>
+    <button id='showall' class="btn">Show Both</button>
+    <button id='showus' class="btn">Show US</button>
+    <button id='showeurope' class="btn">Show Europe</button>
+  </div>
+  <div class="table-container"></div>
+<script>
+
+var au = new L.LatLng(38.956379, -77.106342);
+var mymap = L.map("map").setView(au, 5);
+var vertices = d3.map();
+var euvertices = d3.map();
+var drawNetwork = true;
+var eudrawNetwork = true;
+var drawstates = true;
+var eudrawstates = true;
+var drawHex = true;
+var eudrawHex = true;
+var statesLayer;
+var eustatesLayer;
+var hexLayer;
+var euhexLayer;
+
+L.tileLayer(
+  "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}",
+  {
+    attribution:
+      'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    maxZoom: 10,
+    minZoom: 3,
+    id: "mapbox.light",
+    accessToken:
+      "pk.eyJ1IjoiamFnb2R3aW4iLCJhIjoiY2lnOGQxaDhiMDZzMXZkbHYzZmN4ZzdsYiJ9.Uwh_L37P-qUoeC-MBSDteA"
+  }
+).addTo(mymap);
+
+var svgLayer = L.svg();
+svgLayer.addTo(mymap);
+
+var svg = d3.select("#map").select("svg"),
+  g = svg.select("g");
+g.attr("class", "leaflet-zoom-hide");
+
+// Import Files
+Promise.all([
+  d3.csv("data/gridkit_north_america-highvoltage-vertices.csv"),
+  d3.csv("data/gridkit_north_america-highvoltage-links.csv"),
+  d3.json("data/states.json"),
+  d3.csv("data/gridkit_europe-highvoltage-vertices.csv"),
+  d3.csv("data/gridkit_europe-highvoltage-links.csv"),
+  d3.json("data/eu-countries.geo.json")
+]).then(ready);
+
+function ready(data) {
+  // Set Data
+  var nodes = data[0];
+  var links = data[1];
+  var states = data[2];
+  var eunodes = data[3];
+  var eulinks = data[4];
+  var eustates = data[5];
+  var nodeFeatures = [];
+  var eunodeFeatures = [];
+
+  var types = d3
+    .nest()
+    .key(function(d) {
+      return d["typ"];
+    })
+    .entries(nodes)
+    .map(function(d) {
+      return d["key"];
+    });
+  var hue = d3.scaleOrdinal(d3.schemeCategory10).domain(types);
+
+  nodes.forEach(function(d) {
+    d.links = 0;
+    vertices.set(+d["v_id"], d);
+    d.LatLng = [+d.lat, +d.lon];
+    nodeFeatures.push(turf.point([+d.lon, +d.lat], d));
+  });
+
+  eunodes.forEach(function(d) {
+    d.links = 0;
+    euvertices.set(+d["v_id"], d);
+    d.LatLng = [+d.lat, +d.lon];
+    eunodeFeatures.push(turf.point([+d.lon, +d.lat], d));
+  });
+
+  links.forEach(function(d) {
+    var start = vertices.get(+d["v_id_1"]);
+    var end = vertices.get(+d["v_id_2"]);
+    start.links += 1;
+    end.links += 1;
+    d.start = [+start.lat, +start.lon];
+    d.end = [+end.lat, +end.lon];
+    d.voltage = +d.voltage;
+  });
+
+  eulinks.forEach(function(d) {
+    var start = euvertices.get(+d["v_id_1"]);
+    var end = euvertices.get(+d["v_id_2"]);
+    start.links += 1;
+    end.links += 1;
+    d.start = [+start.lat, +start.lon];
+    d.end = [+end.lat, +end.lon];
+    d.voltage = +d.voltage;
+  });
+
+  nodeFeatures = turf.featureCollection(nodeFeatures);
+  eunodeFeatures = turf.featureCollection(eunodeFeatures);
+
+  var chorostates = turf.collect(states, nodeFeatures, "v_id", "ID");
+  var euchorostates = turf.collect(eustates, eunodeFeatures, "v_id", "ID");
+
+  function getColor(d) {
+    return d > 1000
+      ? "#800026"
+      : d > 500
+        ? "#BD0026"
+        : d > 200
+          ? "#E31A1C"
+          : d > 100
+            ? "#FC4E2A"
+            : d > 50
+              ? "#FD8D3C"
+              : d > 20
+                ? "#FEB24C"
+                : d > 10
+                  ? "#FED976"
+                  : "#FFEDA0";
+  }
+
+  function statestyle(feature) {
+    return {
+      weight: 2,
+      opacity: 1,
+      color: "white",
+      dashArray: "3",
+      fillOpacity: 0.7,
+      fillColor: getColor(feature.properties.ID.length)
+    };
+  }
+
+  statesLayer = L.geoJson(chorostates, {
+    style: statestyle
+  });
+  statesLayer.addTo(mymap);
+
+  eustatesLayer = L.geoJson(euchorostates, {
+    style: statestyle
+  });
+  eustatesLayer.addTo(mymap);
+
+  var bbox = turf.bbox(nodeFeatures);
+  var eubbox = turf.bbox(eunodeFeatures);
+  var cellSize = 200;
+  var units = "kilometers";
+  var options = {};
+  options.units = units;
+
+  var hexgrid = turf.squareGrid(bbox, cellSize, options);
+  var euhexgrid = turf.squareGrid(eubbox, cellSize, options);
+  var hexbins = turf.collect(hexgrid, nodeFeatures, "v_id", "ID");
+  var euhexbins = turf.collect(euhexgrid, eunodeFeatures, "v_id", "ID");
+  hexbins.features = hexbins.features.filter(function(d) {
+    return d["properties"]["ID"].length > 0;
+  });
+  euhexbins.features = euhexbins.features.filter(function(d) {
+    return d["properties"]["ID"].length > 0;
+  });
+  var magma = d3
+    .scaleLinear()
+    .domain(
+      d3.extent(
+        hexbins.features.map(function(d) {
+          return d["properties"]["ID"].length;
+        })
+      )
+    )
+    .range([1, 0]);
+
+  var eumagma = d3
+    .scaleLinear()
+    .domain(
+      d3.extent(
+        euhexbins.features.map(function(d) {
+          return d["properties"]["ID"].length;
+        })
+      )
+    )
+    .range([1, 0]);
+
+  function getHexColor(d) {
+    return d3.interpolateMagma(magma(d));
+  }
+
+  function eugetHexColor(d) {
+    return d3.interpolateMagma(eumagma(d));
+  }
+
+  function hexstyle(feature) {
+    var hc = getHexColor(feature.properties.ID.length);
+    return {
+      opacity: 0,
+      fillOpacity: 0.7,
+      fillColor: hc
+    };
+  }
+
+  function euhexstyle(feature) {
+    var hc = eugetHexColor(feature.properties.ID.length);
+    return {
+      opacity: 0,
+      fillOpacity: 0.7,
+      fillColor: hc
+    };
+  }
+
+  hexLayer = L.geoJson(hexbins, {
+    style: hexstyle
+  });
+  hexLayer.addTo(mymap);
+
+  euhexLayer = L.geoJson(euhexbins, {
+    style: euhexstyle
+  });
+  euhexLayer.addTo(mymap);
+
+  var nodeRadius = d3
+    .scaleLinear()
+    .domain(
+      d3.extent(
+        nodes.map(function(d) {
+          return +d.links;
+        })
+      )
+    )
+    .rangeRound([2, 15]);
+
+  var lineThickness = d3
+    .scaleLinear()
+    .domain(
+      d3.extent(
+        links.map(function(d) {
+          return +d.voltage;
+        })
+      )
+    )
+    .rangeRound([2, 4]);
+
+  var eulineThickness = d3
+    .scaleLinear()
+    .domain(
+      d3.extent(
+        eulinks.map(function(d) {
+          return +d.voltage;
+        })
+      )
+    )
+    .rangeRound([2, 4]);
+
+  g.selectAll(".uscircle")
+    .data(nodes)
+    .enter()
+    .append("circle")
+    .attr("class", "uscircle")
+    .style("opacity", 0.6)
+    .style("fill", function(d) {
+      return hue(d["typ"]);
+    })
+    .attr("r", function(d) {
+      return nodeRadius(d.links);
+    });
+
+  g.selectAll(".eucircle")
+    .data(eunodes)
+    .enter()
+    .append("circle")
+    .attr("class", "eucircle")
+    .style("opacity", 0.6)
+    .style("fill", function(d) {
+      return hue(d["typ"]);
+    })
+    .attr("r", function(d) {
+      return nodeRadius(d.links);
+    });
+
+  g.selectAll(".usline")
+    .data(links)
+    .enter()
+    .append("line")
+    .attr("class", "usline")
+    .style("stroke", function(d) {
+      if (d.voltage != 0) {
+        return "gray";
+      } else {
+        return "red";
+      }
+    })
+    .style("stroke-width", function(d) {
+      if (d.voltage != 0) {
+        return lineThickness(d.voltage);
+      } else {
+        return 1;
+      }
+    })
+    .style("opacity", 0.5);
+
+  g.selectAll(".euline")
+    .data(eulinks)
+    .enter()
+    .append("line")
+    .attr("class", "euline")
+    .style("stroke", function(d) {
+      if (d.voltage != 0) {
+        return "gray";
+      } else {
+        return "red";
+      }
+    })
+    .style("stroke-width", function(d) {
+      if (d.voltage != 0) {
+        return lineThickness(d.voltage);
+      } else {
+        return 1;
+      }
+    })
+    .style("opacity", 0.5);
+
+  mymap.on("zoomend", updateNodes);
+
+  updateNodes();
+
+  function updateNodes() {
+    g.selectAll("circle")
+      .attr("cx", function(d) {
+        return mymap.latLngToLayerPoint(d.LatLng).x;
+      })
+      .attr("cy", function(d) {
+        return mymap.latLngToLayerPoint(d.LatLng).y;
+      });
+  }
+
+  mymap.on("zoomend", updateLinks);
+
+  updateLinks();
+
+  function updateLinks() {
+    g.selectAll("line")
+      .attr("x1", function(d) {
+        return mymap.latLngToLayerPoint(d.start).x;
+      })
+      .attr("y1", function(d) {
+        return mymap.latLngToLayerPoint(d.start).y;
+      })
+      .attr("x2", function(d) {
+        return mymap.latLngToLayerPoint(d.end).x;
+      })
+      .attr("y2", function(d) {
+        return mymap.latLngToLayerPoint(d.end).y;
+      });
+  }
+
+  var usnodes = nodes.map(function(d) {
+    return {
+      v_id: d.v_id,
+      lon: d.lon,
+      lat: d.lat,
+      voltage: d.voltage
+    };
+  });
+
+  var table = d3.select(".table-container").append("table");
+  var titles = d3.keys(usnodes[0]);
+
+  var headers = table
+    .append("thead")
+    .append("tr")
+    .selectAll("th")
+    .data(titles)
+    .enter()
+    .append("th")
+    .text(function(d) {
+      return d;
+    });
+
+  var rows = table
+    .append("tbody")
+    .selectAll("tr")
+    .data(usnodes)
+    .enter()
+    .append("tr");
+  rows
+    .selectAll("td")
+    .data(function(d) {
+      return titles.map(function(k) {
+        return { value: d[k], name: k, lon: d["lon"], lat: d["lat"] };
+      });
+    })
+    .enter()
+    .append("td")
+
+    .attr("data-th", function(d) {
+      return d.name;
+    })
+    .attr("data-lon", function(d) {
+      return d.lon;
+    })
+    .attr("data-lat", function(d) {
+      return d.lat;
+    })
+    .attr("class", "goto")
+    .text(function(d) {
+      return d.value;
+    });
+
+  function zoomTo() {
+    var lat = document.getElementById("lat").value;
+    var lng = document.getElementById("lng").value;
+    map.panTo(new L.LatLng(lat, lng));
+  }
+  d3.selectAll(".goto").on("click", function(d, i) {
+    var lon = d3.select(this).attr("data-lon");
+    var lat = d3.select(this).attr("data-lat");
+    //mymap.panTo(new L.LatLng(lat, lon));
+    mymap.flyTo([lat, lon], 10);
+  });
+}
+
+d3.select("#netbutton").on("click", function() {
+  if (drawNetwork) {
+    d3.selectAll(".uscircle").attr("visibility", "hidden");
+    d3.selectAll(".usline").attr("visibility", "hidden");
+  } else {
+    d3.selectAll(".uscircle").attr("visibility", "visible");
+    d3.selectAll(".usline").attr("visibility", "visible");
+  }
+  drawNetwork = !drawNetwork;
+});
+
+d3.select("#eunetbutton").on("click", function() {
+  if (eudrawNetwork) {
+    d3.selectAll(".eucircle").attr("visibility", "hidden");
+    d3.selectAll(".euline").attr("visibility", "hidden");
+  } else {
+    d3.selectAll(".eucircle").attr("visibility", "visible");
+    d3.selectAll(".euline").attr("visibility", "visible");
+  }
+  eudrawNetwork = !eudrawNetwork;
+});
+
+d3.select("#statebutton").on("click", function() {
+  if (drawstates) {
+    mymap.removeLayer(statesLayer);
+  } else {
+    statesLayer.addTo(mymap);
+  }
+  drawstates = !drawstates;
+});
+
+d3.select("#eustatebutton").on("click", function() {
+  if (eudrawstates) {
+    mymap.removeLayer(eustatesLayer);
+  } else {
+    eustatesLayer.addTo(mymap);
+  }
+  eudrawstates = !eudrawstates;
+});
+
+d3.select("#hexbutton").on("click", function() {
+  if (drawHex) {
+    mymap.removeLayer(hexLayer);
+  } else {
+    hexLayer.addTo(mymap);
+  }
+  drawHex = !drawHex;
+});
+
+d3.select("#euhexbutton").on("click", function() {
+  if (eudrawHex) {
+    mymap.removeLayer(euhexLayer);
+  } else {
+    euhexLayer.addTo(mymap);
+  }
+  eudrawHex = !eudrawHex;
+});
+
+d3.select("#showall").on("click", function() {
+  mymap.flyTo([44.97515, -37.17802], 2);
+});
+d3.select("#showus").on("click", function() {
+  mymap.flyTo([38.956379, -77.106342], 4);
+});
+d3.select("#showeurope").on("click", function() {
+  mymap.flyTo([50.632992, 10.138599], 4);
+});
+
+
+</script>
+</body>
+</html>
