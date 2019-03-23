@@ -26,6 +26,10 @@ body div {
   left: 10%;
 }
 
+#bump-chart svg {
+  top: 0;
+}
+
 #hello {
   position: absolute;
   top: 500px;
