@@ -5,25 +5,49 @@ header {
 }
 
 body {
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  background: black;
+  color: white;
+  font-family: 
+    "HelveticaNeue-Light", 
+    "Helvetica Neue Light", 
+    "Helvetica Neue", 
+    Helvetica, Arial, 
+    "Lucida Grande",
+    sans-serif;
+    
   font-weight: 300;
+  margin: 0;
 }
 
-h1,
-h2,
-h3 {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 400;
+
+h1 {
+  text-align: center;
+  font-family: 'Scope One',  sans-serif;
+  margin: 0;
+  font-size: 30pt;
+  font-weight: 800;
+  word-spacing: 6pt;
+  letter-spacing: 3pt ; 
+  text-transform: uppercase;
+}
+
+
+header {
+  border-bottom: 5px solid #aaa;
+  background: #2d1f36;
+  margin; 0 0 10px 0;
+  padding-bottom: 10px
 }
 
 article {
   display: flex;
   flex-flow: row nowrap;
   justify-content:space-around;
+  width: 95%;
+  left: 5%;
 }
 
-body > div {
-  position: absolute;
+article > div {
   border: 1px dashed gray;
 }
 
@@ -67,6 +91,7 @@ body > div {
 
 /* Bump Chart Styling */
 text {
+  fill: white;
   font-size: 8px;
   text-transform: uppercase;
 }
