@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -8,12 +8,13 @@
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin="" />
   <link rel="stylesheet" href="style.css" type="text/css">
+  <script src="script.js"></script>
 
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js" integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg==" crossorigin=""></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/5.1.5/turf.min.js">
   </script>
-
+  
   <script src="https://d3js.org/d3.v5.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
 
@@ -24,7 +25,11 @@
 <body>
   <header>
     <h1>Gross Domestic Happiness</h1>
+    <div class="container">
+      <p id="description"> Welcome to our visualization!</p>
+    </div>
   </header>
+
   <article>
     <div id="maparea"></div>
 
@@ -32,8 +37,6 @@
     </div>
   </article>
 </body>
-<script src="script.js"></script>
-
 <script src="Map.js"></script>
 <script src="bump_chart.js"></script>
 
