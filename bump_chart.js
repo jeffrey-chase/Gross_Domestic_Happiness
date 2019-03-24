@@ -90,7 +90,7 @@
 
     let circles = svg.append('g').selectAll("circle.point").data(data).enter()
       .append('circle')
-      .attr('r', 2)
+      .attr('r', 3.5)
       .attr('cx', function (d) {
         return xScale(+d['year']);
       })
@@ -160,18 +160,43 @@
         return 'rank ' + makeSafeId(d.key);
       });
 
-    svg.selectAll(".rank, .point, .label").on('click', function () {
-      console.log(this.classList.contains('show'));
-
-      if (this.classList.contains('show')) {
+    function activate(){
+      if (this.classList.contains('activated')) {
         let country = this.classList[this.classList.length - 2];
-        svg.selectAll("." + country).classed('show', false);
+        svg.selectAll("." + country).classed('activated', false);
       } else {
         let country = this.classList[this.classList.length - 1];
-        svg.selectAll("." + country).classed('show', true);
+        svg.selectAll("." + country).classed('activated', true);
       }
 
-    });
+    }
+    
+    function highlight(){
+      if (this.classList.contains('activated')) return false;
+      console.log('hover');
+      let country = this.classList[this.classList.length - 1];
+        svg.selectAll("." + country).classed('hover', true);
+//      setTimeout(function(){
+//        svg.selectAll("." + country).classed('hover', false);
+//      }, 500)
+    }
+    
+    function unhighlight(){
+      if (this.classList.contains('activated')) return false;
+      let country = this.classList[this.classList.length - 1];
+        svg.selectAll("." + country).classed('hover', false);
+    }
+    
+    svg.selectAll(".rank, .point, .label")
+      .on('click', activate);
+    
+    svg.selectAll(".rank, .point, .label")
+      .on('mouseover', highlight);
+    svg.selectAll(".rank, .point, .label")
+      .on('mouseout', unhighlight)
   });
+  
+
+  ;
 
 })();

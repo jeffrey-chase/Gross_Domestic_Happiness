@@ -42,7 +42,7 @@ body > div {
   right: 10px;
 */
   height: 500px;
-  width: 400px;
+  min-width: 400px;
 }
 
 #bump-chart svg {
@@ -71,23 +71,27 @@ text {
   text-transform: uppercase;
 }
 
-path.rank{
-  opacity: 0.4;
+.rank, .label, .point {
   cursor: pointer;
+  pointer-events: all;
 }
 
-path.rank:hover{
+
+
+
+path.rank {
+  opacity: 0.4;
+}
+
+path.rank.hover, path.rank.activated {
   opacity: 1;
+  z-index: 1000;
 }
 
-path.rank.show {
-  opacity: 1;
-}
-
-text.label.show {
+text.label.hover, text.label.activated{
   font-weight: bold;
 }
 
-circle.point.show {
+circle.point.hover, circle.point.activated {
   transform: scale(4, 4);
 }
