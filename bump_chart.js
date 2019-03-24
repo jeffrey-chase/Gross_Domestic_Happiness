@@ -82,7 +82,7 @@
       .attr("transform", "translate(" + 30 + ", 0)")
       .call(yaxis);
 
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 20));
 
     let circles = svg.append('g').selectAll("circle.point").data(data).enter()
       .append('circle')

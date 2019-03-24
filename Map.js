@@ -77,6 +77,7 @@ window.onload = function () {
       countriesLayer.eachLayer(function (l) {
         let polygon = l.feature.geometry;
         let center;
+        let id = makeSafeId(l.feature.properties.name) + "-label";
 
         if (polygon.type === "MultiPolygon") {
           let largestArea = 0;
@@ -94,8 +95,7 @@ window.onload = function () {
           center = turf.centroid(polygon);
         }
         l.on('mouseover', function (e) {
-          let id = makeSafeId(l.feature.properties.name)+ "-label";
-          var popup = L.popup()
+          let popup = L.popup()
             .setLatLng(new L.LatLng(center.geometry.coordinates[1],
               center.geometry.coordinates[0]))
             .setContent(
@@ -111,14 +111,22 @@ window.onload = function () {
             weight: 4,
             dashArray: null
           });
-          d3.select("#"+id).dispatch('mouseover');  
+          d3.select("#" + id).dispatch('mouseover');
+
         });
         l.on('mouseout', function (e) {
           countriesLayer.resetStyle(e.target);
           this.closePopup();
-          let id = makeSafeId(l.feature.properties.name)+ "-label";
-          d3.select("#"+id).dispatch('mouseout');  
+          d3.select("#" + id).dispatch('mouseout');
 
+          l.on('click', function (e) {
+            d3.select("#" + id).dispatch('click');
+            let scrolled = document.getElementById(id);
+            console.log('scroll');
+            scrolled.scrollIntoView();
+//            let newY = scrolled.getBoundingClientRect().top;
+//            window.scroll(0, newY);
+          })
         });
       });
 
