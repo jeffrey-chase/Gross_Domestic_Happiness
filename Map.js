@@ -1,13 +1,17 @@
 window.onload = function () {
-  var au = new L.LatLng(0, 0);
-  var mymap = L.map('maparea').setView(au, 1.5);
+  let center = new L.LatLng(0, 0);
+  const mymap = L.map('maparea').setView(center, 1.5);
 
+  const cornerNE = L.LatLng(50, 180);
+  const cornerSW = L.LatLng(-50, -180);
+  const bounds = L.latLngBounds(cornerSW, cornerNE);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
-    minZoom: 1,
-    maxZoom: 19
+    maxZoom: 5,
+    maxBounds: bounds,
+    maxBoundsViscosity: 1.0,
   }).addTo(mymap).setZIndex(1);
 
 
@@ -46,6 +50,17 @@ window.onload = function () {
       function countryStyle(feature) {
         return {
           weight: 1,
+          opacity: 0.6,
+          color: '#ccc',
+          dashArray: '1',
+          fillOpacity: 0.7,
+          fillColor: getColor(mapping[feature.properties.name])
+        };
+      }
+
+      function countryStyleEmphasized(feature) {
+        return {
+          weight: 3,
           opacity: 1,
           color: 'white',
           dashArray: '1',
@@ -60,12 +75,6 @@ window.onload = function () {
 
 
       countriesLayer.eachLayer(function (l) {
-        l.bindPopup(
-          "<h4>" + l.feature.properties.name + "</h4>" +
-          "<p> Happiness Value: <span class='popup-value'>" +
-          mapping[l.feature.properties.name] +
-          "</span></p>"
-        );
         let polygon = l.feature.geometry;
         let center;
 
@@ -84,20 +93,32 @@ window.onload = function () {
         } else {
           center = turf.centroid(polygon);
         }
-        console.log(center);
         l.on('mouseover', function (e) {
+          let id = makeSafeId(l.feature.properties.name)+ "-label";
           var popup = L.popup()
             .setLatLng(new L.LatLng(center.geometry.coordinates[1],
               center.geometry.coordinates[0]))
-            .setContent("<h4>" + l.feature.properties.name + "</h4>" +
+            .setContent(
+              "<a href='#" + id + "'>" +
+              "<h4>" + l.feature.properties.name + "</h4>" +
               "<p> Happiness Value: <span class='popup-value'>" +
               mapping[l.feature.properties.name] +
-              "</span></p>"
+              "</span></p></a>"
             ).openOn(mymap);
-          //            this.openPopup();
+          this.setStyle({
+            fillOpacity: 1,
+            color: 'white',
+            weight: 4,
+            dashArray: null
+          });
+          d3.select("#"+id).dispatch('mouseover');  
         });
         l.on('mouseout', function (e) {
+          countriesLayer.resetStyle(e.target);
           this.closePopup();
+          let id = makeSafeId(l.feature.properties.name)+ "-label";
+          d3.select("#"+id).dispatch('mouseout');  
+
         });
       });
 
@@ -106,7 +127,7 @@ window.onload = function () {
       L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         subdomains: 'abcd',
-        maxZoom: 19
+        maxZoom: 5
       }).addTo(mymap).setZIndex(10);
     })
 

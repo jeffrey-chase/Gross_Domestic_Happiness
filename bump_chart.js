@@ -1,10 +1,6 @@
 (function () {
   "use strict";
 
-  function makeSafeId(text) {
-    return text.replace(/[ \)\(,\.]/g, '-').toLowerCase();
-  }
-
   const parent = d3.select('#bump-chart');
 
   const width = 400;
