@@ -1,5 +1,7 @@
 let center = new L.LatLng(0, 0);
-const mymap = L.map('maparea').setView(center, 1.5);
+const mymap = L.map('maparea', {
+        zoomSnap: 0.25
+    });
 
 const cornerNE = L.LatLng(50, 180);
 const cornerSW = L.LatLng(-50, -180);
@@ -8,7 +10,7 @@ const bounds = L.latLngBounds(cornerSW, cornerNE);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd',
-  minZoom: 1.5,
+  minZoom: 1,
   maxZoom: 5,
   maxBounds: bounds,
   maxBoundsViscosity: 1.0
@@ -37,7 +39,7 @@ Promise.all([
       })))
       .range([1, 0])
 
-    let getColor = function (d) {
+    let getFill = function (d) {
       if (d === undefined) {
         return '#555';
       } else {
@@ -45,16 +47,22 @@ Promise.all([
 
       }
     }
-
+    
+    const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 10));
+    function getColor(d){
+      return d3.rgb(colorScale(d)).brighter().hex();
+      
+    }
+    console.log(colorScale("North America"))
 
     function countryStyle(feature) {
       return {
-        weight: 1,
+        weight: 2,
         opacity: 0.6,
-        color: '#ccc',
+        color: getColor(feature.properties.subregion),
         dashArray: '1',
         fillOpacity: 0.7,
-        fillColor: getColor(mapping[feature.properties.name])
+        fillColor: getFill(mapping[feature.properties.name])
       };
     }
 
@@ -107,7 +115,6 @@ Promise.all([
           ).openOn(mymap);
         this.setStyle({
           fillOpacity: 1,
-          color: 'white',
           weight: 4,
           dashArray: null
         });
@@ -135,9 +142,11 @@ Promise.all([
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
-      minZoom: 1.5,
+      minZoom: 1,
       maxZoom: 5,
       maxBounds: bounds,
       maxBoundsViscosity: 1.0,
     }).addTo(mymap).setZIndex(10);
+  
+  mymap.setView(center, 1.25);
   })
