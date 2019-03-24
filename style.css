@@ -20,7 +20,7 @@ header {
 .intro {
   top: 0;
   position: absolute;
-  height: 1500px;
+  height: calc(800px + 100vh);
 }
 
 .intro h1 {
@@ -118,6 +118,11 @@ article > div {
   display: none;
 }
 
+.x.axis text {
+  font-size: 10pt;
+  font-weight: bold;
+}
+
 .tick line {
   stroke: #444;
 }
@@ -129,6 +134,13 @@ svg {
 }
 
 text {
+    font-family:
+    "HelveticaNeue-Light",
+    "Helvetica Neue Light",
+    "Helvetica Neue",
+    Helvetica, Arial,
+    "Lucida Grande",
+    sans-serif;
   fill: white;
   font-weight: 400;
   font-size: 6pt;
@@ -147,6 +159,7 @@ text {
 
 path.rank {
   opacity: 0.3;
+  stroke-width: 3;
 }
 
 path.rank.hover,
@@ -166,7 +179,9 @@ text.label.activated {
 
 circle.point.hover,
 circle.point.activated {
-  transform: scale(4, 4);
+  transition-duration: 200ms;
+  transform: scale(1.5, 1.5);
+  z-index: 10001;
 }
 
 

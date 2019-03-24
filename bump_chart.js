@@ -96,11 +96,14 @@
       .style('fill', function (d) {
         return colorScale(d['country']);
       })
+      .attr('transform-origin', function(d){
+        return " " + xScale(+d['year']) + "px " + yScale(+d['happiness_rank']) + "px";
+      })
       .attr('class', function (d) {
-        return makeSafeId(d.country);
+        return 'point '+ makeSafeId(d.country);
       })
       .attr('id', function (d) {
-        return 'point ' + makeSafeId(d.country) + "-point";
+        return  makeSafeId(d.country) + "-point";
       })
 
 

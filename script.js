@@ -19,7 +19,7 @@ function makeSafeId(text) {
     let p = document.querySelector("header p");
     let h = document.querySelector("header");
     if (window.scrollY > 400){
-      p.style.opacity = (top - 300) / 300
+      p.style.opacity = ((top - 400) / 300) 
     } 
     if (window.scrollY > 800){
       console.log('removing');

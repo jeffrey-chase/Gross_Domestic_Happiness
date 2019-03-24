@@ -8,9 +8,10 @@ const bounds = L.latLngBounds(cornerSW, cornerNE);
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   subdomains: 'abcd',
+  minZoom: 1.5,
   maxZoom: 5,
   maxBounds: bounds,
-  maxBoundsViscosity: 1.0,
+  maxBoundsViscosity: 1.0
 }).addTo(mymap).setZIndex(1);
 
 
@@ -122,18 +123,21 @@ Promise.all([
           d3.select("#" + id).dispatch('click');
           let scrolled = document.getElementById(id);
           console.log('scroll');
-          scrolled.scrollIntoView();
-          //            let newY = scrolled.getBoundingClientRect().top;
-          //            window.scroll(0, newY);
+          //          scrolled.scrollIntoView();
+          let newY = scrolled.getBoundingClientRect().top;
+          window.scroll(0, newY);
         })
       });
     });
 
-    countriesLayer.addTo(mymap);
+    countriesLayer.addTo(mymap).setZIndex(2);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
       subdomains: 'abcd',
-      maxZoom: 5
+      minZoom: 1.5,
+      maxZoom: 5,
+      maxBounds: bounds,
+      maxBoundsViscosity: 1.0,
     }).addTo(mymap).setZIndex(10);
   })
