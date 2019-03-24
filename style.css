@@ -36,7 +36,7 @@ header {
   border-bottom: 5px solid #aaa;
   background: #2d1f36;
   margin; 0 0 10px 0;
-  padding-bottom: 10px
+  padding-bottom: 10px;
 }
 
 article {
@@ -45,6 +45,7 @@ article {
   justify-content:space-around;
   width: 95%;
   left: 5%;
+  margin-top: 10px;
 }
 
 article > div {
@@ -119,4 +120,13 @@ text.label.hover, text.label.activated{
 
 circle.point.hover, circle.point.activated {
   transform: scale(4, 4);
+}
+
+
+
+/* Map Styling */
+
+.leaflet-popup-content *{
+  margin: 0 !important;
+  
 }
