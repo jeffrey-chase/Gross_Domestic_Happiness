@@ -9,6 +9,10 @@ function makeSafeId(text) {
 //    document.querySelector('header').classList.add("intro");
 //    document.querySelector('header p').classList.add("hidden");
     window.onscroll = animate;
+    let ar = document.querySelector("#down-arrow");
+    setTimeout(function(){
+      ar.style.opacity = 1;
+    }, 500);
 
   }
 
@@ -18,6 +22,7 @@ function makeSafeId(text) {
     let top = window.scrollY;
     let p = document.querySelector("header p");
     let h = document.querySelector("header");
+
     if (window.scrollY > 400) {
       p.style.opacity = ((top - 400) / 300);
     } else {
@@ -30,6 +35,7 @@ function makeSafeId(text) {
         window.scrollTo(0, 0);
       }, 1000);
       window.onscroll = mapParallax;
+      document.querySelector("#down-arrow").style.display="none";
 
     }
 

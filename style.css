@@ -12,7 +12,7 @@ header {
   transition-duration: 1s;
   border-bottom: 5px solid #aaa;
   background: #2d1f36;
-  margin: 0 0 10px 0;
+  margin: 0;
   padding: 10px;
   z-index: 100;
 
@@ -29,7 +29,7 @@ header {
   align-content: center;
   align-items: center;
   justify-content: center;
-  flex-basis: row nowrap;
+  flex-flow: row wrap;
   font-size: 6em;
   height: 100vh;
 }
@@ -75,6 +75,16 @@ h1 {
   text-transform: uppercase;
 }
 
+#down-arrow {
+  display: block;
+  color: #f442e8;
+  transition-duration: 3s;
+  font-size: 90px;
+  opacity: 0;
+}
+
+
+
 
 article {
   display: flex;
@@ -93,6 +103,7 @@ article > div {
   position: fixed;
   left: 10px;
   height: 500px;
+  transform: translateY(75);
   /*  top: 100px;*/
   width: 800px;
 }
@@ -102,6 +113,7 @@ article > div {
   position: absolute;
   right: 10px;
   min-width: 400px;
+  margin-top: 10px;
 }
 
 #bump-chart svg {
@@ -119,9 +131,12 @@ article > div {
   display: none;
 }
 
+.axis text {
+  font-weight: bold;
+}
+
 .x.axis text {
   font-size: 10pt;
-  font-weight: bold;
 }
 
 .tick line {

@@ -15,3 +15,6 @@
 - Make rendering change width when window is resized
 - Bubble distort based on hover
 - Toggle region color code lines in map
+- Responsive layout (phone?)
+
+
