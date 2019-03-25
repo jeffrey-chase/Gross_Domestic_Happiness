@@ -1,7 +1,7 @@
 let center = new L.LatLng(0, 0);
 const mymap = L.map('maparea', {
-        zoomSnap: 0.25
-    });
+  zoomSnap: 0.25
+});
 
 const cornerNE = L.LatLng(50, 180);
 const cornerSW = L.LatLng(-50, -180);
@@ -47,11 +47,12 @@ Promise.all([
 
       }
     }
-    
+
     const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 10));
-    function getColor(d){
+
+    function getColor(d) {
       return d3.rgb(colorScale(d)).brighter().hex();
-      
+
     }
     console.log(colorScale("North America"))
 
@@ -121,32 +122,65 @@ Promise.all([
         d3.select("#" + id).dispatch('mouseover');
 
       });
+
       l.on('mouseout', function (e) {
         countriesLayer.resetStyle(e.target);
         this.closePopup();
         d3.select("#" + id).dispatch('mouseout');
 
-        l.on('click', function (e) {
-          d3.select("#" + id).dispatch('click');
-          let scrolled = document.getElementById(id);
-          console.log('scroll');
-          //          scrolled.scrollIntoView();
-          let newY = scrolled.getBoundingClientRect().top;
-          window.scroll(0, newY);
-        })
       });
+
+      l.on('click', function (e) {
+        let label = d3.select("#" + id);
+        label.dispatch('click');
+        console.log(id);
+        console.log(label);
+        label
+          .transition()
+          .style('fill', '#FFA433')
+          .style('font-size', '9pt')
+          .style('font-weight', 'bold')
+          .duration(1000)
+          .delay(200)
+          .on('end', function () {
+          console.log('hello');
+            d3.select(this).transition()
+              .style('fill', null)
+              .style('font-size', null)
+              .duration(300)
+              .delay(100);
+          });
+
+        let svg = document.querySelector('#bump-chart svg');
+        console.log('scroll');
+
+        let elemY = parseFloat(document.getElementById(id).getAttribute('y'));
+        console.log(elemY);
+        let svgY = svg.getBoundingClientRect().y
+        let y = -document.body.getBoundingClientRect().top + (svgY + elemY);
+        console.log(y);
+        window.scrollTo({
+          top: y,
+          behavior: 'smooth'
+        });
     });
+  });
 
-    countriesLayer.addTo(mymap).setZIndex(2);
+countriesLayer.addTo(mymap).setZIndex(2);
+mymap.createPane('labels');
+mymap.getPane('labels').style.zIndex = 650;
+mymap.getPane('labels').style.pointerEvents = 'none';
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      minZoom: 1,
-      maxZoom: 5,
-      maxBounds: bounds,
-      maxBoundsViscosity: 1.0,
-    }).addTo(mymap).setZIndex(10);
-  
-  mymap.setView(center, 1.25);
-  })
+
+let labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd',
+  minZoom: 1,
+  maxZoom: 5,
+  maxBounds: bounds,
+  maxBoundsViscosity: 1.0,
+  pane: 'labels'
+}).addTo(mymap);
+
+mymap.setView(center, 1.25);
+})

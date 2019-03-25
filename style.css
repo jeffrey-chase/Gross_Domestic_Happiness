@@ -63,7 +63,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 h1 {
   text-align: center;
   font-family: 'Scope One', sans-serif;
@@ -103,7 +102,7 @@ article > div {
   position: fixed;
   left: 10px;
   height: 500px;
-  transform: translateY(75);
+  transform: translateY(76);
   /*  top: 100px;*/
   width: 800px;
 }
@@ -163,6 +162,13 @@ text {
   text-transform: uppercase;
 }
 
+text.emphasized {
+   font-size: 8pt;
+  font-weight: bold;
+  fill: yellow;
+} 
+
+
 .rank,
 .label,
 .point {
@@ -203,6 +209,16 @@ circle.point.activated {
 
 
 /* Map Styling */
+
+[class^='leaflet-popup'],
+[class^='leaflet-popup'] * {
+  pointer-events: none !important;
+  opacity: 0.9;
+}
+
+a.leaflet-popup-close-button{
+  display:none;
+}
 
 .leaflet-popup-content a {
   text-decoration: none;

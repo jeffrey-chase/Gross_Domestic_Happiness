@@ -107,7 +107,12 @@
       })
 
 
-    let labels = svg.append('g').selectAll('text.label').data(data).enter()
+    let labels = svg.append('g').selectAll('text.label')
+    .data(data.filter(function (d) {
+      return +d.year === 2018;
+    }))
+    
+    labels.enter()
       .append('text')
       .attr('x', function (d) {
         return xScale(+d['year']) + 10;
@@ -126,6 +131,8 @@
       .attr('id', function (d) {
         return makeSafeId(d.country) + "-label";
       });
+    
+    labels.exit().remove();
 
     //      lineMaker = d3.svg.line()
     //        .x(function(d){return +d['year']})
