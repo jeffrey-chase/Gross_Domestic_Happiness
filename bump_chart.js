@@ -96,22 +96,23 @@
       .style('fill', function (d) {
         return colorScale(d['country']);
       })
-      .attr('transform-origin', function(d){
+      .attr('transform-origin', function (d) {
         return " " + xScale(+d['year']) + "px " + yScale(+d['happiness_rank']) + "px";
       })
       .attr('class', function (d) {
-        return 'point '+ makeSafeId(d.country);
+        return 'point ' + makeSafeId(d.country);
       })
       .attr('id', function (d) {
-        return  makeSafeId(d.country) + "-point";
+        return makeSafeId(d.country) + "-point";
       })
+
 
 
     let labels = svg.append('g').selectAll('text.label')
-    .data(data.filter(function (d) {
-      return +d.year === 2018;
-    }))
-    
+      .data(data.filter(function (d) {
+        return +d.year === 2018;
+      }))
+
     labels.enter()
       .append('text')
       .attr('x', function (d) {
@@ -131,7 +132,7 @@
       .attr('id', function (d) {
         return makeSafeId(d.country) + "-label";
       });
-    
+
     labels.exit().remove();
 
     //      lineMaker = d3.svg.line()
@@ -166,7 +167,7 @@
         return 'rank ' + makeSafeId(d.key);
       });
 
-    function activate(){
+    function activate() {
       if (this.classList.contains('activated')) {
         let country = this.classList[this.classList.length - 2];
         svg.selectAll("." + country).classed('activated', false);
@@ -176,32 +177,54 @@
       }
 
     }
-    
-    function highlight(){
-      if (this.classList.contains('activated')) return false;
-      console.log('hover');
-      let country = this.classList[this.classList.length - 1];
-        svg.selectAll("." + country).classed('hover', true);
-//      setTimeout(function(){
-//        svg.selectAll("." + country).classed('hover', false);
-//      }, 500)
+
+    function highlight() {
+      let activated = this.classList.contains('activated');
+      let index = activated ? 2 : 1,
+        sizeBig = activated ? 5 : 6,
+        sizeSmall = activated ? 2.75 : 3.5;
+      let country = this.classList[this.classList.length - index];
+      svg.selectAll("." + country).classed('hover', true);
+
+
+      let points = svg.selectAll("." + country + '.point')
+      pulse();
+
+
+      function pulse() {
+        console.log('pulse')
+        if (svg.selectAll("." + country).classed('hover')) {
+          points
+            .transition()
+            .attr('r', sizeBig)
+            .duration(1000)
+            .delay(10)
+            .ease(d3.easeSin)
+            .transition()
+            .attr('r', 3.5)
+            .duration(1000)
+            .delay(10)
+            .on('end', pulse)
+        }
+      }
     }
-    
-    function unhighlight(){
+
+    function unhighlight() {
       if (this.classList.contains('activated')) return false;
       let country = this.classList[this.classList.length - 1];
-        svg.selectAll("." + country).classed('hover', false);
+      svg.selectAll("." + country).classed('hover', false);
+
     }
-    
+
+
     svg.selectAll(".rank, .point, .label")
       .on('click', activate);
-    
     svg.selectAll(".rank, .point, .label")
       .on('mouseover', highlight);
     svg.selectAll(".rank, .point, .label")
       .on('mouseout', unhighlight)
   });
-  
+
 
   ;
 

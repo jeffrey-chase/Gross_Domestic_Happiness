@@ -137,19 +137,19 @@ Promise.all([
         console.log(label);
         label
           .transition()
-          .style('fill', '#FFA433')
-          .style('font-size', '9pt')
+          .style('fill', 'rgb(242,178,32)')
+          .style('font-size', '8pt')
           .style('font-weight', 'bold')
           .duration(1000)
           .delay(200)
           .on('end', function () {
-          console.log('hello');
             d3.select(this).transition()
               .style('fill', null)
               .style('font-size', null)
-              .duration(300)
+              .duration(1000)
               .delay(100);
           });
+        
 
         let svg = document.querySelector('#bump-chart svg');
         console.log('scroll');
@@ -158,9 +158,15 @@ Promise.all([
         console.log(elemY);
         let svgY = svg.getBoundingClientRect().y
         let y = -document.body.getBoundingClientRect().top + (svgY + elemY);
-        console.log(y);
+        
+        let middle = (window.innerHeight - 
+            parseFloat(window.getComputedStyle(document.querySelector('header')).height)) / 3;
+        
+        let newPosition = y - middle ;
+        
+        console.log(y + ' '+ middle);
         window.scrollTo({
-          top: y,
+          top: newPosition,
           behavior: 'smooth'
         });
     });
