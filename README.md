@@ -5,7 +5,7 @@
 
 ### General TODO:
 
-- Add description of data/visualization to the intro
+- Add description of data/visualization to the intro ( Current text is just place holder)
 - Footer with author info and links
 - Make rendering change width when window is resized
 - Responsive layout (phone?)
