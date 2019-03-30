@@ -30,7 +30,7 @@ Promise.all([
     let mapping = {};
 
     info.forEach(function (d) {
-      mapping[d.country] = +d.happiness_score;
+      mapping[d.ISO3] = +d.happiness_score;
     })
 
     let fillScale = d3.scaleLinear()
@@ -62,7 +62,7 @@ Promise.all([
         color: getColor(feature.properties.subregion),
         dashArray: '1',
         fillOpacity: 0.8,
-        fillColor: getFill(mapping[feature.properties.name])
+        fillColor: getFill(mapping[feature.properties.iso_a3])
       };
     }
 
@@ -73,7 +73,7 @@ Promise.all([
         color: 'white',
         dashArray: '1',
         fillOpacity: 0.8,
-        fillColor: getColor(mapping[feature.properties.name])
+        fillColor: getColor(mapping[feature.properties.iso_a3])
       };
     }
 
@@ -87,7 +87,7 @@ Promise.all([
 //      chartMapMapping[l.feature.properties.name] = l;
       let polygon = l.feature.geometry;
       let center;
-      let id = makeSafeId(l.feature.properties.name) + "-label";
+      let id = "[data-cCode="+l.feature.properties.iso_a3 + "]";
       if (polygon.type === "MultiPolygon") {
         let largestArea = 0;
         let largestPolygon;
@@ -111,7 +111,7 @@ Promise.all([
           .setContent(
             "<h4>" + l.feature.properties.name + "</h4>" +
             "<p> Happiness Value: <span class='popup-value'>" +
-            mapping[l.feature.properties.name] +
+            mapping[l.feature.properties.iso_a3] +
             "</span></p>"
           ).openOn(mymap);
         this.setStyle({
@@ -119,20 +119,20 @@ Promise.all([
           weight: 4,
           dashArray: null
         });
-        d3.select("#" + id).dispatch('mouseover');
+        d3.select(".label" + id).dispatch('mouseover');
 
       });
 
       l.on('mouseout', function (e) {
         countriesLayer.resetStyle(e.target);
         this.closePopup();
-        d3.select("#" + id).dispatch('mouseout');
+        d3.select(".label"+id).dispatch('mouseout');
 
       });
 
 
       l.on('click', function (e) {
-        let label = d3.select("#" + id);
+        let label = d3.select(".label"+id);
         label.dispatch('click');
         console.log(id);
         console.log(label);
@@ -155,7 +155,7 @@ Promise.all([
         let svg = document.querySelector('#bump-chart svg');
         console.log('scroll');
 
-        let elemY = parseFloat(document.getElementById(id).getAttribute('y'));
+        let elemY = parseFloat(document.querySelector(".label"+id).getAttribute('y'));
         console.log(elemY);
         let svgY = svg.getBoundingClientRect().y
         let y = -document.body.getBoundingClientRect().top + (svgY + elemY);

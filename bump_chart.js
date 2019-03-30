@@ -26,15 +26,16 @@
       .key(function (d) {
         return d['year'];
       })
-      .rollup(function (d) {
-        return d3.sum(d, function (g) {
-          return g['happiness_rank'];
-        });
+      .rollup(function (v) {
+        return {
+          happiness_rank: v[0].happiness_rank,
+          ISO3: v[0].ISO3
+        };
       })
       .entries(data);
 
     console.log(nested);
-    
+
     const yearGrab = function (d) {
       return +d['year'];
     }
@@ -106,6 +107,9 @@
       .attr('id', function (d) {
         return makeSafeId(d.country) + "-point";
       })
+      .attr('data-cCode', function (d) {
+        return d.ISO3;
+      });
 
 
 
@@ -132,6 +136,9 @@
       })
       .attr('id', function (d) {
         return makeSafeId(d.country) + "-label";
+      })
+      .attr('data-cCode', function (d) {
+        return d.ISO3;
       });
 
     labels.exit().remove();
@@ -147,12 +154,12 @@
       .attr('d', function (d) {
         let start = "M " +
           xScale(+d.values[0].key) + " " +
-          yScale(+d.values[0].value) + ' ';
+          yScale(+d.values[0].value.happiness_rank) + ' ';
         let moves = "";
         for (let i = 1; i < d.values.length; i++) {
           moves += ("L " +
             xScale(+d.values[i].key) + " " +
-            yScale(+d.values[i].value) + " ");
+            yScale(+d.values[i].value.happiness_rank) + " ");
         }
         return start + moves;
       })
@@ -166,6 +173,9 @@
       })
       .attr('class', function (d) {
         return 'rank ' + makeSafeId(d.key);
+      })
+      .attr('data-cCode', function (d) {
+        return d.values[0].value.ISO3;
       });
 
     function activate() {
@@ -184,17 +194,17 @@
       let index = activated ? 2 : 1,
         sizeBig = activated ? 5 : 6,
         sizeSmall = activated ? 2.75 : 3.5;
-      let country = this.classList[this.classList.length - index];
-      svg.selectAll("." + country).classed('hover', true);
+      let country = this.getAttribute('data-cCode');
+      svg.selectAll("[data-cCode=" + country+"]").classed('hover', true);
 
 
-      let points = svg.selectAll("." + country + '.point')
+      let points = svg.selectAll("[data-cCode=" + country+"]"+ '.point')
       pulse();
 
 
       function pulse() {
         console.log('pulse')
-        if (svg.selectAll("." + country).classed('hover')) {
+        if (svg.selectAll("[data-cCode=" + country+"]").classed('hover')) {
           points
             .transition()
             .attr('r', sizeBig)
@@ -212,8 +222,8 @@
 
     function unhighlight() {
       if (this.classList.contains('activated')) return false;
-      let country = this.classList[this.classList.length - 1];
-      svg.selectAll("." + country).classed('hover', false);
+      let country = this.getAttribute('data-cCode');
+      svg.selectAll("[data-cCode=" + country+"]").classed('hover', false);
 
     }
 
