@@ -190,4 +190,23 @@ Promise.all([
     }).addTo(mymap);
 
     mymap.setView(center, 1.25);
+     let legend = d3.select("body").append("svg")
+        .attr("id","legend");
+     let fillScale2 = d3.scaleLinear()
+      .domain(d3.extent(info.map(function (d) {
+        return +d.happiness_score;
+      })))
+      .range([d3.interpolateMagma(1), d3.interpolateMagma(0)]);
+     let colorLegend = d3.legendColor()
+            .shapeWidth(30)
+            .orient('vertical')
+            .scale(fillScale2);
+
+        // .shapePadding(5)
+        // .shapeWidth(50)
+        // .shapeHeight(20)
+        // .labelOffset(12);
+       d3.select("#legend").append("g")
+        // .attr("transform", "translate(352, 60)")
+        .call(colorLegend);
   })
