@@ -9,6 +9,7 @@
 - Footer with author info and links
 - Make rendering change width when window is resized
 - Responsive layout (phone?)
+- Dropdown userguide in the header explaining interactive elements
 
 
 #### Map TODO

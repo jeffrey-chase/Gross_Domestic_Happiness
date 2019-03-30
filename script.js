@@ -48,7 +48,7 @@ function makeSafeId(text) {
       setTimeout(function () {
         window.onscroll = mapParallax;
 
-      }, 500);
+      }, 100);
 
       document.querySelector("#down-arrow").style.display = "none";
 
@@ -59,6 +59,6 @@ function makeSafeId(text) {
   function mapParallax() {
     let map = document.querySelector("#maparea");
 
-    map.style.transform = "translateY(" + d3.interpolate(75, 10)(window.scrollY / 2000) + "px";
+    map.style.transform = "translateY(" + d3.interpolate(75, 10)(window.scrollY / 2000) + "px)";
   }
 })();

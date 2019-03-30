@@ -1,4 +1,4 @@
-let center = new L.LatLng(0, 0);
+let center = new L.LatLng(30, 0);
 const mymap = L.map('maparea', {
   zoomSnap: 0.25
 });
@@ -48,13 +48,12 @@ Promise.all([
       }
     }
 
-    const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 10));
+    const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 12));
 
     function getColor(d) {
       return d3.rgb(colorScale(d)).brighter().hex();
 
     }
-    console.log(colorScale("North America"))
 
     function countryStyle(feature) {
       return {
@@ -82,12 +81,13 @@ Promise.all([
       style: countryStyle
     });
 
+    chartMapMapping = {}
 
     countriesLayer.eachLayer(function (l) {
+      chartMapMapping[l.feature.properties.name] = l;
       let polygon = l.feature.geometry;
       let center;
       let id = makeSafeId(l.feature.properties.name) + "-label";
-
       if (polygon.type === "MultiPolygon") {
         let largestArea = 0;
         let largestPolygon;
@@ -129,6 +129,9 @@ Promise.all([
         d3.select("#" + id).dispatch('mouseout');
 
       });
+     
+
+
 
       l.on('click', function (e) {
         let label = d3.select("#" + id);
@@ -149,7 +152,7 @@ Promise.all([
               .duration(1000)
               .delay(100);
           });
-        
+
 
         let svg = document.querySelector('#bump-chart svg');
         console.log('scroll');
@@ -158,35 +161,35 @@ Promise.all([
         console.log(elemY);
         let svgY = svg.getBoundingClientRect().y
         let y = -document.body.getBoundingClientRect().top + (svgY + elemY);
-        
-        let middle = (window.innerHeight - 
-            parseFloat(window.getComputedStyle(document.querySelector('header')).height)) / 3;
-        
-        let newPosition = y - middle ;
-        
-        console.log(y + ' '+ middle);
+
+        let middle = (window.innerHeight -
+          parseFloat(window.getComputedStyle(document.querySelector('header')).height)) / 3;
+
+        let newPosition = y - middle;
+
+        console.log(y + ' ' + middle);
         window.scrollTo({
           top: newPosition,
           behavior: 'smooth'
         });
+      });
     });
-  });
 
-countriesLayer.addTo(mymap).setZIndex(2);
-mymap.createPane('labels');
-mymap.getPane('labels').style.zIndex = 650;
-mymap.getPane('labels').style.pointerEvents = 'none';
+    countriesLayer.addTo(mymap).setZIndex(2);
+    mymap.createPane('labels');
+    mymap.getPane('labels').style.zIndex = 650;
+    mymap.getPane('labels').style.pointerEvents = 'none';
 
 
-let labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd',
-  minZoom: 1,
-  maxZoom: 5,
-  maxBounds: bounds,
-  maxBoundsViscosity: 1.0,
-  pane: 'labels'
-}).addTo(mymap);
+    let labels = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+      subdomains: 'abcd',
+      minZoom: 1,
+      maxZoom: 5,
+      maxBounds: bounds,
+      maxBoundsViscosity: 1.0,
+      pane: 'labels'
+    }).addTo(mymap);
 
-mymap.setView(center, 1.25);
-})
+    mymap.setView(center, 1.25);
+  })

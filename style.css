@@ -102,8 +102,9 @@ article > div {
   position: fixed;
   left: 10px;
   height: 500px;
-  transform: translateY(76);
-  /*  top: 100px;*/
+/*  width: 600px;*/
+/*  height: 375px;*/
+  transform: translate(0, 75px);
   width: 800px;
 }
 
@@ -242,5 +243,4 @@ a.leaflet-popup-close-button {
 span.popup-value {
   color: #8f67a8;
   font-weight: bold;
-
 }

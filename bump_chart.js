@@ -1,20 +1,25 @@
 (function () {
   "use strict";
 
+  // Parent element to contain the svg
   const parent = d3.select('#bump-chart');
 
+  // Total dimensions of the svg/chart
   const width = 400;
   const height = 2000;
 
+  // Svg to draw the chart on
   const svg = parent.append('svg')
     .attr('width', width + "px")
     .attr('height', height + "px");
 
 
+  // Reading in the data as a promise
   const combined = d3.csv('data/combined_data.csv');
   combined.then(function (data) {
     console.log(data);
 
+    // Creates a version of the data grouped by country then year
     let nested = d3.nest().key(function (d) {
         return d['country'];
       })
@@ -29,11 +34,7 @@
       .entries(data);
 
     console.log(nested);
-
-    let trends = data.map(d => {
-      d['values']
-    })
-
+    
     const yearGrab = function (d) {
       return +d['year'];
     }
