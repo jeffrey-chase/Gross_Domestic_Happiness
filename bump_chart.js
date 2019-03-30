@@ -202,7 +202,7 @@
             .delay(10)
             .ease(d3.easeSin)
             .transition()
-            .attr('r', 3.5)
+            .attr('r', sizeSmall)
             .duration(1000)
             .delay(10)
             .on('end', pulse)

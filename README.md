@@ -15,10 +15,10 @@
 #### Map TODO
 
 
-- Add legends to the map for the color scale
-- Put the label on the closest point in the country if the centroid is not inside the bounds of the country
-- Label popup to closest polygon in multi-polygons rather than largest
-- Add ranks to popup over map
+- Add legends to the map for the color scale (**S**)
+- Put the label on the closest point in the country if the centroid is not inside the bounds of the country (**J**)
+- Label popup to closest polygon in multi-polygons rather than largest (??**J**)
+- Add ranks to popup over map 
 - Connect layers on map to values by ISO3 code rather than name to fix most of countries
 - Buttons to visualize different attributes in the map
 - Toggle region color code lines in map

@@ -1,5 +1,5 @@
 html {
-  margin: 0;
+  margin: 0px;
 }
 
 header {
@@ -166,7 +166,6 @@ text {
 text.emphasized {
   font-size: 8pt;
   font-weight: bold;
-  fill: yellow;
 }
 
 
@@ -217,19 +216,20 @@ circle.point.activated {
 [class^='leaflet-popup'],
 [class^='leaflet-popup'] * {
   pointer-events: none !important;
-  opacity: 0.9;
 }
 
+[class^='leaflet-popup'] {
+    opacity: .8;
+}
+
+.leaflet-popup-tip-container {
+  opacity: 1;
+}
 
 a.leaflet-popup-close-button {
   display: none;
 }
 
-.leaflet-popup-content a {
-  text-decoration: none;
-  color: black;
-
-}
 
 .leaflet-popup-content * {
   margin: 0 !important;

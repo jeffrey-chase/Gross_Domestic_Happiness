@@ -61,7 +61,7 @@ Promise.all([
         opacity: 0.6,
         color: getColor(feature.properties.subregion),
         dashArray: '1',
-        fillOpacity: 0.7,
+        fillOpacity: 0.8,
         fillColor: getFill(mapping[feature.properties.name])
       };
     }
@@ -72,7 +72,7 @@ Promise.all([
         opacity: 1,
         color: 'white',
         dashArray: '1',
-        fillOpacity: 0.7,
+        fillOpacity: 0.8,
         fillColor: getColor(mapping[feature.properties.name])
       };
     }
@@ -81,10 +81,10 @@ Promise.all([
       style: countryStyle
     });
 
-    chartMapMapping = {}
+//    chartMapMapping = {}
 
     countriesLayer.eachLayer(function (l) {
-      chartMapMapping[l.feature.properties.name] = l;
+//      chartMapMapping[l.feature.properties.name] = l;
       let polygon = l.feature.geometry;
       let center;
       let id = makeSafeId(l.feature.properties.name) + "-label";
@@ -103,16 +103,16 @@ Promise.all([
       } else {
         center = turf.centroid(polygon);
       }
+      
       l.on('mouseover', function (e) {
         let popup = L.popup()
           .setLatLng(new L.LatLng(center.geometry.coordinates[1],
             center.geometry.coordinates[0]))
           .setContent(
-            "<a href='#" + id + "'>" +
             "<h4>" + l.feature.properties.name + "</h4>" +
             "<p> Happiness Value: <span class='popup-value'>" +
             mapping[l.feature.properties.name] +
-            "</span></p></a>"
+            "</span></p>"
           ).openOn(mymap);
         this.setStyle({
           fillOpacity: 1,
@@ -129,8 +129,6 @@ Promise.all([
         d3.select("#" + id).dispatch('mouseout');
 
       });
-     
-
 
 
       l.on('click', function (e) {
