@@ -25,8 +25,14 @@ for (i in 2015:2018) {
   all_data <- rbind(all_data, data)
 }
 
+codes <- read_csv('data/codes.csv') %>% select(-X5)
+codes
 
-all_data
+
+all_data <- all_data %>%
+  left_join(codes, by=c('country'='Country')) %>%
+  select(-original_name)
+
 
 
 write_csv(all_data, "data/combined_data.csv")
