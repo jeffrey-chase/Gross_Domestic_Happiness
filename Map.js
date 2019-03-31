@@ -43,7 +43,7 @@ Promise.all([
       if (d === undefined) {
         return '#555';
       } else {
-        return d3.interpolateMagma(fillScale(d));
+        return d3.interpolateInferno(fillScale(d));
 
       }
     }
@@ -190,15 +190,19 @@ Promise.all([
     }).addTo(mymap);
 
     mymap.setView(center, 1.25);
-     let legend = d3.select("body").append("svg")
-        .attr("id","legend");
-     let fillScale2 = d3.scaleLinear()
+     let legend = d3.select("#maparea .leaflet-top.leaflet-left").append("svg")
+        .attr("id","legend")
+        .attr('z-index', 1001)
+        .style('width', '100%')
+        .style('padding', '12px');
+     let fillScale2 = d3.scaleSequential(d3.interpolateInferno)
       .domain(d3.extent(info.map(function (d) {
         return +d.happiness_score;
-      })))
-      .range([d3.interpolateMagma(1), d3.interpolateMagma(0)]);
+      })).reverse());
      let colorLegend = d3.legendColor()
             .shapeWidth(30)
+            .cells([2, 3, 4, 5, 6, 7])
+            .ascending(true)
             .orient('vertical')
             .scale(fillScale2);
 
