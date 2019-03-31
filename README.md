@@ -9,7 +9,7 @@
 - Footer with author info and links
 - Make rendering change width when window is resized
 - Responsive layout (phone?)
-- Dropdown userguide in the header explaining interactive elements
+- Dropdown userguide in the header explaining interactive elements (https://www.w3schools.com/howto/howto_js_dropdown.asp)
 
 
 #### Map TODO
@@ -19,12 +19,8 @@
 - Put the label on the closest point in the country if the centroid is not inside the bounds of the country (**J**)
 - Label popup to closest polygon in multi-polygons rather than largest (??**J**)
 - Add ranks to popup over map 
-- Connect layers on map to values by ISO3 code rather than name to fix most of countries
 - Buttons to visualize different attributes in the map
 - Toggle region color code lines in map
-- Try to fix opacity in popups' arrows
-- Map parallax initialization jumpy (?); needs fixing
-- Consider other color scales maybe
 - Shift+arrows on keyboard zooms in and out
 - Restyle the leaflet default buttons
 - Also gray out color of the lines of the country when they are NA
