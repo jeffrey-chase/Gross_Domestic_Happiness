@@ -20,7 +20,44 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
+<style>
+.dropbtn {
+  background-color: #3498DB;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
 </head>
 
 <body>
@@ -34,7 +71,7 @@
 <!--      <button>Welcome to our Visualization</button>-->
 
 <!--//text is just place holder for now-->
-      
+
       <p>This is the 7th World Happiness Report. The first was released in April 2012 in support of a UN High level meeting on “Wellbeing and Happiness: Defining a
         New Economic Paradigm”. That report presented the available global data on national happiness and reviewed related evidence from the emerging science of happiness,
         showing that the quality of people’s lives can be coherently, reliably, and validly assessed by a variety of subjective well-being measures, collectively referred to then and in
@@ -50,7 +87,36 @@
         differences in life evaluations are driven by the differences in how people connect with each other and with their shared institutions and social norms..</p>
 -->
 
-    </div>
+<div class="dropdown">
+  <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
   </header>
 
   <article>
@@ -63,5 +129,6 @@
 <script src="bump_chart.js"></script>
 
 <script defer src="Map.js"></script>
+
 
 </html>
