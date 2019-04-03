@@ -21,42 +21,76 @@
 
   <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
 <style>
-.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
+
+.wrapper {margin: 100px 10px 0;}
+
+nav {
+
+
+}
+
+nav ul {
+	padding: 0;
+  margin: 0;
+	list-style: none;
+	position: relative;
+
+	}
+
+nav ul li {
+	display:inline-block;
+	background-color: #3388ff;
+	}
+
+nav a {
+	display:block;
+	padding:0 10px;
+	color:#FFF;
+	font-size:13px;
+	font-family: Arial;
+	line-height: 60px;
+	text-decoration:none;
+}
+
+nav a:hover {
+	background-color: #2566c1;
+}
+
+/* Hide Dropdowns by Default */
+nav ul ul {
+	display: none;
+	position: absolute;
+	top: 60px; /* the height of the main nav */
+}
+
+/* Display Dropdowns on Hover */
+nav ul li:hover > ul {
+	display:inherit;
+}
+
+/* Fisrt Tier Dropdown */
+nav ul ul li {
+	width:320px;
+	float:none;
+	display:list-item;
+	position: relative;
+}
+
+nav ul ul li a {
+	font-size: 11px;
+}
+
+/* Second, Third and more Tiers	*/
+nav ul ul ul li {
+	position: relative;
+	top:-60px;
+	left:320px;
 }
 
 
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
+/* Change this in order to change the Dropdown symbol */
+li > a:after { content:  ' +'; }
+li > a:only-child:after { content: ''; }
 </style>
 </head>
 
@@ -87,34 +121,89 @@
         differences in life evaluations are driven by the differences in how people connect with each other and with their shared institutions and social norms..</p>
 -->
 
-  <div class="dropdown">
-    <button onclick="myFunction()" class="dropbtn">Visualization Instructions</button></div>
-  <div id="myDropdown" class="dropdown-content">
-    <a href="#Map Features">Map Chart Features</a>
-    <a href="#Bump Chart Features">Bump Chart Features</a>
-</div>
+  <!--<div class="dropdown">-->
+    <!--<button onclick="myFunction()" class="dropbtn">Visualization Instructions</button>-->
+  <!--</div>-->
+  <!--<div id="myDropdown" class="dropdown-content">-->
+    <!--<a id="show-right" href="#Map Features">Map Chart Features</a>-->
+    <!--<a href="#Bump Chart Features">Bump Chart Features</a>-->
 
-<script>
 
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+<!--</div>-->
+      <!--<div id="myDropdown2" class="dropdown-content2">-->
+    <!--<a href="#Map Features">Hover over Countries</a>-->
 
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-</script>
+<!--</div>-->
+
+<!--<script>-->
+<!--var el1 = document.getElementById("show-right");-->
+<!--var el2 = document.getElementById("myDropdown2");-->
+<!--el1.addEventListener("mouseover", function( event ) {-->
+ <!--el2.classList.toggle("show");-->
+<!--});-->
+<!--el2.addEventListener("mouseleave", function( event ) {-->
+ <!--this.classList.toggle("show");-->
+<!--});-->
+
+<!--function myFunction() {-->
+  <!--document.getElementById("myDropdown").classList.toggle("show");-->
+<!--}-->
+
+<!--window.onclick = function(event) {-->
+  <!--if (!event.target.matches('.dropbtn')) {-->
+    <!--var dropdowns = document.getElementsByClassName("dropdown-content");-->
+    <!--var i;-->
+    <!--for (i = 0; i < dropdowns.length; i++) {-->
+      <!--var openDropdown = dropdowns[i];-->
+      <!--if (openDropdown.classList.contains('show')) {-->
+        <!--openDropdown.classList.remove('show');-->
+      <!--}-->
+    <!--}-->
+  <!--}-->
+<!--}-->
+<!--</script>-->
   </header>
+ <div class="wrapper">
+ <nav>
+        <ul>
 
+            <li><a href="#">Visualization Options</a>
+            <!-- First Tier Drop Down -->
+            <ul>
+                <li><a href="#">Map Chart Features</a>
+                  <ul>
+                    <li><a href="#">1.Hover over Countries to see Happiness Value</a></li>
+                    <li><a href="#">2.Zoom in to find a specific country</a></li>
+                    <li><a href="#">3.Highlight selected country on the Bar Chart</a>
+                        <!-- Third Tier Drop Down -->
+                        <ul>
+                            <li><a href="#">Stuff</a></li>
+                            <li><a href="#">Things</a></li>
+                            <li><a href="#">Other Stuff</a></li>
+                        </ul>
+                    </li>
+                </ul>
+              </li>
+                <li><a href="#">Bump Chart Features</a>
+            	<!-- Second Tier Drop Down -->
+                <ul>
+                    <li><a href="#">1. Hover over a country to see the change in Happiness Score </a></li>
+                    <li><a href="#">Sub</a></li>
+                    <li><a href="#">Sub</a>
+                        <!-- Third Tier Drop Down -->
+                        <ul>
+                            <li><a href="#">Stuff</a></li>
+                            <li><a href="#">Things</a></li>
+                            <li><a href="#">Other Stuff</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            </li>
+        </ul>
+    </nav>
+   </div>
   <article>
     <div id="maparea"></div>
 
