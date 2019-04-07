@@ -99,9 +99,9 @@ Promise.all([
             largestPolygon = shape;
           }
         }
-        center = turf.centroid(largestPolygon);
+        center = turf.pointOnFeature(largestPolygon);
       } else {
-        center = turf.centroid(polygon);
+        center = turf.pointOnFeature(polygon);
       }
       
       l.on('mouseover', function (e) {
