@@ -20,7 +20,7 @@ for (i in 2015:2018) {
   names(data) <- makeSafeNames(names(data))
   
   data <- data %>%
-    select(-c(`whisker-low`, `dystopia_(1.88)_+_residual`)) %>%
+    select(c(country, happiness_rank, happiness_score, economy, family, health, freedom, generosity))
     mutate(year=i)
            
   all_data <- rbind(all_data, data)
