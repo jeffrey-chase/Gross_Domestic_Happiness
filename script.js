@@ -12,7 +12,7 @@ function makeSafeId(text) {
     let ar = document.querySelector("#down-arrow");
     setTimeout(function () {
       ar.style.opacity = 1;
-    }, 500);
+    }, 600);
 
   }
 
@@ -20,17 +20,19 @@ function makeSafeId(text) {
 
   function animate() {
     let top = window.scrollY;
-    let p = document.querySelector("header p");
+    let content = document.querySelector("header .container");
+    let contentBottom = content.getBoundingClientRect().bottom;
+    
     let h = document.querySelector("header");
 
     if (window.scrollY > 400) {
-      p.style.opacity = ((top - 400) / 300);
+      content.style.opacity = ((top - 400) / 300);
     } else {
       h.style.color = d3.interpolateRgb("#f442e8", "rgb(255,255,255)")(window.scrollY / 200);
     }
-    if (window.scrollY > 800) {
+    if (window.scrollY > contentBottom + window.innerHeight) {
       h.classList.remove('intro');
-      p.classList.add('gone');
+      content.classList.add('gone');
       setTimeout(function () {
         window.scrollTo(0, 0);
       }, 1000);
