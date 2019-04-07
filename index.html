@@ -20,84 +20,6 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
-  <style>
-    .wrapper {
-      margin: 100px 10px 0;
-    }
-
-    nav {}
-
-    nav ul {
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      position: absolute;
-      left: 0;
-
-    }
-
-    nav ul li {
-      display: inline-block;
-      background-color: #3388ff;
-    }
-
-    nav a {
-      display: block;
-      padding: 0 10px;
-      color: #FFF;
-      font-size: 13px;
-      font-family: Arial;
-      line-height: 60px;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      background-color: #2566c1;
-    }
-
-    /* Hide Dropdowns by Default */
-    nav ul ul {
-      display: none;
-      position: absolute;
-      top: 60px;
-      /* the height of the main nav */
-    }
-
-    /* Display Dropdowns on Hover */
-    nav ul li:hover>ul {
-      display: inherit;
-    }
-
-    /* Fisrt Tier Dropdown */
-    nav ul ul li {
-      width: 320px;
-      float: none;
-      display: list-item;
-      position: relative;
-    }
-
-    nav ul ul li a {
-      font-size: 11px;
-    }
-
-    /* Second, Third and more Tiers	*/
-    nav ul ul ul li {
-      position: relative;
-      top: -60px;
-      left: 320px;
-    }
-
-
-    /* Change this in order to change the Dropdown symbol */
-    li>a:after {
-      content: ' +';
-    }
-
-    li>a:only-child:after {
-      content: '';
-    }
-
-  </style>
 </head>
 
 <body>
@@ -128,7 +50,7 @@
     </div>
   </header>
   <div class="wrapper">
-    <nav>
+    <div class="dropdown">
       <ul>
 
         <li><a href="#">Visualization Options</a>
@@ -166,14 +88,14 @@
           </ul>
         </li>
       </ul>
-    </nav>
-  </div>
-  <article>
-    <div id="maparea"></div>
-
-    <div id="bump-chart">
     </div>
-  </article>
+    </div>
+        <article>
+          <div id="maparea"></div>
+
+          <div id="bump-chart">
+          </div>
+        </article>
 </body>
 <script src="bump_chart.js"></script>
 
