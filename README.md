@@ -16,8 +16,6 @@
 
 
 - Add legends to the map for the color scale (**S**) (https://bl.ocks.org/starcalibre/6cccfa843ed254aa0a0d) 
-- Put the label on the closest point in the country if the centroid is not inside the bounds of the country (**J**)
-- Label popup to closest polygon in multi-polygons rather than largest (??**J**)
 - Add ranks to popup over map 
 - Buttons to visualize different attributes in the map
 - Toggle region color code lines in map

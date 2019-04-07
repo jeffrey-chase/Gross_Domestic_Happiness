@@ -307,3 +307,17 @@ span.popup-value {
   font-weight: bold;
 }
 
+<<<<<<< HEAD
+=======
+
+.leaflet-control-zoom a {
+  background: #333 !important;
+  border: 1px solid #888;
+  color: #8f67a8 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  color: #F5CDFF !important;
+}
+
+>>>>>>> 18839719cfb2de743c813752077e069728d8214d

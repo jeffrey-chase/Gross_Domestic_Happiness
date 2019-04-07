@@ -30,8 +30,9 @@ Promise.all([
     let mapping = {};
 
     info.forEach(function (d) {
-      mapping[d.ISO3] = +d.happiness_score;
+      mapping[d.ISO3] = d;
     })
+    console.log(mapping);
 
     let fillScale = d3.scaleLinear()
       .domain(d3.extent(info.map(function (d) {
@@ -56,13 +57,20 @@ Promise.all([
     }
 
     function countryStyle(feature) {
+      let fill = '#555';
+      try {
+        fill = getFill(+mapping[feature.properties.iso_a3].happiness_score);
+      } catch (err) {
+        console.log('failed for ' + feature.properties.iso_a3);
+      }
+
       return {
         weight: 2,
         opacity: 0.6,
         color: getColor(feature.properties.subregion),
         dashArray: '1',
         fillOpacity: 0.8,
-        fillColor: getFill(mapping[feature.properties.iso_a3])
+        fillColor: fill
       };
     }
 
@@ -73,7 +81,7 @@ Promise.all([
         color: 'white',
         dashArray: '1',
         fillOpacity: 0.8,
-        fillColor: getColor(mapping[feature.properties.iso_a3])
+        fillColor: getColor(+mapping[feature.properties.iso_a3].happiness_score)
       };
     }
 
@@ -81,13 +89,13 @@ Promise.all([
       style: countryStyle
     });
 
-//    chartMapMapping = {}
+    //    chartMapMapping = {}
 
     countriesLayer.eachLayer(function (l) {
-//      chartMapMapping[l.feature.properties.name] = l;
+      //      chartMapMapping[l.feature.properties.name] = l;
       let polygon = l.feature.geometry;
       let center;
-      let id = "[data-cCode="+l.feature.properties.iso_a3 + "]";
+      let id = "[data-cCode=" + l.feature.properties.iso_a3 + "]";
       if (polygon.type === "MultiPolygon") {
         let largestArea = 0;
         let largestPolygon;
@@ -99,21 +107,41 @@ Promise.all([
             largestPolygon = shape;
           }
         }
-        center = turf.centroid(largestPolygon);
+        center = turf.pointOnFeature(largestPolygon);
       } else {
-        center = turf.centroid(polygon);
+        center = turf.pointOnFeature(polygon);
       }
-      
+
       l.on('mouseover', function (e) {
+        let name = l.feature.properties.name;
+
+        let rank;
+        let score;
+        let content;
+
+        try {
+          rank = mapping[l.feature.properties.iso_a3].happiness_rank || 'NA';
+          score = mapping[l.feature.properties.iso_a3].happiness_score || 'NA';
+          content = "<h4>" + name +
+            " <span class='popup-value'>(#" + rank + ")</span></h4>" +
+            "<p> Happiness Value: <span class='popup-value'>" +
+            score +
+            "</span></p>"
+        } catch (err) {
+          rank = "NA";
+          score = "NA";
+          content = "<h4>" + name + "</h4>" +
+            "<p> There is no data available for this country </p>"
+        }
+
+
+
+
+
         let popup = L.popup()
           .setLatLng(new L.LatLng(center.geometry.coordinates[1],
             center.geometry.coordinates[0]))
-          .setContent(
-            "<h4>" + l.feature.properties.name + "</h4>" +
-            "<p> Happiness Value: <span class='popup-value'>" +
-            mapping[l.feature.properties.iso_a3] +
-            "</span></p>"
-          ).openOn(mymap);
+          .setContent(content).openOn(mymap);
         this.setStyle({
           fillOpacity: 1,
           weight: 4,
@@ -126,13 +154,13 @@ Promise.all([
       l.on('mouseout', function (e) {
         countriesLayer.resetStyle(e.target);
         this.closePopup();
-        d3.select(".label"+id).dispatch('mouseout');
+        d3.select(".label" + id).dispatch('mouseout');
 
       });
 
 
       l.on('click', function (e) {
-        let label = d3.select(".label"+id);
+        let label = d3.select(".label" + id);
         label.dispatch('click');
         console.log(id);
         console.log(label);
@@ -155,7 +183,7 @@ Promise.all([
         let svg = document.querySelector('#bump-chart svg');
         console.log('scroll');
 
-        let elemY = parseFloat(document.querySelector(".label"+id).getAttribute('y'));
+        let elemY = parseFloat(document.querySelector(".label" + id).getAttribute('y'));
         console.log(elemY);
         let svgY = svg.getBoundingClientRect().y
         let y = -document.body.getBoundingClientRect().top + (svgY + elemY);
@@ -190,27 +218,27 @@ Promise.all([
     }).addTo(mymap);
 
     mymap.setView(center, 1.25);
-     let legend = d3.select("#maparea .leaflet-top.leaflet-left").append("svg")
-        .attr("id","legend")
-        .attr('z-index', 1001)
-        .style('width', '100%')
-        .style('padding', '12px');
-     let fillScale2 = d3.scaleSequential(d3.interpolateInferno)
+    let legend = d3.select("#maparea .leaflet-top.leaflet-left").append("svg")
+      .attr("id", "legend")
+      .attr('z-index', 1001)
+      .style('width', '100%')
+      .style('padding', '12px');
+    let fillScale2 = d3.scaleSequential(d3.interpolateInferno)
       .domain(d3.extent(info.map(function (d) {
         return +d.happiness_score;
       })).reverse());
-     let colorLegend = d3.legendColor()
-            .shapeWidth(30)
-            .cells([2, 3, 4, 5, 6, 7])
-            .ascending(true)
-            .orient('vertical')
-            .scale(fillScale2);
+    let colorLegend = d3.legendColor()
+      .shapeWidth(30)
+      .cells([2, 3, 4, 5, 6, 7])
+      .ascending(true)
+      .orient('vertical')
+      .scale(fillScale2);
 
-        // .shapePadding(5)
-        // .shapeWidth(50)
-        // .shapeHeight(20)
-        // .labelOffset(12);
-       d3.select("#legend").append("g")
-        // .attr("transform", "translate(352, 60)")
-        .call(colorLegend);
+    // .shapePadding(5)
+    // .shapeWidth(50)
+    // .shapeHeight(20)
+    // .labelOffset(12);
+    d3.select("#legend").append("g")
+      // .attr("transform", "translate(352, 60)")
+      .call(colorLegend);
   })
