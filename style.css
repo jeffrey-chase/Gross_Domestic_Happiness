@@ -21,7 +21,7 @@ header {
 .intro {
   top: 0;
   position: absolute;
-  height: calc(800px + 100vh);
+  height: calc(2000px + 100vh);
 }
 
 .intro h1 {
@@ -36,7 +36,7 @@ header {
 
 .container {
   margin: auto;
-  width: 100%;
+  width: 50%;
 }
 
 .hidden {

@@ -20,79 +20,84 @@
   </script>
 
   <link href="https://fonts.googleapis.com/css?family=Scope+One" rel="stylesheet">
-<style>
+  <style>
+    .wrapper {
+      margin: 100px 10px 0;
+    }
 
-.wrapper {margin: 100px 10px 0;}
+    nav {}
 
-nav {
+    nav ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      position: absolute;
+      left: 0;
 
+    }
 
-}
+    nav ul li {
+      display: inline-block;
+      background-color: #3388ff;
+    }
 
-nav ul {
-	padding: 0;
-  margin: 0;
-	list-style: none;
-	position: absolute;
-    left: 0;
+    nav a {
+      display: block;
+      padding: 0 10px;
+      color: #FFF;
+      font-size: 13px;
+      font-family: Arial;
+      line-height: 60px;
+      text-decoration: none;
+    }
 
-	}
+    nav a:hover {
+      background-color: #2566c1;
+    }
 
-nav ul li {
-	display:inline-block;
-	background-color: #3388ff;
-	}
+    /* Hide Dropdowns by Default */
+    nav ul ul {
+      display: none;
+      position: absolute;
+      top: 60px;
+      /* the height of the main nav */
+    }
 
-nav a {
-	display:block;
-	padding:0 10px;
-	color:#FFF;
-	font-size:13px;
-	font-family: Arial;
-	line-height: 60px;
-	text-decoration:none;
-}
+    /* Display Dropdowns on Hover */
+    nav ul li:hover>ul {
+      display: inherit;
+    }
 
-nav a:hover {
-	background-color: #2566c1;
-}
+    /* Fisrt Tier Dropdown */
+    nav ul ul li {
+      width: 320px;
+      float: none;
+      display: list-item;
+      position: relative;
+    }
 
-/* Hide Dropdowns by Default */
-nav ul ul {
-	display: none;
-	position: absolute;
-	top: 60px; /* the height of the main nav */
-}
+    nav ul ul li a {
+      font-size: 11px;
+    }
 
-/* Display Dropdowns on Hover */
-nav ul li:hover > ul {
-	display:inherit;
-}
-
-/* Fisrt Tier Dropdown */
-nav ul ul li {
-	width:320px;
-	float:none;
-	display:list-item;
-	position: relative;
-}
-
-nav ul ul li a {
-	font-size: 11px;
-}
-
-/* Second, Third and more Tiers	*/
-nav ul ul ul li {
-	position: relative;
-	top:-60px;
-	left:320px;
-}
+    /* Second, Third and more Tiers	*/
+    nav ul ul ul li {
+      position: relative;
+      top: -60px;
+      left: 320px;
+    }
 
 
-/* Change this in order to change the Dropdown symbol */
-li > a:after { content:  ' +'; }
-li > a:only-child:after { content: ''; }
-</style>
+    /* Change this in order to change the Dropdown symbol */
+    li>a:after {
+      content: ' +';
+    }
+
+    li>a:only-child:after {
+      content: '';
+    }
+
+  </style>
 </head>
 
 <body>
@@ -103,9 +108,9 @@ li > a:only-child:after { content: ''; }
 
     <div class="container">
 
-<!--      <button>Welcome to our Visualization</button>-->
+      <!--      <button>Welcome to our Visualization</button>-->
 
-<!--//text is just place holder for now-->
+      <!--//text is just place holder for now-->
 
       <p>This is the 7th World Happiness Report. The first was released in April 2012 in support of a UN High level meeting on “Wellbeing and Happiness: Defining a
         New Economic Paradigm”. That report presented the available global data on national happiness and reviewed related evidence from the emerging science of happiness,
@@ -114,97 +119,55 @@ li > a:only-child:after { content: ''; }
         and on happiness in specific countries and regions. Often there is a central theme. This year we focus on happiness and community: how happiness has been changing over the past dozen years,
         and how information technology, governance and social norms influence communities..</p>
 
-<!--
       <p>The world is a rapidly changing place. Among the fastest changing aspects are those relating to how people communicate and interact with each other, whether in their schools and workplaces,
-         their neighbourhoods, or in far-flung parts of the world. In last year’s report, we studied migration as one important source of global change, finding that each country’s life circumstances,
+        their neighbourhoods, or in far-flung parts of the world. In last year’s report, we studied migration as one important source of global change, finding that each country’s life circumstances,
         including the social context and political institutions were such important sources of happiness that the international ranking of migrant happiness was almost identical to that of the native born.
         This evidence made a powerful case that the large international
         differences in life evaluations are driven by the differences in how people connect with each other and with their shared institutions and social norms..</p>
--->
 
-  <!--<div class="dropdown">-->
-    <!--<button onclick="myFunction()" class="dropbtn">Visualization Instructions</button>-->
-  <!--</div>-->
-  <!--<div id="myDropdown" class="dropdown-content">-->
-    <!--<a id="show-right" href="#Map Features">Map Chart Features</a>-->
-    <!--<a href="#Bump Chart Features">Bump Chart Features</a>-->
-
-
-<!--</div>-->
-      <!--<div id="myDropdown2" class="dropdown-content2">-->
-    <!--<a href="#Map Features">Hover over Countries</a>-->
-
-<!--</div>-->
-
-<!--<script>-->
-<!--var el1 = document.getElementById("show-right");-->
-<!--var el2 = document.getElementById("myDropdown2");-->
-<!--el1.addEventListener("mouseover", function( event ) {-->
- <!--el2.classList.toggle("show");-->
-<!--});-->
-<!--el2.addEventListener("mouseleave", function( event ) {-->
- <!--this.classList.toggle("show");-->
-<!--});-->
-
-<!--function myFunction() {-->
-  <!--document.getElementById("myDropdown").classList.toggle("show");-->
-<!--}-->
-
-<!--window.onclick = function(event) {-->
-  <!--if (!event.target.matches('.dropbtn')) {-->
-    <!--var dropdowns = document.getElementsByClassName("dropdown-content");-->
-    <!--var i;-->
-    <!--for (i = 0; i < dropdowns.length; i++) {-->
-      <!--var openDropdown = dropdowns[i];-->
-      <!--if (openDropdown.classList.contains('show')) {-->
-        <!--openDropdown.classList.remove('show');-->
-      <!--}-->
-    <!--}-->
-  <!--}-->
-<!--}-->
-<!--</script>-->
+    </div>
   </header>
- <div class="wrapper">
- <nav>
-        <ul>
+  <div class="wrapper">
+    <nav>
+      <ul>
 
-            <li><a href="#">Visualization Options</a>
-            <!-- First Tier Drop Down -->
-            <ul>
-                <li><a href="#">Map Chart Features</a>
-                  <ul>
-                    <li><a href="#">1.Hover over Countries to see Happiness Value</a></li>
-                    <li><a href="#">2.Zoom in/out to find a specific country</a></li>
-                    <li><a href="#">3.Hovered country highlights its bump chart status</a>
-                        <!-- Third Tier Drop Down -->
-                        <!--<ul>-->
-                            <!--<li><a href="#">Stuff</a></li>-->
-                            <!--<li><a href="#">Things</a></li>-->
-                            <!--<li><a href="#">Other Stuff</a></li>-->
-                        <!--</ul>-->
-                    </li>
-                </ul>
-              </li>
-                <li><a href="#">Bump Chart Features</a>
-            	<!-- Second Tier Drop Down -->
-                <ul>
-                    <li><a href="#">1. Hover over county to track score over time </a></li>
-                    <li><a href="#">2. Click country to highlight</a></li>
-                    <li><a href="#">3. Click again to deselect </a>
-                        <!-- Third Tier Drop Down -->
-                        <!--<ul>-->
-                            <!--<li><a href="#">Stuff</a></li>-->
-                            <!--<li><a href="#">Things</a></li>-->
-                            <!--<li><a href="#">Other Stuff</a></li>-->
-                        <!--</ul>-->
-                    </li>
-                </ul>
+        <li><a href="#">Visualization Options</a>
+          <!-- First Tier Drop Down -->
+          <ul>
+            <li><a href="#">Map Chart Features</a>
+              <ul>
+                <li><a href="#">1.Hover over Countries to see Happiness Value</a></li>
+                <li><a href="#">2.Zoom in/out to find a specific country</a></li>
+                <li><a href="#">3.Hovered country highlights its bump chart status</a>
+                  <!-- Third Tier Drop Down -->
+                  <!--<ul>-->
+                  <!--<li><a href="#">Stuff</a></li>-->
+                  <!--<li><a href="#">Things</a></li>-->
+                  <!--<li><a href="#">Other Stuff</a></li>-->
+                  <!--</ul>-->
                 </li>
-            </ul>
+              </ul>
             </li>
-        </ul>
+            <li><a href="#">Bump Chart Features</a>
+              <!-- Second Tier Drop Down -->
+              <ul>
+                <li><a href="#">1. Hover over county to track score over time </a></li>
+                <li><a href="#">2. Click country to highlight</a></li>
+                <li><a href="#">3. Click again to deselect </a>
+                  <!-- Third Tier Drop Down -->
+                  <!--<ul>-->
+                  <!--<li><a href="#">Stuff</a></li>-->
+                  <!--<li><a href="#">Things</a></li>-->
+                  <!--<li><a href="#">Other Stuff</a></li>-->
+                  <!--</ul>-->
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </nav>
-   </div>
+  </div>
   <article>
     <div id="maparea"></div>
 
