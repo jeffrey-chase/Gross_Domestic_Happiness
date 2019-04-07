@@ -20,25 +20,25 @@ header {
 
 .dropdown ul {
   padding: 0;
-  margin: 0;
+  margin: 10;
   list-style: none;
   position: absolute;
-  left: 0;
+  left: -20;
   z-index: 100;
 
 }
 
 .dropdown ul li {
   display: inline-block;
-  background-color: #3388ff;
+  background-color: #3399ff;
 }
 
 .dropdown a {
-  display: block;
+  display: inline-block;
   padding: 0 10px;
   color: #FFF;
   font-size: 13px;
-  font-family: Arial;
+  font-family: "Adobe Garamond Pro";
   line-height: 60px;
   text-decoration: none;
 }
@@ -52,7 +52,7 @@ header {
   display: none;
   position: absolute;
   left: 153px;
-  top: -60px;
+  top: 0px;
   /* the height of the main nav */
 }
 
@@ -64,7 +64,8 @@ header {
 
 /* First Tier Dropdown */
 .dropdown ul ul li {
-  width: 320px;
+  width: 1250px;
+  padding: 0px;
   float: none;
   display: list-item;
   position: relative;
@@ -72,14 +73,14 @@ header {
 }
 
 .dropdown ul ul li a {
-  font-size: 11px;
+  font-size: 13px;
 }
 
 /* Second, Third and more Tiers	*/
 .dropdown ul ul ul li {
   position: relative;
-  top: -30px;
-  left: 160px;
+  top: 0px;
+  left: 140px;
 }
 
 .intro {
@@ -305,3 +306,4 @@ span.popup-value {
   color: #8f67a8;
   font-weight: bold;
 }
+
