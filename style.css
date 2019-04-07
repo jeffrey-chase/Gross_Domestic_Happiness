@@ -17,73 +17,73 @@ header {
   z-index: 100;
 
 }
-.dropdown {
 
+.dropdown {}
+
+.dropdown ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: absolute;
+  left: 0;
+  z-index: 100;
 
 }
 
-.dropdown ul {
-	padding: 0;
-  margin: 0;
-	list-style: none;
-	position: absolute;
-    left: 0;
-    z-index: 100;
-
-	}
-
 .dropdown ul li {
-	display:inline-block;
-	background-color: #3388ff;
-	}
+  display: inline-block;
+  background-color: #3388ff;
+}
 
 .dropdown a {
-	display:block;
-	padding:0 10px;
-	color:#FFF;
-	font-size:13px;
-	font-family: Arial;
-	line-height: 60px;
-	text-decoration:none;
+  display: block;
+  padding: 0 10px;
+  color: #FFF;
+  font-size: 13px;
+  font-family: Arial;
+  line-height: 60px;
+  text-decoration: none;
 }
 
 .dropdown a:hover {
-	background-color: #2566c1;
+  background-color: #2566c1;
 }
 
 /* Hide Dropdowns by Default */
 .dropdown ul ul {
-	display: none;
-	position: absolute;
-	left: 153px;
-    top: -60px;/* the height of the main nav */
+  display: none;
+  position: absolute;
+  left: 153px;
+  top: -60px;
+  /* the height of the main nav */
 }
 
 /* Display Dropdowns on Hover */
 .dropdown ul li:hover > ul {
-	display:inherit;
+  display: inherit;
 
 }
 
 /* First Tier Dropdown */
 .dropdown ul ul li {
-	width:320px;
-	float:none;
-	display:list-item;
-	position: relative;
+  width: 320px;
+  float: none;
+  display: list-item;
+  position: relative;
 
 }
 
 .dropdown ul ul li a {
-	font-size: 11px;
+  font-size: 11px;
 }
 
 /* Second, Third and more Tiers	*/
 .dropdown ul ul ul li {
-	position: relative;
-	top:-30px;
-	left:160px;
+  position: relative;
+  top: -30px;
+  left: 160px;
 }
+
 .intro {
   top: 0;
   position: absolute;
@@ -133,7 +133,7 @@ h1 {
   text-align: center;
   font-family: 'Scope One', sans-serif;
   margin: 0;
-  font-size: 60pt;
+  font-size: 30pt;
   font-weight: 800;
   word-spacing: 6pt;
   letter-spacing: 3pt;
@@ -168,8 +168,8 @@ article > div {
   position: fixed;
   left: 10px;
   height: 500px;
-/*  width: 600px;*/
-/*  height: 375px;*/
+  /*  width: 600px;*/
+  /*  height: 375px;*/
   transform: translate(0, 75px);
   width: 800px;
 }
@@ -285,7 +285,7 @@ circle.point.activated {
 }
 
 [class^='leaflet-popup'] {
-    opacity: .8;
+  opacity: .8;
 }
 
 .leaflet-popup-tip-container {
