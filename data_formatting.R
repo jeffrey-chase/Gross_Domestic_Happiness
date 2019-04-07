@@ -7,8 +7,9 @@ makeSafeNames <- function (headers) {
   for (i in 1:length(headers)) {
     headers[i] <- headers[i] %>%
       stringr::str_trim(side="both") %>%
-      stringr::str_replace( '[ ]', '_') %>%
-      stringr::str_to_lower() 
+      stringr::str_replace_all( '[ ]', '_') %>%
+      stringr::str_to_lower() %>%
+      stringr::str_remove_all('explained_by:_')
   }
   return(headers) 
 }
@@ -19,7 +20,7 @@ for (i in 2015:2018) {
   names(data) <- makeSafeNames(names(data))
   
   data <- data %>%
-    select(c(country, happiness_score, happiness_rank)) %>%
+    select(-c(`whisker-low`, `dystopia_(1.88)_+_residual`)) %>%
     mutate(year=i)
            
   all_data <- rbind(all_data, data)
