@@ -19,7 +19,6 @@ header {
 }
 .dropdown {
 
-
 }
 
 .dropdown ul {
@@ -42,7 +41,7 @@ header {
 	padding:0 10px;
 	color:#FFF;
 	font-size:13px;
-	font-family: Arial;
+	font-family: "Adobe Garamond Pro";
 	line-height: 60px;
 	text-decoration:none;
 }
@@ -133,7 +132,7 @@ h1 {
   text-align: center;
   font-family: 'Scope One', sans-serif;
   margin: 0;
-  font-size: 60pt;
+  font-size: 30pt;
   font-weight: 800;
   word-spacing: 6pt;
   letter-spacing: 3pt;
@@ -147,9 +146,6 @@ h1 {
   font-size: 90px;
   opacity: 0;
 }
-
-
-
 
 article {
   display: flex;
