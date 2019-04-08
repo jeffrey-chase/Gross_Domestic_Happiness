@@ -122,7 +122,11 @@ Promise.all([
         try {
           rank = mapping[l.feature.properties.iso_a3].happiness_rank || 'NA';
           score = mapping[l.feature.properties.iso_a3].happiness_score || 'NA';
-          content = "<h4>" + name +
+          content = 
+            "<div class='flag-container'>"+
+            "<img src='images/flags/svg/" + l.feature.properties.iso_a2 + ".svg'>"+
+            "</div>"+
+            "<h4>" + name +
             " <span class='popup-value'>(#" + rank + ")</span></h4>" +
             "<p> Happiness Value: <span class='popup-value'>" +
             score +

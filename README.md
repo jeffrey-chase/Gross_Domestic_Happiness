@@ -9,7 +9,6 @@
 - Footer with author info and links
 - Make rendering change width when window is resized
 - Responsive layout (phone?)
-- Dropdown userguide in the header explaining interactive elements (https://www.w3schools.com/howto/howto_js_dropdown.asp)
 
 
 #### Map TODO
@@ -20,10 +19,7 @@
 - Buttons to visualize different attributes in the map
 - Toggle region color code lines in map
 - Shift+arrows on keyboard zooms in and out
-- Restyle the leaflet default buttons
-- Also gray out color of the lines of the country when they are NA
 - Histogram for regions values hovering near that region
-- Change undefined to  N/A
 
 #### Chart TODO
 

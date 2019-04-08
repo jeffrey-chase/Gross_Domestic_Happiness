@@ -280,7 +280,7 @@ circle.point.activated {
 }
 
 [class^='leaflet-popup'] {
-  opacity: .8;
+  opacity: .9;
 }
 
 .leaflet-popup-tip-container {
@@ -301,6 +301,32 @@ a.leaflet-popup-close-button {
   margin: 13px 19px 7px 19px;
 }
 
+.flag-container {
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #555;
+  border-radius: 50%;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  overflow: hidden;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+
+}
+
+.leaflet-popup-content img {
+  position: relative;
+  height: 20px;
+  /*  height: 30px; */
+  /*  clip: rect();*/
+  /*  clip-path: circle(20px at center);*/
+}
+
+
 span.popup-value {
   color: #8f67a8;
   font-weight: bold;
@@ -316,4 +342,3 @@ span.popup-value {
 .leaflet-control-zoom a:hover {
   color: #F5CDFF !important;
 }
-
