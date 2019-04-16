@@ -19,10 +19,11 @@ header {
 }
 
 .dropdown ul {
+  font-size: 0.75em;
   padding: 0;
-  margin: 10;
   list-style: none;
-  position: absolute;
+  position: fixed;
+  top: 0;
   left: -20;
   z-index: 100;
 
@@ -30,29 +31,28 @@ header {
 
 .dropdown ul li {
   display: inline-block;
-  background-color: #3399ff;
+  background-color: #aaa;
 }
 
 .dropdown a {
   display: inline-block;
   padding: 0 10px;
   color: #FFF;
-  font-size: 13px;
-  font-family: "Adobe Garamond Pro";
   line-height: 60px;
   text-decoration: none;
 }
 
 .dropdown a:hover {
-  background-color: #2566c1;
+  color: #2d1f36;
+  background-color: #F5CDFF;
 }
 
 /* Hide Dropdowns by Default */
 .dropdown ul ul {
   display: none;
   position: absolute;
-  left: 153px;
-  top: 0px;
+  left: 0;
+  top: 60px;
   /* the height of the main nav */
 }
 

@@ -6,8 +6,6 @@ function makeSafeId(text) {
 
 (function () {
   window.onload = function () {
-    //    document.querySelector('header').classList.add("intro");
-    //    document.querySelector('header p').classList.add("hidden");
     window.onscroll = animate;
     let ar = document.querySelector("#down-arrow");
     setTimeout(function () {
@@ -21,6 +19,7 @@ function makeSafeId(text) {
   function animate() {
     let top = window.scrollY;
     let content = document.querySelector("header .container");
+    content.style.opacity = 0;
     let contentBottom = content.getBoundingClientRect().bottom;
     
     let h = document.querySelector("header");
