@@ -34,7 +34,7 @@ header {
   background-color: #aaa;
 }
 
-.dropdown a {
+.dropdown span {
   display: inline-block;
   padding: 0 10px;
   color: #FFF;
@@ -42,9 +42,13 @@ header {
   text-decoration: none;
 }
 
-.dropdown a:hover {
+.dropdown:hover * {
   color: #2d1f36;
   background-color: #F5CDFF;
+}
+
+.dropdown:hover > *  {
+  border-top: 4px solid #aaa;
 }
 
 /* Hide Dropdowns by Default */
@@ -72,7 +76,7 @@ header {
 
 }
 
-.dropdown ul ul li a {
+.dropdown ul ul li span {
   font-size: 13px;
 }
 
@@ -341,4 +345,11 @@ span.popup-value {
 
 .leaflet-control-zoom a:hover {
   color: #F5CDFF !important;
+}
+
+#legend text {
+  font-size: 1em;
+  text-transform: capitalize;
+  letter-spacing: 0.1em;
+  
 }

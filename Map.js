@@ -122,10 +122,10 @@ Promise.all([
         try {
           rank = mapping[l.feature.properties.iso_a3].happiness_rank || 'NA';
           score = mapping[l.feature.properties.iso_a3].happiness_score || 'NA';
-          content = 
-            "<div class='flag-container'>"+
-            "<img src='images/flags/svg/" + l.feature.properties.iso_a2 + ".svg'>"+
-            "</div>"+
+          content =
+            "<div class='flag-container'>" +
+            "<img src='images/flags/svg/" + l.feature.properties.iso_a2 + ".svg'>" +
+            "</div>" +
             "<h4>" + name +
             " <span class='popup-value'>(#" + rank + ")</span></h4>" +
             "<p> Happiness Value: <span class='popup-value'>" +
@@ -159,7 +159,6 @@ Promise.all([
         countriesLayer.resetStyle(e.target);
         this.closePopup();
         d3.select(".label" + id).dispatch('mouseout');
-
       });
 
 
@@ -227,10 +226,13 @@ Promise.all([
       .attr('z-index', 1001)
       .style('width', '100%')
       .style('padding', '12px');
+
+
     let fillScale2 = d3.scaleSequential(d3.interpolateInferno)
       .domain(d3.extent(info.map(function (d) {
         return +d.happiness_score;
       })).reverse());
+
     let colorLegend = d3.legendColor()
       .shapeWidth(30)
       .cells([2, 3, 4, 5, 6, 7])
@@ -238,11 +240,19 @@ Promise.all([
       .orient('vertical')
       .scale(fillScale2);
 
-    // .shapePadding(5)
-    // .shapeWidth(50)
-    // .shapeHeight(20)
-    // .labelOffset(12);
-    d3.select("#legend").append("g")
-      // .attr("transform", "translate(352, 60)")
+    //  legend.append('rect')
+    //    .attr('width',  '100%')
+    //    .attr('height', '100%')
+    //    .attr('fill', 'black');
+
+    legend.append('text')
+      .attr('id', 'legend-title')
+      .text('Happiness Value')
+      .attr('fill', 'white')
+      .attr('x', 0)
+      .attr('y', 40);
+
+    legend.append("g")
+      .attr("transform", "translate(10, 50)")
       .call(colorLegend);
   })
