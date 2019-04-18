@@ -61,7 +61,6 @@
 
               <span>1.Hover over Countries to see Happiness Value</span>
               <span> 2.Zoom in/out to find a specific country</span>
-              <span>2.Zoom in/out to find a specific country</span>
               <span>3.Hovered country highlights its bump chart status</span>
 
 
@@ -79,12 +78,14 @@
   </div>
   <article>
     <div id="mapcontrols">
-      <button type="button">GDP</button>
-      <button type="button">Family</button>
-      <button type="button">Life Expentancy</button>
-      <button type="button">Freedom</button>
-      <button type="button">Generosity</button>
-      <button type="button">Gov. Corruption</button>
+      <form>
+        <input type="button" value="GDP" onclick="alert('GDP per Capita is in terms of Purchasing Power Parity (PPP) adjusted to constant 2011 international dollars, taken from the World Development Indicators (WDI) Released by the World Bank in August 2016.')">
+        <input type="button" value ="Social Support" onclick="alert('Social Support is the national average of the binary responses (either 0 or 1) to the Gallup World Poll (GWP) question: If you were in trouble, do you have relatives or friends you can count on to help you where you need them, or not.')">
+        <input type="button" value="Life Expentancy" onclick="alert('The time series of healthy life expectancy at birth are constructed based in data from the World Health Organization (WHO).')">
+        <input type="button" value="Freedom" onclick="alert('Freedom to make life choices is the national average of binary responses to the WGP question: Are you satisfied or dissatisfied with your freedom to choose what you do with your life.')">
+        <input type="button" value="Generosity" onclick="alert('Generosity is the residual or regressing the national average of GWP responses to the question: Have you donated money to a charity in the past month? on GDP per capita.')">
+        <input type="button" value="Gov. Corruption" onclick="alert('Perceptions of corruption are the average of binary responses to two GWP questions: 1. Is corruption widespread throughout the government or not? 2. Is corruption widespread within businesses or not?.')">
+      </form>
     </div>
     <div id="maparea">
     </div>
