@@ -12,6 +12,21 @@
   const svg = parent.append('svg')
     .attr('width', width + "px")
     .attr('height', height + "px");
+  
+  let g = svg.append('g')
+  
+  let fisheye = d3.fisheye.circular();
+  
+  svg.call(
+    d3.zoom()
+    .scaleExtent([1,5])
+    .on('zoom', zoom)
+    
+  )
+  function zoom(e){
+//    e.preventDefault();
+    g.attr("transform", d3.event.transform);
+  }
 
 
   // Reading in the data as a promise
@@ -69,24 +84,24 @@
       .tickSize(-(width - 150))
       .tickFormat(d3.format(""));
 
-    svg.append("g")
+    g.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + (height - 20) + ")")
       .call(xaxis);
 
-    svg.append("g")
+    g.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + (30) + ")")
       .call(xaxis2);
 
-    svg.append("g")
+    g.append("g")
       .attr('class', 'y axis')
       .attr("transform", "translate(" + 30 + ", 0)")
       .call(yaxis);
 
     const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 20));
 
-    let circles = svg.append('g').selectAll("circle.point").data(data).enter()
+    let circles = g.append('g').selectAll("circle.point").data(data).enter()
       .append('circle')
       .attr('r', 3.5)
       .attr('cx', function (d) {
@@ -113,7 +128,7 @@
 
 
 
-    let labels = svg.append('g').selectAll('text.label')
+    let labels = g.append('g').selectAll('text.label')
       .data(data.filter(function (d) {
         return +d.year === 2018;
       }))
@@ -149,7 +164,7 @@
     //      
 
     // Adding the paths 
-    svg.append('g').selectAll('path.rank').data(nested).enter()
+    g.append('g').selectAll('path.rank').data(nested).enter()
       .append('path')
       .attr('d', function (d) {
         let start = "M " +
@@ -186,7 +201,7 @@
         let country = this.classList[this.classList.length - 1];
         svg.selectAll("." + country).classed('activated', true);
       }
-
+    
     }
 
     function highlight() {
