@@ -12,19 +12,13 @@
   const svg = parent.append('svg')
     .attr('width', width + "px")
     .attr('height', height + "px");
-  
+
   let g = svg.append('g')
-  
-  let fisheye = d3.fisheye.circular();
-  
-  svg.call(
-    d3.zoom()
-    .scaleExtent([1,5])
-    .on('zoom', zoom)
-    
-  )
-  function zoom(e){
-//    e.preventDefault();
+
+
+
+  function zoom(e) {
+    //    e.preventDefault();
     g.attr("transform", d3.event.transform);
   }
 
@@ -113,9 +107,6 @@
       .style('fill', function (d) {
         return colorScale(d['country']);
       })
-      .attr('transform-origin', function (d) {
-        return " " + xScale(+d['year']) + "px " + yScale(+d['happiness_rank']) + "px";
-      })
       .attr('class', function (d) {
         return 'point ' + makeSafeId(d.country);
       })
@@ -201,7 +192,7 @@
         let country = this.classList[this.classList.length - 1];
         svg.selectAll("." + country).classed('activated', true);
       }
-    
+
     }
 
     function highlight() {
@@ -210,16 +201,15 @@
         sizeBig = activated ? 5 : 6,
         sizeSmall = activated ? 2.75 : 3.5;
       let country = this.getAttribute('data-cCode');
-      svg.selectAll("[data-cCode=" + country+"]").classed('hover', true);
+      svg.selectAll("[data-cCode=" + country + "]").classed('hover', true);
 
 
-      let points = svg.selectAll("[data-cCode=" + country+"]"+ '.point')
+      let points = svg.selectAll("[data-cCode=" + country + "]" + '.point')
       pulse();
 
 
       function pulse() {
-        console.log('pulse')
-        if (svg.selectAll("[data-cCode=" + country+"]").classed('hover')) {
+        if (svg.selectAll("[data-cCode=" + country + "]").classed('hover')) {
           points
             .transition()
             .attr('r', sizeBig)
@@ -238,11 +228,30 @@
     function unhighlight() {
       if (this.classList.contains('activated')) return false;
       let country = this.getAttribute('data-cCode');
-      svg.selectAll("[data-cCode=" + country+"]").classed('hover', false);
+      svg.selectAll("[data-cCode=" + country + "]").classed('hover', false);
 
     }
 
+    function brushed() {
+      let s = d3.event.selection;
+      if (s !== null) {
+        let sy = s.map((e) => yScale.invert(e));
+        console.log(sy);
+        
+        circles.classed("focused", function (d) {
+          return sy[0] <= d.happiness_rank && d.happiness_rank <= sy[1];
+        });
 
+      }
+    }
+
+    let brush = d3.brushY()
+      .extent([[0, 0], [width - 120, height - 60]]);
+
+    svg.call(
+      d3.brush().on("brush", brushed)
+
+    )
     svg.selectAll(".rank, .point, .label")
       .on('click', activate);
     svg.selectAll(".rank, .point, .label")
