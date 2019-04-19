@@ -63,7 +63,9 @@ function makeSafeId(text) {
 
   function mapParallax() {
     let map = document.querySelector("#maparea");
-
-    map.style.transform = "translateY(" + d3.interpolate(75, 10)(window.scrollY / 2000) + "px)";
+    let mapControls = document.querySelector("#mapcontrols");
+    let scroll = d3.interpolate(75, 10)(window.scrollY / 2000);
+    map.style.transform = "translateY(" + scroll + "px)";
+    mapControls.style.transform = "translateY(" + (scroll + 5)+ "px)";
   }
 })();
