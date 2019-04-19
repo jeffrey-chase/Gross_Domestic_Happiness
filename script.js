@@ -22,7 +22,7 @@ function makeSafeId(text) {
     let content = document.querySelector("header .container");
     let guide = document.querySelector(".dropdown");
     content.style.opacity = 0;
-    guide.style.display = 'none';
+    guide.classList.add('hidden')
     let contentBottom = content.getBoundingClientRect().bottom;
     
     let h = document.querySelector("header");
@@ -35,7 +35,7 @@ function makeSafeId(text) {
     if (window.scrollY > contentBottom + window.innerHeight) {
       h.classList.remove('intro');
       content.classList.add('gone');
-      guide.style.display = '';
+      guide.classList.remove('hidden');
       setTimeout(function () {
         window.scrollTo(0, 0);
       }, 1000);

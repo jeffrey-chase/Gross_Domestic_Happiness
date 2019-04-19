@@ -17,6 +17,13 @@ header {
   z-index: 100;
 
 }
+.dropdown * {
+  transition-duration: 2s;
+  opacity: 1;
+}
+.dropdown.hidden * {
+  opacity: 0;
+}
 
 .dropdown ul {
   font-size: 0.75em;
