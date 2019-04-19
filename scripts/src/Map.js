@@ -126,17 +126,24 @@ Promise.all([
           let rank;
           let score;
           let content;
+          let variable = selectedVar.toLowerCase().split('_')
+          variable = variable.map((e)=>{
+            return e[0].toUpperCase() + e.slice(1);
+          }).join(' ');
+          
 
           try {
             rank = mapping[l.feature.properties.iso_a3].happiness_rank || 'NA';
             score = mapping[l.feature.properties.iso_a3][selectedVar] || 'NA';
+            
             content =
               "<div class='flag-container'>" +
               "<img src='images/flags/svg/" + l.feature.properties.iso_a2.toLowerCase() + ".svg'>" +
               "</div>" +
               "<h4>" + name +
               " <span class='popup-value'>(#" + rank + ")</span></h4>" +
-              "<p> Happiness Value: <span class='popup-value'>" +
+              "<p>" + variable +
+              " Value: <span class='popup-value'>" +
               score +
               "</span></p>"
           } catch (err) {
