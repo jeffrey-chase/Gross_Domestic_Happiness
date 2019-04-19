@@ -15,12 +15,23 @@
 
 
   window.addEventListener('keydown', (e) => {
-    if (e.keyCode === 'shift') {
+    if (e.shiftKey) {
       svg.call(
         d3.zoom()
         .scaleExtent([1, 5])
         .on('zoom', zoom)
+      );
+    } else {
+      return false;
+    }
 
+  });
+  window.addEventListener('keyup', (e) => {
+    if (e.shiftKey) {
+      svg.call(
+        d3.zoom()
+        .scaleExtent([1, 5])
+        .on('zoom', null)
       );
     } else {
       return false;
