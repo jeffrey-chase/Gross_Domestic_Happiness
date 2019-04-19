@@ -1,6 +1,6 @@
 library(readxl)
 library(tidyverse)
-setwd('Desktop/School Work/Spring 2019/Information Visualization/projects/GDH/')
+setwd('~/Desktop/School Work/Spring 2019/Information Visualization/projects/GDH/')
 all_data <- tibble()
 
 makeSafeNames <- function (headers) {
@@ -20,7 +20,7 @@ for (i in 2015:2018) {
   names(data) <- makeSafeNames(names(data))
   
   data <- data %>%
-    select(c(country, happiness_rank, happiness_score, economy, family, health, freedom, generosity))
+    select(c(country, happiness_rank, happiness_score, economy, family, health, freedom, generosity, trust)) %>%
     mutate(year=i)
            
   all_data <- rbind(all_data, data)
