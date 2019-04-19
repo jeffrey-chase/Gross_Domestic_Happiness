@@ -127,15 +127,15 @@ Promise.all([
           let score;
           let content;
           let variable = selectedVar.toLowerCase().split('_')
-          variable = variable.map((e)=>{
+          variable = variable.map((e) => {
             return e[0].toUpperCase() + e.slice(1);
           }).join(' ');
-          
+
 
           try {
             rank = mapping[l.feature.properties.iso_a3].happiness_rank || 'NA';
             score = mapping[l.feature.properties.iso_a3][selectedVar] || 'NA';
-            
+
             content =
               "<div class='flag-container'>" +
               "<img src='images/flags/svg/" + l.feature.properties.iso_a2.toLowerCase() + ".svg'>" +
@@ -228,8 +228,8 @@ Promise.all([
 
       let colorLegend = d3.legendColor()
         .shapeWidth(30)
-        //        .cells()
-        .ascending(true)
+        .cells(8)
+        .ascending(false)
         .orient('vertical')
         .scale(fillScale2);
 
@@ -247,7 +247,7 @@ Promise.all([
         .attr("id", "legend")
         .attr('z-index', 1001)
         .attr('width', '100%')
-        .attr('height', 200)
+        .attr('height', 500)
         .style('padding', '15px');
 
 
