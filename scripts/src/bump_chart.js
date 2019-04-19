@@ -13,41 +13,38 @@
     .attr('width', width + "px")
     .attr('height', height + "px");
 
-
-  window.addEventListener('keydown', (e) => {
-    if (e.shiftKey) {
-      svg.call(
-        d3.zoom()
-        .scaleExtent([1, 5])
-        .on('zoom', zoom)
-      );
-    } else {
-      return false;
-    }
-
-  });
-  window.addEventListener('keyup', (e) => {
-    if (e.shiftKey) {
-      svg.call(
-        d3.zoom()
-        .scaleExtent([1, 5])
-        .on('zoom', null)
-      );
-    } else {
-      return false;
-    }
-
-  })
+//  let zoomHandler = d3.zoom()
+//    .scaleExtent([1, 5])
+//    .on('zoom', zoom);
+//  svg.call(zoomHandler);
+//
+//  let noZoom = true;
+//  window.addEventListener('keydown', (e) => {
+//    if (e.shiftKey) {
+//      console.log("shift down")
+//      noZoom = false;
+//      console.log('nozoom: ' + noZoom);
+//
+//    }
+//
+//  });
+//  window.addEventListener('keyup', (e) => {
+//    noZoom = true;
+//    //    zoomHandler.on("zoom", null)
+//    //    zoomHandler.scaleTo(1).translateTo([0, 0]).customEvent(svg);
+//  });
 
 
   let g = svg.append('g')
 
 
-  function zoom(e) {
-    //    e.preventDefault();
-
-    g.attr("transform", d3.event.transform);
-  }
+//  function zoom(e) {
+//    //    e.preventDefault();
+//    if (!noZoom) {
+//      console.log(noZoom);
+//      g.attr("transform", d3.event.transform);
+//    }
+//  }
 
 
   // Reading in the data as a promise
