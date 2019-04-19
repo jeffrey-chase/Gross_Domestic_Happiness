@@ -13,12 +13,28 @@
     .attr('width', width + "px")
     .attr('height', height + "px");
 
-  let g = svg.append('g')
 
+  window.addEventListener('keydown', (e) => {
+    if (e.keyCode === 'shift') {
+      svg.call(
+        d3.zoom()
+        .scaleExtent([1, 5])
+        .on('zoom', zoom)
+
+      );
+    } else {
+      return false;
+    }
+
+  })
+
+
+  let g = svg.append('g')
 
 
   function zoom(e) {
     //    e.preventDefault();
+
     g.attr("transform", d3.event.transform);
   }
 
@@ -232,26 +248,26 @@
 
     }
 
-    function brushed() {
-      let s = d3.event.selection;
-      if (s !== null) {
-        let sy = s.map((e) => yScale.invert(e));
-        console.log(sy);
-        
-        circles.classed("focused", function (d) {
-          return sy[0] <= d.happiness_rank && d.happiness_rank <= sy[1];
-        });
+    //    function brushed() {
+    //      let s = d3.event.selection;
+    //      if (s !== null) {
+    //        let sy = s.map((e) => yScale.invert(e));
+    //        console.log(sy);
+    //        
+    //        circles.classed("focused", function (d) {
+    //          return sy[0] <= d.happiness_rank && d.happiness_rank <= sy[1];
+    //        });
+    //
+    //      }
+    //    }
 
-      }
-    }
-
-    let brush = d3.brushY()
-      .extent([[0, 0], [width - 120, height - 60]]);
-
-    svg.call(
-      d3.brush().on("brush", brushed)
-
-    )
+    //    let brush = d3.brushY()
+    //      .extent([[0, 0], [width - 120, height - 60]]);
+    //
+    //    svg.call(
+    //      d3.brush().on("brush", brushed)
+    //
+    //    )
     svg.selectAll(".rank, .point, .label")
       .on('click', activate);
     svg.selectAll(".rank, .point, .label")
