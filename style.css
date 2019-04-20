@@ -132,6 +132,24 @@ header {
   height: 100vh;
 }
 
+#restart {
+  background: none;
+  border: none;
+  color: #f442e8;
+  font-size: 2.5em;
+  position: fixed;
+  top: 5px;
+  right: 10px;
+}
+
+#restart:hover {
+  color: #f5cdff;
+}
+
+#restart:focus {
+  outline: 2px solid #f442e8;
+}
+
 .container {
   margin: auto;
   width: 50%;
