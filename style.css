@@ -304,9 +304,10 @@ article > div {
   font-weight: bold;
 }
 
-.x.axis text {
+.x.axis text, .x2.axis text {
   font-size: 10pt;
 }
+
 
 .tick line {
   stroke: #444;
