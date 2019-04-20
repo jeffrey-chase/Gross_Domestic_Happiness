@@ -44,8 +44,12 @@
       } else {
         e.properties.center = turf.pointOnFeature(polygon);
       }
-      
-      window.isoCodeToData[e.properties.iso_a3].region = e.feature.properties.subregion;
+      try {
+        window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion;
+      } catch (err) {
+        window.isoCodeToData[e.properties.iso_a3] = {}
+        window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion;
+      }
     });
     bumpChart();
     mapDraw();

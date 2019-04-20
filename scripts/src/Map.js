@@ -32,7 +32,7 @@ function mapDraw() {
     if (selectedVar === undefined) {
       selectedVar = 'happiness_rank';
     }
-    
+
     console.log('refresh layers')
 
     let fillScale = d3.scaleLinear()
@@ -42,7 +42,7 @@ function mapDraw() {
       .range([1, 0])
 
     let getFill = function (d) {
-      if (d === undefined) {
+      if (d === undefined || isNaN(d)) {
         return '#555';
       } else {
         return d3.interpolateInferno(fillScale(d));
@@ -63,7 +63,8 @@ function mapDraw() {
       try {
         fill = getFill(+mapping[feature.properties.iso_a3][selectedVar]);
       } catch (err) {
-        console.log('failed for ' + feature.properties.iso_a3);
+        //        console.log('failed for ' + feature.properties.iso_a3);
+        fill = '#555'
       }
 
       return {
@@ -86,7 +87,6 @@ function mapDraw() {
         fillColor: getColor(+mapping[feature.properties.iso_a3][selectedVar])
       };
     }
-    console.log(geoData);
 
     let countriesLayer = L.geoJson(geoData, {
       style: countryStyle
@@ -96,7 +96,6 @@ function mapDraw() {
 
       let id = "[data-cCode=" + l.feature.properties.iso_a3 + "]";
       let center = l.feature.properties.center;
-      console.log(center);
 
       l.on('mouseover', function (e) {
         let name = l.feature.properties.name;
@@ -123,16 +122,16 @@ function mapDraw() {
             " Value: <span class='popup-value'>" +
             score +
             "</span></p>"
+
+          if (isNaN(score)) {
+            rank = "NA";
+            score = "NA";
+            content = "<h4>" + name + "</h4>" +
+              "<p> There is no data available for this country </p>"
+          }
         } catch (err) {
-          rank = "NA";
-          score = "NA";
-          content = "<h4>" + name + "</h4>" +
-            "<p> There is no data available for this country </p>"
+
         }
-
-
-
-
 
         let popup = L.popup()
           .setLatLng(new L.LatLng(center.geometry.coordinates[1],
@@ -239,7 +238,7 @@ function mapDraw() {
       .attr("transform", "translate(10, 100)")
       .call(colorLegend);
   }
-  
+
   refreshLayers('happiness_score');
   mymap.createPane('labels');
   mymap.getPane('labels').style.zIndex = 650;
