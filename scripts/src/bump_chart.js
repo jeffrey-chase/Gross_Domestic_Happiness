@@ -1,6 +1,6 @@
-(function () {
-  "use strict";
+"use strict";
 
+function bumpChart() {
   // Parent element to contain the svg
   const parent = d3.select('#bump-chart');
 
@@ -13,38 +13,38 @@
     .attr('width', width + "px")
     .attr('height', height + "px");
 
-//  let zoomHandler = d3.zoom()
-//    .scaleExtent([1, 5])
-//    .on('zoom', zoom);
-//  svg.call(zoomHandler);
-//
-//  let noZoom = true;
-//  window.addEventListener('keydown', (e) => {
-//    if (e.shiftKey) {
-//      console.log("shift down")
-//      noZoom = false;
-//      console.log('nozoom: ' + noZoom);
-//
-//    }
-//
-//  });
-//  window.addEventListener('keyup', (e) => {
-//    noZoom = true;
-//    //    zoomHandler.on("zoom", null)
-//    //    zoomHandler.scaleTo(1).translateTo([0, 0]).customEvent(svg);
-//  });
+  //    let zoomHandler = d3.zoom()
+  //      .scaleExtent([1, 5])
+  //      .on('zoom', zoom);
+  //    svg.call(zoomHandler);
+  //
+  //  let noZoom = true;
+  //  window.addEventListener('keydown', (e) => {
+  //    if (e.shiftKey) {
+  //      console.log("shift down")
+  //      noZoom = false;
+  //      console.log('nozoom: ' + noZoom);
+  //
+  //    }
+  //
+  //  });
+  //  window.addEventListener('keyup', (e) => {
+  //    noZoom = true;
+  //    //    zoomHandler.on("zoom", null)
+  //    //    zoomHandler.scaleTo(1).translateTo([0, 0]).customEvent(svg);
+  //  });
 
 
   let g = svg.append('g')
 
 
-//  function zoom(e) {
-//    //    e.preventDefault();
-//    if (!noZoom) {
-//      console.log(noZoom);
-//      g.attr("transform", d3.event.transform);
-//    }
-//  }
+  //  function zoom(e) {
+  //    console.log(d3.event.sourceEvent.shiftKey);
+  //    if (d3.event.sourceEvent.shiftKey === true) {
+  //      g.attr("transform", d3.event.transform);
+  //
+  //    }
+  //  }
 
 
   // Reading in the data as a promise
@@ -66,8 +66,6 @@
         };
       })
       .entries(data);
-
-    console.log(nested);
 
     const yearGrab = function (d) {
       return +d['year'];
@@ -102,8 +100,9 @@
       .tickSize(-(width - 150))
       .tickFormat(d3.format(""));
 
+
     g.append("g")
-      .attr("class", "x axis")
+      .attr("class", "x2 axis")
       .attr("transform", "translate(0," + (height - 20) + ")")
       .call(xaxis);
 
@@ -282,9 +281,29 @@
       .on('mouseover', highlight);
     svg.selectAll(".rank, .point, .label")
       .on('mouseout', unhighlight)
+
+
+
+
+    window.addEventListener('scroll', function (e) {
+      let y = parseInt(window.scrollY);
+      //      let scale = d3.scaleLinear()
+      //        .domain([0, document.getElementById('bump-chart').getBoundingClientRect().height -600])
+      //        .range([0, height-window.innerHeight]);
+
+      let scale = (y) => {
+        return y;
+      }
+
+      console.log(scale(y));
+
+      d3.selectAll('.x text')
+        .attr('y', scale(y))
+        .attr('z-index', 100000);
+    })
   });
 
 
   ;
 
-})();
+}
