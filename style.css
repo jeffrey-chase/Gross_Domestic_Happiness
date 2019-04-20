@@ -22,8 +22,16 @@ header {
   cursor: help;
 }
 
+.dropdown strong {
+  font-weight: bold !important;
+}
+
+.dropdown:hover #dropdown-label {
+  opacity: 0;
+}
+
 .dropdown * {
-  transition-duration: 2s;
+  transition-duration: 500ms;
   opacity: 1;
 }
 
@@ -76,14 +84,18 @@ header {
 
 /* Display Dropdowns on Hover */
 .dropdown ul li:hover > ul {
-  display: inherit;
-
+  display: inherit
 }
 
 /* First Tier Dropdown */
 .dropdown ul ul li {
-  font-style: italic;
+  font-size: 1.3em;
   font-weight: 300;
+  align-content: space-around;
+  align-items: baseline;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
   width: 100vw;
   padding: 0px;
   float: none;
@@ -93,13 +105,8 @@ header {
 }
 
 .dropdown ul ul li span:first-child {
-  font-style: normal;
-}
-
-
-
-.dropdown ul ul li span {
-  font-size: 13px;
+  font-size: 1.25em;
+  width: 200px;
 }
 
 /* Second, Third and more Tiers	*/
@@ -171,6 +178,7 @@ h1 {
   transition-duration: 3s;
   font-size: 90px;
   opacity: 0;
+  width: 100%;
 }
 
 article {
@@ -214,22 +222,31 @@ article > div {
   flex: 1 1 0;
   margin: 0 2.5px;
   padding: 5px;
+  transition-duration: 1s;
 }
 
 #mapcontrols button:hover {
+  background: #625768;
   color: #F5CDFF;
 }
 
 #mapcontrols button:active {
   background: #F5CDFF;
-  box-shadow: 2px 2px 2px #aaa inset; 
+  box-shadow: 2px 2px 2px #aaa inset;
   color: white;
 }
+
+#mapcontrols button:focus {
+  outline: 1px solid #F5CDFF;
+}
+
+
 
 #mapcontrols button.picked {
   background: #F5CDFF;
   box-shadow: 3px 3px 3px #333;
   color: #2d1f36;
+  font-weight: bold;
 }
 
 #maparea {
