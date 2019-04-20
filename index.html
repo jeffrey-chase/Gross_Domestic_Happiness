@@ -35,16 +35,16 @@
       <!--//text is just place holder for now-->
 
       <p>The data set used to produce this visualization is in the form of a table with 155 rows each representing a different country (primary item type)
-      and six different columns each representing a unique ordinal attribute served quantitatively by numbers representing the attribute's value for the
-      corresponding item</p>
+        and six different columns each representing a unique ordinal attribute served quantitatively by numbers representing the attribute's value for the
+        corresponding item</p>
 
       <p>These numbers are an estimate magnitude of six factors:</p>
-       <p><b>1.</b> Gross Domestic Product</p>
-       <p><b>2.</b> Social Support</p>
-       <p><b>3.</b> Expectancy</p>
-       <p><b>4.</b> Freedom</p>
-       <p><b>5.</b> Generosity</p>
-       <p><b>6.</b> Gov. Corruption</p>
+      <p><b>1.</b> Gross Domestic Product</p>
+      <p><b>2.</b> Social Support</p>
+      <p><b>3.</b> Expectancy</p>
+      <p><b>4.</b> Freedom</p>
+      <p><b>5.</b> Generosity</p>
+      <p><b>6.</b> Gov. Corruption</p>
 
       <p>When combined these attributes have produced a list of the happiest countries in the world.</p>
 
@@ -61,7 +61,7 @@
           <ul>
             <li><span><strong>Map Interactions</strong></span>
               <span> <strong>Hover:</strong> show popup; highlight in bump chart </span>
-              <span>  <strong>Scroll:</strong> zoom </span> 
+              <span> <strong>Scroll:</strong> zoom </span>
               <span> <strong>Click + drag / arrow keys:</strong> pan</span>
               <span> <strong>Click:</strong> selects it in bump chart, scroll to it</span>
             <li><span><strong>Bump Chart Interactions</strong></span>
@@ -78,13 +78,13 @@
   <article>
 
     <div id="mapcontrols">
-        <button id="score-button" data-var='happiness_score' class="picked" title="insert description here">Happiness Score</button>
-        <button id="gdp-button" data-var='economy' title="GDP per Capita is in terms of Purchasing Power Parity (PPP) adjusted to constant 2011 international dollars, taken from the World Development Indicators (WDI) Released by the World Bank in August 2016.">Economy</button>
-        <button id="soc-support-button" data-var='family' title="Social Support is the national average of the binary responses (either 0 or 1) to the Gallup World Poll (GWP) question: If you were in trouble, do you have relatives or friends you can count on to help you where you need them, or not.">Family</button>
-        <button id="health-button" data-var='health' title="The time series of healthy life expectancy at birth are constructed based in data from the World Health Organization (WHO).">Health</button>
-        <button id='freedom-button' data-var='freedom' title="Freedom to make life choices is the national average of binary responses to the WGP question: Are you satisfied or dissatisfied with your freedom to choose what you do with your life."> Freedom </button>
-        <button id='generosity-button' data-var='generosity' title="Generosity is the residual or regressing the national average of GWP responses to the question: Have you donated money to a charity in the past month? on GDP per capita.">Generosity</button>
-        <button id='corruption-button' data-var='trust' title="Perceptions of corruption are the average of binary responses to two GWP questions: 1. Is corruption widespread throughout the government or not? 2. Is corruption widespread within businesses or not?.">Trust</button>
+      <button id="score-button" data-var='happiness_score' class="picked" title="insert description here">Happiness Score</button>
+      <button id="gdp-button" data-var='economy' title="GDP per Capita is in terms of Purchasing Power Parity (PPP) adjusted to constant 2011 international dollars, taken from the World Development Indicators (WDI) Released by the World Bank in August 2016.">Economy</button>
+      <button id="soc-support-button" data-var='family' title="Social Support is the national average of the binary responses (either 0 or 1) to the Gallup World Poll (GWP) question: If you were in trouble, do you have relatives or friends you can count on to help you where you need them, or not.">Family</button>
+      <button id="health-button" data-var='health' title="The time series of healthy life expectancy at birth are constructed based in data from the World Health Organization (WHO).">Health</button>
+      <button id='freedom-button' data-var='freedom' title="Freedom to make life choices is the national average of binary responses to the WGP question: Are you satisfied or dissatisfied with your freedom to choose what you do with your life."> Freedom </button>
+      <button id='generosity-button' data-var='generosity' title="Generosity is the residual or regressing the national average of GWP responses to the question: Have you donated money to a charity in the past month? on GDP per capita.">Generosity</button>
+      <button id='corruption-button' data-var='trust' title="Perceptions of corruption are the average of binary responses to two GWP questions: 1. Is corruption widespread throughout the government or not? 2. Is corruption widespread within businesses or not?.">Trust</button>
     </div>
 
     <div id="maparea">
@@ -95,11 +95,11 @@
   </article>
 
 </body>
-<script src="scripts/src/bump_chart.js"></script>
-
+<script defer src="scripts/src/bump_chart.js"></script>
 <script defer src="scripts/src/Map.js"></script>
+<script defer src="data-initialize.js"></script>
 <footer>
-<!--
+  <!--
     <div class ="wrapper">
       <ul>
          <p>These numbers are an estimate magnitude of six factors:</p>
