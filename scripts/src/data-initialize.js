@@ -51,6 +51,23 @@
         window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion;
       }
     });
+
+    let regions = window.indicators.forEach((e) => {
+      e.region = window.isoCodeToData[e.ISO3].region;
+    });
+    
+    window.regionSummaries = d3.nest()
+      .key(function (d) {
+        return d.region;
+      })
+      .key(function (d){
+      return d.year;
+    })
+      .rollup(function (v) {
+        return Math.floor(d3.mean(v, function(d) {return d.happiness_rank}));
+      })
+      .entries(window.indicators);
+
     bumpChart();
     mapDraw();
   })
