@@ -46,9 +46,9 @@ function bumpChart() {
   //    }
   //  }
 
-let data = window.indicators;
+  let data = window.indicators;
   // Creates a version of the data grouped by country then year
-let nested = window.nested;
+  let nested = window.nested;
 
   const yearGrab = function (d) {
     return +d['year'];
@@ -160,21 +160,34 @@ let nested = window.nested;
   //        .y(function(d){return +d['value']})
   //      
 
-  // Adding the paths 
+  //   Adding the paths 
+
+  let regionValues = {}
+
+  window.regionSummaries.forEach((e) => {
+    regionValues[e.key] = e.values;
+  });
+
+  console.log(regionValues);
+
+  function pathMaker(d) {
+
+    let start = "M " +
+      xScale(+d.values[0].key) + " " +
+      yScale(+d.values[0].value.happiness_rank) + ' ';
+    let moves = "";
+    for (let i = 1; i < d.values.length; i++) {
+      moves += ("L " +
+        xScale(+d.values[i].key) + " " +
+        yScale(+d.values[i].value.happiness_rank) + " ");
+    }
+    return start + moves;
+
+  }
+
   g.append('g').selectAll('path.rank').data(nested).enter()
     .append('path')
-    .attr('d', function (d) {
-      let start = "M " +
-        xScale(+d.values[0].key) + " " +
-        yScale(+d.values[0].value.happiness_rank) + ' ';
-      let moves = "";
-      for (let i = 1; i < d.values.length; i++) {
-        moves += ("L " +
-          xScale(+d.values[i].key) + " " +
-          yScale(+d.values[i].value.happiness_rank) + " ");
-      }
-      return start + moves;
-    })
+    .attr('d', pathMaker)
     .attr('stroke', function (d) {
       return colorScale(d['key']);
     })
@@ -188,7 +201,70 @@ let nested = window.nested;
     })
     .attr('data-cCode', function (d) {
       return d.values[0].value.ISO3;
+    })
+    .attr('data-path', pathMaker)
+    .attr('data-regPath', function (d) {
+      let data = regionValues[d.values[0].value.region];
+      console.log(d);
+      let start = "M " +
+        xScale(+data[0].key) + " " +
+        yScale(+data[0].value) + ' ';
+      let moves = "";
+      for (let i = 1; i < d.values.length; i++) {
+        moves += ("L " +
+          xScale(+data[i].key) + " " +
+          yScale(+data[i].value) + " ");
+      }
+      return start + moves;
     });
+
+
+  g.append('g').selectAll('path.region').data(window.regionSummaries)
+    .enter()
+    .append('path')
+    .attr('class', 'region')
+    .attr('d', function (d) {
+      let start = "M " +
+        xScale(+d.values[0].key) + " " +
+        yScale(+d.values[0].value) + ' ';
+      let moves = "";
+      for (let i = 1; i < d.values.length; i++) {
+        moves += ("L " +
+          xScale(+d.values[i].key) + " " +
+          yScale(+d.values[i].value) + " ");
+      }
+      return start + moves;
+    })
+    //    .attr('data-path', )
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 3)
+    .attr('fill', 'none')
+    .attr('id', function (d) {
+      return makeSafeId(d.key) + "-path"
+    })
+    .attr('class', function (d) {
+      return 'rank ' + makeSafeId(d.key);
+    })
+    .attr('data-cCode', function (d) {
+      return d.values[0].value.ISO3;
+    });
+
+  svg.on('dblclick', function (e) {
+    d3.selectAll('path.rank')
+      .transition()
+      .duration(2000)
+      .delay(500)
+      .attr('d', function (d) {
+      let self = d3.select(this);
+      if(self.attr('d') !== self.attr('data-regPath')){
+        return self.attr('data-regPath');
+      } else {
+        return self.attr('data-path');
+      }
+        
+      })
+  });
+
 
   function activate() {
     if (this.classList.contains('activated')) {
