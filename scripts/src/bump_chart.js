@@ -64,41 +64,6 @@ function bumpChart() {
     })])
     .range([50, height - 30]);
 
-  let xaxis = d3.axisBottom()
-    .scale(xScale)
-    .ticks(4)
-    .tickSize(-(height - 60))
-
-    .tickFormat(d3.format(""));
-
-  let xaxis2 = d3.axisTop()
-    .scale(xScale)
-    .ticks(4)
-    .tickSize(-(height - 60))
-    .tickFormat(d3.format(""));
-
-  let yaxis = d3.axisLeft()
-    .scale(yScale)
-    .ticks(nested.length)
-    .tickSize(-(width - 150))
-    .tickFormat(d3.format(""));
-
-
-  g.append("g")
-    .attr("class", "x2 axis")
-    .attr("transform", "translate(0," + (height - 20) + ")")
-    .call(xaxis);
-
-  g.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + (30) + ")")
-    .call(xaxis2);
-
-  g.append("g")
-    .attr('class', 'y axis')
-    .attr("transform", "translate(" + 30 + ", 0)")
-    .call(yaxis);
-
   let regionValues = {}
 
   window.regionSummaries.forEach((e) => {
@@ -112,6 +77,34 @@ function bumpChart() {
   }
 
   const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 20));
+
+  let xaxis = d3.axisBottom()
+    .scale(xScale)
+    .ticks(4)
+    .tickSize(-(height - 60))
+    .tickFormat(d3.format(""));
+
+  let xaxis2 = d3.axisTop()
+    .scale(xScale)
+    .ticks(4)
+    .tickSize(0)
+    .tickFormat(d3.format(""));
+
+  let yaxis = d3.axisLeft()
+    .scale(yScale)
+    .ticks(nested.length)
+    .tickSize(-(width - 150))
+    .tickFormat(d3.format(""));
+
+  g.append("g")
+    .attr('class', 'y axis')
+    .attr("transform", "translate(" + 30 + ", 0)")
+    .call(yaxis);
+
+  g.append("g")
+    .attr("class", "x2 axis")
+    .attr("transform", "translate(0," + (height - 20) + ")")
+    .call(xaxis);
 
   let circles = g.append('g').selectAll("circle.point").data(data).enter()
     .append('circle')
@@ -191,10 +184,6 @@ function bumpChart() {
 
   //   Adding the paths 
 
-
-
-  console.log(regionValues);
-
   function pathMaker(d) {
 
     let start = "M " +
@@ -237,15 +226,15 @@ function bumpChart() {
     .attr('data-regPath', function (d) {
       let data = regionValues[d.values[0].value.region];
       console.log(d);
-      let noise = Math.random() * 0.75;
+      let noiseMag = 1.75
       let start = "M " +
         xScale(+data[0].key) + " " +
-        yScale(+data[0].value + Math.random() * 0.75) + ' ';
+        yScale(+data[0].value + Math.random() * noiseMag - noiseMag / 2) + ' ';
       let moves = "";
       for (let i = 1; i < d.values.length; i++) {
         moves += ("L " +
           xScale(+data[i].key) + " " +
-          yScale(+data[i].value + Math.random() * 0.75) + " ");
+          yScale(+data[i].value + Math.random() * noiseMag - noiseMag / 2) + " ");
       }
       return start + moves;
     });
@@ -281,6 +270,21 @@ function bumpChart() {
       return d.values[0].value.ISO3;
     });
 
+  let xaxisContainer = g.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + (30) + ")")
+
+  xaxisContainer.append('rect')
+    .attr('fill', 'black')
+    .attr('width', width)
+    .attr('height', 30)
+
+  xaxisContainer.call(xaxis2);
+
+
+
+
+
   let regions = false;
 
   function attrSwitch(self, attr, regAttr) {
@@ -291,7 +295,7 @@ function bumpChart() {
     }
   }
 
-  svg.on('dblclick', function (e) {
+  d3.select('#aggregationSwitch').on('click', function (e) {
     regions = !regions;
     svg.selectAll('path.rank')
       .transition()
@@ -304,7 +308,8 @@ function bumpChart() {
       .attr('stroke', function (d) {
         let self = d3.select(this)
         return attrSwitch(self, 'data-stroke', 'data-reg-stroke');
-      });
+      })
+      .attr('stroke-width', regions ? 0.1 : 3);
 
     svg.selectAll('.label')
       .transition()
@@ -318,9 +323,9 @@ function bumpChart() {
         let self = d3.select(this);
         return attrSwitch(self, 'data-y', 'data-reg-y');
       })
-      .text(function(d){
-      return d3.select(this).attr('data-text');
-    })
+      .text(function (d) {
+        return d3.select(this).attr('data-text');
+      })
       .on('end', function (e) {
         if (regions) {
           d3.select(this)
@@ -330,6 +335,7 @@ function bumpChart() {
         }
       });
     if (regions) {
+      d3.select(this).text("Show Individual Countries");
       circles.transition()
         .duration(2000)
         .delay(500)
@@ -339,19 +345,24 @@ function bumpChart() {
 
       svg.selectAll('.label')
         .style('font-size', '12pt');
+
+      svg.selectAll('.axis text')
+        .style('font-size', '9pt')
+
       svg
         .transition()
         .duration(2000)
         .delay(500).attr('height', height * 0.6)
     } else {
+      d3.select(this).text("Show Individual Countries");
+
       circles.transition()
         .duration(2000)
         .delay(500)
         .attr('opacity', 1)
         .style('display', null);
       g.attr('transform', 'scale(1,1)');
-      svg.selectAll('.label').style('font-size', null);
-
+      svg.selectAll('text').style('font-size', null);
 
       svg.transition()
         .duration(2000)
@@ -410,32 +421,13 @@ function bumpChart() {
 
   }
 
-  //    function brushed() {
-  //      let s = d3.event.selection;
-  //      if (s !== null) {
-  //        let sy = s.map((e) => yScale.invert(e));
-  //        console.log(sy);
-  //        
-  //        circles.classed("focused", function (d) {
-  //          return sy[0] <= d.happiness_rank && d.happiness_rank <= sy[1];
-  //        });
-  //
-  //      }
-  //    }
-
-  //    let brush = d3.brushY()
-  //      .extent([[0, 0], [width - 120, height - 60]]);
-  //
-  //    svg.call(
-  //      d3.brush().on("brush", brushed)
-  //
-  //    )
   svg.selectAll(".rank, .point, .label")
     .on('click', activate);
   svg.selectAll(".rank, .point, .label")
     .on('mouseover', highlight);
   svg.selectAll(".rank, .point, .label")
     .on('mouseout', unhighlight)
+
 
 
 
@@ -447,14 +439,21 @@ function bumpChart() {
     //        .range([0, height-window.innerHeight]);
 
     let scale = (y) => {
-      return y;
-    }
+      return y < 50 ? 0 : y - 50;
+    };
+
+    let rectScale = (y) => {
+      return y < 50 ? -30 : y - 80;
+    };
 
     console.log(scale(y));
 
-    d3.selectAll('.x text')
-      .attr('y', scale(y))
-      .attr('z-index', 100000);
+    xaxisContainer.selectAll('text')
+      .attr('y', scale(y));
+
+    xaxisContainer.select('rect')
+      .attr('y', rectScale(y))
+      .attr('x', 0);
   })
 
 }

@@ -285,8 +285,18 @@ article > div {
   margin-top: 10px;
 }
 
+#aggregationSwitch {
+  border: 2px solid #aaa;
+  background: black;
+  color: white;
+  position: absolute;
+  top: 0; right: 25%; left: 25%;
+  width: 200px;
+}
+
+
 #bump-chart svg {
-  top: 0;
+  margin-top: 20px;
 }
 
 #hello {
