@@ -210,7 +210,7 @@ function mapDraw() {
       .scale(fillScale2);
 
     let parent = d3.select("#maparea .leaflet-top.leaflet-left")
-    parent.selectAll("*").remove();
+    parent.select('svg').remove();
 
 
     //      legend.append('rect')

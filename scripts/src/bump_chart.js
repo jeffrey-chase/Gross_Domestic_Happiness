@@ -176,7 +176,7 @@ function bumpChart() {
       return d.region;
     })
     .attr('data-reg-fill', function (d) {
-      return regionScale(d.region)
+      return regionScale(d.region);
     })
     .attr('data-reg-y', function (d) {
       let data = regionValues[d.region];
@@ -215,6 +215,12 @@ function bumpChart() {
     .attr('d', pathMaker)
     .attr('stroke', function (d) {
       return colorScale(d['key']);
+    })
+    .attr('data-stroke', function (d) {
+      return colorScale(d['key']);
+    })
+    .attr('data-reg-stroke', function (d) {
+      return regionScale(d.values[0].value.region);
     })
     .attr('stroke-width', 3)
     .attr('fill', 'none')
@@ -278,7 +284,7 @@ function bumpChart() {
   let regions = false;
 
   function attrSwitch(self, attr, regAttr) {
-    if (!regions) {
+    if (regions) {
       return self.attr(regAttr);
     } else {
       return self.attr(attr);
@@ -286,13 +292,18 @@ function bumpChart() {
   }
 
   svg.on('dblclick', function (e) {
+    regions = !regions;
     svg.selectAll('path.rank')
       .transition()
       .duration(2000)
       .delay(500)
       .attr('d', function (d) {
         let self = d3.select(this);
-        return attrSwitch(self, 'data-path', 'data-regPath')
+        return attrSwitch(self, 'data-path', 'data-regPath');
+      })
+      .attr('stroke', function (d) {
+        let self = d3.select(this)
+        return attrSwitch(self, 'data-stroke', 'data-reg-stroke');
       });
 
     svg.selectAll('.label')
@@ -307,30 +318,45 @@ function bumpChart() {
         let self = d3.select(this);
         return attrSwitch(self, 'data-y', 'data-reg-y');
       })
-      .text(function (d) {
-        let self = d3.select(this)
-        return attrSwitch(self, 'data-text', 'data-reg-text')
-      })
-    if (!regions) {
+      .text(function(d){
+      return d3.select(this).attr('data-text');
+    })
+      .on('end', function (e) {
+        if (regions) {
+          d3.select(this)
+            .text(() => {
+              return d3.select(this).attr('data-reg-text');
+            });
+        }
+      });
+    if (regions) {
       circles.transition()
         .duration(2000)
         .delay(500)
         .attr('opacity', 0)
+        .style('display', 'none !important')
       g.attr('transform', 'scale(0.55, 0.55)');
-      
+
       svg.selectAll('.label')
         .style('font-size', '12pt');
+      svg
+        .transition()
+        .duration(2000)
+        .delay(500).attr('height', height * 0.6)
     } else {
       circles.transition()
         .duration(2000)
         .delay(500)
         .attr('opacity', 1)
+        .style('display', null);
       g.attr('transform', 'scale(1,1)');
       svg.selectAll('.label').style('font-size', null);
+
+
+      svg.transition()
+        .duration(2000)
+        .delay(500).attr('height', height)
     }
-
-
-    regions = !regions;
   });
 
 
@@ -370,7 +396,9 @@ function bumpChart() {
           .attr('r', sizeSmall)
           .duration(1000)
           .delay(10)
-          .on('end', pulse)
+          .on('end', () => {
+            pulse(country)
+          })
       }
     }
   }

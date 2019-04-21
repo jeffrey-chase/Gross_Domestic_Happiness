@@ -32,10 +32,10 @@
         e.properties.center = turf.pointOnFeature(polygon);
       }
       try {
-        window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion;
+        window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion || 'Other';
       } catch (err) {
         window.isoCodeToData[e.properties.iso_a3] = {}
-        window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion;
+        window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion || 'Other';
       }
     });
     
