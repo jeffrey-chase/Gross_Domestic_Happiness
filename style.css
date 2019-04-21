@@ -327,8 +327,8 @@ text {
     Helvetica, Arial,
     "Lucida Grande",
     sans-serif;
-  fill: white;
-  font-weight: 400;
+/*  fill: white;*/
+  font-weight: bold;
   font-size: 6pt;
   text-transform: uppercase;
 }

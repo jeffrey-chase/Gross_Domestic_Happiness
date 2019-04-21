@@ -99,6 +99,18 @@ function bumpChart() {
     .attr("transform", "translate(" + 30 + ", 0)")
     .call(yaxis);
 
+  let regionValues = {}
+
+  window.regionSummaries.forEach((e) => {
+    regionValues[e.key] = e.values;
+  });
+
+  const regScale = window.regScale;
+
+  const regionScale = function (d) {
+    return d3.color(regScale(d)).brighter().hex();
+  }
+
   const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 20));
 
   let circles = g.append('g').selectAll("circle.point").data(data).enter()
@@ -122,7 +134,7 @@ function bumpChart() {
     .attr('data-cCode', function (d) {
       return d.ISO3;
     });
-
+  console.log(regionValues);
 
 
   let labels = g.append('g').selectAll('text.label')
@@ -138,6 +150,9 @@ function bumpChart() {
     .attr('y', function (d) {
       return yScale(+d['happiness_rank']);
     })
+    .attr('data-y', function (d) {
+      return yScale(+d['happiness_rank']);
+    })
     .text(function (d) {
       let year = +d['year'];
       return year === 2018 ? d['country'] : "";
@@ -151,10 +166,24 @@ function bumpChart() {
     })
     .attr('data-cCode', function (d) {
       return d.ISO3;
+    })
+    .attr('fill', 'white')
+    .attr('data-fill', 'white')
+    .attr('data-text', function (d) {
+      return d.country;
+    })
+    .attr('data-reg-text', function (d) {
+      return d.region;
+    })
+    .attr('data-reg-fill', function (d) {
+      return regionScale(d.region)
+    })
+    .attr('data-reg-y', function (d) {
+      let data = regionValues[d.region];
+      return yScale(data[3].value);
     });
 
   labels.exit().remove();
-
   //      lineMaker = d3.svg.line()
   //        .x(function(d){return +d['year']})
   //        .y(function(d){return +d['value']})
@@ -162,11 +191,7 @@ function bumpChart() {
 
   //   Adding the paths 
 
-  let regionValues = {}
 
-  window.regionSummaries.forEach((e) => {
-    regionValues[e.key] = e.values;
-  });
 
   console.log(regionValues);
 
@@ -206,14 +231,15 @@ function bumpChart() {
     .attr('data-regPath', function (d) {
       let data = regionValues[d.values[0].value.region];
       console.log(d);
+      let noise = Math.random() * 0.75;
       let start = "M " +
         xScale(+data[0].key) + " " +
-        yScale(+data[0].value) + ' ';
+        yScale(+data[0].value + Math.random() * 0.75) + ' ';
       let moves = "";
       for (let i = 1; i < d.values.length; i++) {
         moves += ("L " +
           xScale(+data[i].key) + " " +
-          yScale(+data[i].value) + " ");
+          yScale(+data[i].value + Math.random() * 0.75) + " ");
       }
       return start + moves;
     });
@@ -249,20 +275,62 @@ function bumpChart() {
       return d.values[0].value.ISO3;
     });
 
+  let regions = false;
+
+  function attrSwitch(self, attr, regAttr) {
+    if (!regions) {
+      return self.attr(regAttr);
+    } else {
+      return self.attr(attr);
+    }
+  }
+
   svg.on('dblclick', function (e) {
-    d3.selectAll('path.rank')
+    svg.selectAll('path.rank')
       .transition()
       .duration(2000)
       .delay(500)
       .attr('d', function (d) {
-      let self = d3.select(this);
-      if(self.attr('d') !== self.attr('data-regPath')){
-        return self.attr('data-regPath');
-      } else {
-        return self.attr('data-path');
-      }
-        
+        let self = d3.select(this);
+        return attrSwitch(self, 'data-path', 'data-regPath')
+      });
+
+    svg.selectAll('.label')
+      .transition()
+      .duration(2000)
+      .delay(500)
+      .attr('fill', function (d) {
+        let self = d3.select(this);
+        return attrSwitch(self, 'data-fill', 'data-reg-fill');
       })
+      .attr('y', function (d) {
+        let self = d3.select(this);
+        return attrSwitch(self, 'data-y', 'data-reg-y');
+      })
+      .text(function (d) {
+        let self = d3.select(this)
+        return attrSwitch(self, 'data-text', 'data-reg-text')
+      })
+    if (!regions) {
+      circles.transition()
+        .duration(2000)
+        .delay(500)
+        .attr('opacity', 0)
+      g.attr('transform', 'scale(0.55, 0.55)');
+      
+      svg.selectAll('.label')
+        .style('font-size', '12pt');
+    } else {
+      circles.transition()
+        .duration(2000)
+        .delay(500)
+        .attr('opacity', 1)
+      g.attr('transform', 'scale(1,1)');
+      svg.selectAll('.label').style('font-size', null);
+    }
+
+
+    regions = !regions;
   });
 
 
@@ -287,10 +355,10 @@ function bumpChart() {
 
 
     let points = svg.selectAll("[data-cCode=" + country + "]" + '.point')
-    pulse();
+    pulse(country);
 
 
-    function pulse() {
+    function pulse(country) {
       if (svg.selectAll("[data-cCode=" + country + "]").classed('hover')) {
         points
           .transition()

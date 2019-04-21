@@ -50,7 +50,7 @@ function mapDraw() {
       }
     }
 
-    const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, 12));
+    const colorScale = window.regScale;
 
     function getColor(d) {
       return d3.rgb(colorScale(d)).brighter().hex();

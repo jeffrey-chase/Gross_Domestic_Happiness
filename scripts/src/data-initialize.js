@@ -75,6 +75,10 @@
       })
       .entries(window.indicators);
 
+    
+    window.regScale = d3.scaleOrdinal()
+      .domain(window.regionSummaries.map((e)=> e.key))
+      .range(d3.quantize(d3.interpolateRainbow, 20))
     bumpChart();
     mapDraw();
   })
