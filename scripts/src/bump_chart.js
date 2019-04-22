@@ -17,39 +17,7 @@ function bumpChart(width) {
     .attr('height', height + "px");
 
 
-
-  //    let zoomHandler = d3.zoom()
-  //      .scaleExtent([1, 5])
-  //      .on('zoom', zoom);
-  //    svg.call(zoomHandler);
-  //
-  //  let noZoom = true;
-  //  window.addEventListener('keydown', (e) => {
-  //    if (e.shiftKey) {
-  //      console.log("shift down")
-  //      noZoom = false;
-  //      console.log('nozoom: ' + noZoom);
-  //
-  //    }
-  //
-  //  });
-  //  window.addEventListener('keyup', (e) => {
-  //    noZoom = true;
-  //    //    zoomHandler.on("zoom", null)
-  //    //    zoomHandler.scaleTo(1).translateTo([0, 0]).customEvent(svg);
-  //  });
-
-
   let g = svg.append('g')
-
-
-  //  function zoom(e) {
-  //    console.log(d3.event.sourceEvent.shiftKey);
-  //    if (d3.event.sourceEvent.shiftKey === true) {
-  //      g.attr("transform", d3.event.transform);
-  //
-  //    }
-  //  }
 
   let data = window.indicators;
   // Creates a version of the data grouped by country then year
@@ -122,6 +90,7 @@ function bumpChart(width) {
     .attr('display', 'none')
     .call(y2axis);
 
+  d3.select('#tooltip').remove();
   let tooltip = d3.select('body')
     .append('div')
     .attr('id', 'tooltip')
@@ -156,7 +125,6 @@ function bumpChart(width) {
     .attr('data-cCode', function (d) {
       return d.ISO3;
     });
-  console.log(regionValues);
 
 
   let labels = g.append('g').selectAll('text.label')
@@ -255,7 +223,6 @@ function bumpChart(width) {
     .attr('data-path', pathMaker)
     .attr('data-regPath', function (d) {
       let data = regionValues[d.values[0].value.region];
-      console.log(d);
       let noiseMag = 1.75
       let start = "M " +
         xScale(+data[0].key) + " " +
@@ -272,36 +239,6 @@ function bumpChart(width) {
     });
 
 
-  g.append('g').selectAll('path.region').data(window.regionSummaries)
-    .enter()
-    .append('path')
-    .attr('class', 'region')
-    .attr('d', function (d) {
-      let start = "M " +
-        xScale(+d.values[0].key) + " " +
-        yScale(+d.values[0].value) + ' ';
-      let moves = "";
-      for (let i = 1; i < d.values.length; i++) {
-        moves += ("L " +
-          xScale(+d.values[i].key) + " " +
-          yScale(+d.values[i].value) + " ");
-      }
-      return start + moves;
-    })
-    //    .attr('data-path', )
-    .attr('stroke', '#fff')
-    .attr('stroke-width', 3)
-    .attr('fill', 'none')
-    .attr('id', function (d) {
-      return makeSafeId(d.key) + "-path"
-    })
-    .attr('class', function (d) {
-      return 'rank ' + makeSafeId(d.key);
-    })
-    .attr('data-cCode', function (d) {
-      return d.values[0].value.ISO3;
-    });
-
   let xaxisContainer = g.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + (30) + ")")
@@ -310,6 +247,7 @@ function bumpChart(width) {
     .attr('fill', 'black')
     .attr('width', width)
     .attr('height', 30)
+    .attr('y', -20)
 
   xaxisContainer.call(xaxis2);
 
@@ -420,7 +358,6 @@ function bumpChart(width) {
   }
 
   function highlight(fromMap) {
-    console.log(this);
     let activated = this.classList.contains('activated');
     let index = activated ? 2 : 1,
       sizeBig = activated ? 5 : 6,
@@ -484,7 +421,6 @@ function bumpChart(width) {
     let points = svg.selectAll("[data-cCode=" + country + "]" + '.point')
     pulse(country);
 
-    console.log(d3.event.detail.fromMap)
     if (d3.event.detail.fromMap !== true) {
       window.isoCodeToLayer[country].fire('mouseover');
 
@@ -544,7 +480,6 @@ function bumpChart(width) {
       return y < 50 ? -30 : y - 80;
     };
 
-    console.log(scale(y));
 
     xaxisContainer.selectAll('text')
       .attr('y', scale(y));

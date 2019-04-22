@@ -89,33 +89,36 @@
     mapDraw();
     bumpChart();
 
-    function resizer(e, cutoff) {
-      if (window.innerWidth > 1000) {
+    function resizer(e, cutoff, growCutoff) {
+      if (window.innerWidth > 1201 || (window.innerWidth > cutoff && window.innerWidth < growCutoff)) {
         return false;
+      } else {
+        console.log('cutoff: ' + cutoff + ' growCutoff: '+ growCutoff)
       }
-
       let newWidth = cutoff === 1000 ? 300 : 250;
-      let newCutoff = cutoff === 1000 ? 800 : 600;
+      
+      let enlargeWidth = window.innerWidth >= 1000 ? 400 : 300;
 
-      let enlargeWidth = cutoff === 1000 ? 400 : 300;
-      let enlargeCutoff = cutoff + 200;
-
-      if (window.innerHeight < cutoff) {
+      if (window.innerWidth < cutoff) {
+        console.log('shrink')
         bumpChart(newWidth);
         window.onresize = (e) => {
-          resizer(e, newCutoff)
+          resizer(e, cutoff-200, cutoff);
         }
-      } else {
+      } else if (window.innerWidth > growCutoff) {
+        console.log('expand ' + enlargeWidth);
         bumpChart(enlargeWidth);
         window.onresize = (e) => {
-          resizer(e, enlargeCutoff)
+          resizer(e, cutoff, cutoff+200);
         }
       }
     }
 
     window.onresize = function (e) {
-      resizer(e, 1000)
+      resizer(e, 1000, 1200)
     }
-    d3.select('#aggregationSwitch').dispatch('click');
+    
+    window.onresize();
+//    d3.select('#aggregationSwitch').dispatch('click');
   })
 })(window);

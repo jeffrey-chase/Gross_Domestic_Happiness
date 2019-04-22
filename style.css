@@ -282,9 +282,7 @@ article > div {
   overflow: hidden;
   position: absolute;
   right: 1%;
-  min-width: 400px;
   margin-top: 10px;
-  width: 400px;
 }
 
 #aggregationSwitch {
@@ -517,11 +515,44 @@ span.popup-value {
 
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1250px) {
   #maparea {
-    width: calc(80% - 300px);
+    width: calc(90% - 350px);
   }
   #mapcontrols {
-    width: calc(80% - 400px);
+    width: calc(90% - 450px);
+  }
+  
+  #bump-chart {
+    right: 0;
+  }
+  
+  #mapcontrols {
+    font-size: 6pt;
+  }
+  header:not(.intro) {
+    font-size: 0.75em ;
+    white-space: nowrap;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  #maparea {
+    width: calc(90% - 250px);
+  }
+  #mapcontrols {
+    width: calc(90% - 300px);
+  }
+  
+  #bump-chart {
+    right: 0;
+  }
+  
+  #mapcontrols {
+    font-size: 6pt;
+  }
+  
+  .x.axis text {
+    font-size: 5pt;
   }
 }
