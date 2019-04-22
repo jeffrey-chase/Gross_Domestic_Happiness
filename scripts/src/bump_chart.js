@@ -190,10 +190,10 @@ function bumpChart() {
       return d.country;
     })
     .attr('data-reg-text', function (d) {
-      return d.region;
+      return d.region === undefined || d.region === ''? 'Other' :d.region;
     })
     .attr('data-reg-fill', function (d) {
-      return regionScale(d.region);
+      return d.region === undefined || d.region === ''? '#aaa' : regionScale(d.region);
     })
     .attr('data-reg-y', function (d) {
       let data = regionValues[d.region];
@@ -233,7 +233,8 @@ function bumpChart() {
       return colorScale(d['key']);
     })
     .attr('data-reg-stroke', function (d) {
-      return regionScale(d.values[0].value.region);
+      return d.values[0].value.region === undefined || d.values[0].value.region === '' ?
+        '#aaa': regionScale(d.values[0].value.region);
     })
     .attr('stroke-width', 3)
     .attr('fill', 'none')
@@ -333,7 +334,6 @@ function bumpChart() {
       })
       .attr('stroke', function (d) {
         let self = d3.select(this)
-
         return attrSwitch(self, 'data-stroke', 'data-reg-stroke');
       })
       .attr('stroke-width', regions ? 0.1 : 3);
@@ -344,8 +344,7 @@ function bumpChart() {
       .delay(500)
       .attr('fill', function (d) {
         let self = d3.select(this);
-        let region = self.attr('data-reg-text');
-        return region === '' || region == undefined ? '#aaa' : attrSwitch(self, 'data-fill', 'data-reg-fill');
+        return attrSwitch(self, 'data-fill', 'data-reg-fill');
       })
       .attr('y', function (d) {
         let self = d3.select(this);
@@ -358,8 +357,7 @@ function bumpChart() {
         if (regions) {
           d3.select(this)
             .text(() => {
-              let region = d3.select(this).attr('data-reg-text');
-              return region === '' || region == undefined ? "Other" : region;
+              return d3.select(this).attr('data-reg-text');
             });
         }
       });

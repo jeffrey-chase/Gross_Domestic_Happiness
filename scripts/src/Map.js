@@ -156,21 +156,19 @@ function mapDraw() {
       l.on('click', function (e) {
         let label = d3.select(".label" + id);
         label.dispatch('click');
-        console.log(id);
-        console.log(label);
+
         label
           .transition()
           .style('fill', 'rgb(242,178,32)')
-          .style('font-size', '8pt')
           .style('font-weight', 'bold')
           .duration(1000)
-          .delay(200)
+          .delay(100)
           .on('end', function () {
             d3.select(this).transition()
               .style('fill', null)
-              .style('font-size', null)
               .duration(1000)
-              .delay(100);
+              .delay(0);
+          label.dispatch('mouseover')
           });
 
 
