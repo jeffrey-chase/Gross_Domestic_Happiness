@@ -312,7 +312,32 @@ article > div {
 
 }
 
+#tooltip {
+  font-size: 7pt;
+  padding: 0 !important;
+  height: 80px;
+  width: 100px;
+  word-break: break-all;
+  white-space: normal;
+}
+
+#tooltip > * {}
+
+
+#tooltip #content {
+  margin: 0 !important;
+  padding: 10px !important;
+  height: 60px;
+  width: 100px;
+}
+
+#tooltip.upsideDown .leaflet-popup-tip-container {
+  top: -20px;
+  transform: rotate(180deg);
+}
+
 #bump-chart svg {
+
   margin-top: 20px;
 }
 

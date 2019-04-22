@@ -95,7 +95,7 @@ function bumpChart() {
     .ticks(nested.length)
     .tickSize(-(width - 150))
     .tickFormat(d3.format(""));
-  
+
   let y2axis = d3.axisLeft()
     .scale(yScale)
     .ticks(16)
@@ -110,13 +110,25 @@ function bumpChart() {
     .attr("class", "x2 axis")
     .attr("transform", "translate(0," + (height - 20) + ")")
     .call(xaxis);
-  
+
   g.append("g")
     .attr("class", "y2 axis")
     .attr("transform", "translate(" + 30 + ", 0)")
     .attr('display', 'none')
     .call(y2axis);
 
+  let tooltip = d3.select('body')
+    .append('div')
+    .attr('id', 'tooltip')
+    .attr('class', 'leaflet-popup')
+    .style('position', 'absolute')
+    .style('display', 'none');
+
+  tooltip.append('div').attr('class', 'leaflet-popup-content-wrapper')
+    .append('div').attr('class', 'leaflet-popup-content').attr('id', 'content');
+
+  tooltip.append('div').attr('class', 'leaflet-popup-tip-container')
+    .append('div').attr('class', 'leaflet-popup-tip');
 
   let circles = g.append('g').selectAll("circle.point").data(data).enter()
     .append('circle')
@@ -241,12 +253,14 @@ function bumpChart() {
       let noiseMag = 1.75
       let start = "M " +
         xScale(+data[0].key) + " " +
-        yScale(+data[0].value + Math.random() * noiseMag - noiseMag / 2) + ' ';
+        // yScale(+data[0].value + Math.random() * noiseMag - noiseMag / 2) + ' ';
+        (yScale(+data[0].value + +d.values[0].value.happiness_rank / 70)) + ' ';
       let moves = "";
       for (let i = 1; i < d.values.length; i++) {
         moves += ("L " +
           xScale(+data[i].key) + " " +
-          yScale(+data[i].value + Math.random() * noiseMag - noiseMag / 2) + " ");
+          // yScale(+data[i].value + Math.random() * noiseMag - noiseMag / 2) + " ");
+          (yScale(+data[i].value + +d.values[i].value.happiness_rank / 70)) + ' ');
       }
       return start + moves;
     });
@@ -319,7 +333,7 @@ function bumpChart() {
       })
       .attr('stroke', function (d) {
         let self = d3.select(this)
-        
+
         return attrSwitch(self, 'data-stroke', 'data-reg-stroke');
       })
       .attr('stroke-width', regions ? 0.1 : 3);
@@ -352,7 +366,7 @@ function bumpChart() {
     if (regions) {
       svg.selectAll('.y2').attr('display', null);
       svg.selectAll('.y').attr('display', 'none');
-      
+
       d3.select(this).text("Show Individual Countries");
       circles.transition()
         .duration(2000)
@@ -375,7 +389,7 @@ function bumpChart() {
       d3.select(this).text("Group by Region");
       svg.selectAll('.y2').attr('display', 'none');
       svg.selectAll('.y').attr('display', null);
-      
+
       circles.transition()
         .duration(2000)
         .delay(500)
@@ -410,6 +424,53 @@ function bumpChart() {
     let country = this.getAttribute('data-cCode');
     svg.selectAll("[data-cCode=" + country + "]").classed('hover', true);
 
+    let data = window.isoCodeToDataAllYears[country];
+
+    let x = d3.event.pageX;
+    let y = d3.event.pageY;
+
+    let self = d3.select(this);
+    let location = self.node().getBoundingClientRect();
+
+    let aboveScreen = location.top < 0;
+    let belowScreen = location.bottom > window.innerHeight;
+    let leftOfScreen = location.left < 0;
+    let rightOfScreen = location.left > window.innerWidth;
+
+    y = aboveScreen ? window.scrollY + 190 :
+      belowScreen ? window.innerHeight + 10 :
+      location.top + window.scrollY;
+
+    x = leftOfScreen ? 0 :
+      rightOfScreen ? window.innerWidth - 120 :
+      location.left + window.scrollX;
+
+
+    tooltip.classed('upsideDown', aboveScreen);
+    let tipContent = tooltip.select('#content');
+    tipContent.selectAll('*').remove();
+
+    tipContent.data(data)
+
+    tipContent
+      .append('h4')
+      .text(data[0].country);
+
+    tipContent.selectAll('p').data(data).enter()
+      .append('p')
+      .text(function (d) {
+        return d.year + ": " + d.happiness_rank;
+      });
+
+    //    tooltip.style("left", (d3.event.pageX - 50) + "px")
+    //      .style("top", (d3.event.pageY - 95) + "px");
+
+    tooltip.style("left", (x - 50) + "px")
+      .style("top", (y - 95) + "px");
+
+    tooltip.style('display', 'inline-block');
+
+    tipContent.exit().remove()
 
     let points = svg.selectAll("[data-cCode=" + country + "]" + '.point')
     pulse(country);
@@ -439,6 +500,7 @@ function bumpChart() {
     let country = this.getAttribute('data-cCode');
     svg.selectAll("[data-cCode=" + country + "]").classed('hover', false);
 
+    tooltip.style('display', 'none')
   }
 
   svg.selectAll(".rank, .point, .label")
@@ -475,5 +537,5 @@ function bumpChart() {
       .attr('y', rectScale(y))
       .attr('x', 0);
   })
-
+  d3.select('#aggregationSwitch').dispatch('click');
 }

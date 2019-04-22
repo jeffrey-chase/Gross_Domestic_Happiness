@@ -13,6 +13,13 @@
       window.isoCodeToData[d.ISO3] = d;
     })
 
+    window.isoCodeToDataAllYears = {}
+    window.indicators.forEach(function (d) {
+      if (!(d.ISO3 in window.isoCodeToDataAllYears)){
+        window.isoCodeToDataAllYears[d.ISO3] = [];
+      } 
+      window.isoCodeToDataAllYears[d.ISO3].push(d);
+    })
     
     window.geoData.features.forEach((e) => {
       let polygon = e.geometry;
