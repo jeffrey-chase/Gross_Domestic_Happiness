@@ -528,7 +528,7 @@ span.popup-value {
   }
   
   #mapcontrols {
-    font-size: 6pt;
+    font-size: 10pt;
   }
   header:not(.intro) {
     font-size: 0.75em ;
@@ -536,7 +536,7 @@ span.popup-value {
   }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 900px) {
   #maparea {
     width: calc(90% - 250px);
   }
@@ -550,9 +550,15 @@ span.popup-value {
   
   #mapcontrols {
     font-size: 6pt;
+    flex-flow: row wrap;
+  }
+  
+  .dropdown ul ul li {
+    flex-flow: column nowrap;
   }
   
   .x.axis text {
     font-size: 5pt;
   }
+  
 }
