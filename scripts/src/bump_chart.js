@@ -261,6 +261,7 @@ function bumpChart(width) {
 
   d3.select('#aggregationSwitch').on('click', function (e) {
     window.regions = !window.regions;
+    svg.selectAll('.activated, .hover').classed('activated', false).classed('hover', false);
     svg.selectAll('path.rank')
       .transition()
       .duration(2000)

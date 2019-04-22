@@ -545,6 +545,11 @@ span.popup-value {
   #mapcontrols {
     width: calc(90% - 300px);
   }
+  
+  #legend text {
+    font-size: 0.7em;
+  }
+  
 
   #bump-chart {
     right: 0;
