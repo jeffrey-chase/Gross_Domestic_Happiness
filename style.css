@@ -514,3 +514,12 @@ span.popup-value {
   letter-spacing: 0.1em;
 
 }
+
+@media only screen and (max-width: 1300px) {
+  #maparea {
+    width: calc(80% - 300px);
+  }
+  #mapcontrols {
+    width: calc(80% - 400px);
+  }
+}

@@ -88,5 +88,34 @@
       .range(d3.quantize(d3.interpolateRainbow, 20))
     mapDraw();
     bumpChart();
+
+    function resizer(e, cutoff) {
+      if (window.innerWidth > 1000) {
+        return false;
+      }
+
+      let newWidth = cutoff === 1000 ? 300 : 250;
+      let newCutoff = cutoff === 1000 ? 800 : 600;
+
+      let enlargeWidth = cutoff === 1000 ? 400 : 300;
+      let enlargeCutoff = cutoff + 200;
+
+      if (window.innerHeight < cutoff) {
+        bumpChart(newWidth);
+        window.onresize = (e) => {
+          resizer(e, newCutoff)
+        }
+      } else {
+        bumpChart(enlargeWidth);
+        window.onresize = (e) => {
+          resizer(e, enlargeCutoff)
+        }
+      }
+    }
+
+    window.onresize = function (e) {
+      resizer(e, 1000)
+    }
+    d3.select('#aggregationSwitch').dispatch('click');
   })
 })(window);

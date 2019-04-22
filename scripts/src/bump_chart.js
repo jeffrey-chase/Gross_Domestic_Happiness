@@ -1,17 +1,22 @@
 "use strict";
 
-function bumpChart() {
+function bumpChart(width) {
   // Parent element to contain the svg
   const parent = d3.select('#bump-chart');
 
   // Total dimensions of the svg/chart
-  const width = 400;
+  if (width === undefined) {
+    width = 400;
+  }
   const height = 2000;
 
   // Svg to draw the chart on
+  parent.select('svg').remove();
   const svg = parent.append('svg')
     .attr('width', width + "px")
     .attr('height', height + "px");
+
+
 
   //    let zoomHandler = d3.zoom()
   //      .scaleExtent([1, 5])
@@ -190,10 +195,10 @@ function bumpChart() {
       return d.country;
     })
     .attr('data-reg-text', function (d) {
-      return d.region === undefined || d.region === ''? 'Other' :d.region;
+      return d.region === undefined || d.region === '' ? 'Other' : d.region;
     })
     .attr('data-reg-fill', function (d) {
-      return d.region === undefined || d.region === ''? '#aaa' : regionScale(d.region);
+      return d.region === undefined || d.region === '' ? '#aaa' : regionScale(d.region);
     })
     .attr('data-reg-y', function (d) {
       let data = regionValues[d.region];
@@ -234,7 +239,7 @@ function bumpChart() {
     })
     .attr('data-reg-stroke', function (d) {
       return d.values[0].value.region === undefined || d.values[0].value.region === '' ?
-        '#aaa': regionScale(d.values[0].value.region);
+        '#aaa' : regionScale(d.values[0].value.region);
     })
     .attr('stroke-width', 3)
     .attr('fill', 'none')
@@ -414,7 +419,8 @@ function bumpChart() {
 
   }
 
-  function highlight() {
+  function highlight(fromMap) {
+    console.log(this);
     let activated = this.classList.contains('activated');
     let index = activated ? 2 : 1,
       sizeBig = activated ? 5 : 6,
@@ -472,10 +478,14 @@ function bumpChart() {
 
     let points = svg.selectAll("[data-cCode=" + country + "]" + '.point')
     pulse(country);
-    
-    console.log(window.isoCodeToLayer[country]);
-    window.isoCodeToLayer[country].fire('mouseover', {origin: 'map'});
 
+    console.log(d3.event.detail.fromMap)
+    if (d3.event.detail.fromMap !== true) {
+      window.isoCodeToLayer[country].fire('mouseover');
+
+    } else {
+
+    }
 
     function pulse(country) {
       if (svg.selectAll("[data-cCode=" + country + "]").classed('hover')) {
@@ -538,5 +548,4 @@ function bumpChart() {
       .attr('y', rectScale(y))
       .attr('x', 0);
   })
-  d3.select('#aggregationSwitch').dispatch('click');
 }

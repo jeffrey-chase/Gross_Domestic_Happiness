@@ -98,8 +98,8 @@ function mapDraw() {
       window.isoCodeToLayer[l.feature.properties.iso_a3] = l;
 
       let center = l.feature.properties.center;
+      l.on('mouseover', function (e, fromChart) {
 
-      l.on('mouseover', function (e) {
         let name = l.feature.properties.name;
 
         let rank;
@@ -145,9 +145,8 @@ function mapDraw() {
           dashArray: null
         });
 
-        if (origin === undefined) {
-          d3.select(".label" + id).dispatch('mouseover');
-        }
+
+        d3.select(".label" + id).dispatch('mouseover', {detail: {fromMap: true}});
 
       });
 
