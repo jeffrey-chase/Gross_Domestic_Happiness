@@ -462,9 +462,14 @@ function bumpChart(width) {
 
     tipContent.selectAll('p').data(data).enter()
       .append('p')
+      .text(function(d){
+      return d.year + ": ";
+    })
+      .append('span')
       .text(function (d) {
-        return d.year + ": " + d.happiness_rank;
-      });
+        return d.happiness_rank;
+      })
+      .attr('class', 'popup-value');
 
     //    tooltip.style("left", (d3.event.pageX - 50) + "px")
     //      .style("top", (d3.event.pageY - 95) + "px");

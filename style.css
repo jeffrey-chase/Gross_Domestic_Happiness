@@ -321,14 +321,16 @@ article > div {
   white-space: normal;
 }
 
-#tooltip > * {}
-
-
 #tooltip #content {
   margin: 0 !important;
   padding: 10px !important;
   height: 60px;
   width: 100px;
+}
+
+#content p {
+  font-weight: bold;
+  
 }
 
 #tooltip.upsideDown .leaflet-popup-tip-container {
