@@ -15,12 +15,12 @@
 
     window.isoCodeToDataAllYears = {}
     window.indicators.forEach(function (d) {
-      if (!(d.ISO3 in window.isoCodeToDataAllYears)){
+      if (!(d.ISO3 in window.isoCodeToDataAllYears)) {
         window.isoCodeToDataAllYears[d.ISO3] = [];
-      } 
+      }
       window.isoCodeToDataAllYears[d.ISO3].push(d);
     })
-    
+
     window.geoData.features.forEach((e) => {
       let polygon = e.geometry;
       if (polygon.type === "MultiPolygon") {
@@ -45,7 +45,7 @@
         window.isoCodeToData[e.properties.iso_a3].region = e.properties.subregion || 'Other';
       }
     });
-    
+
     window.indicators.forEach((e) => {
       e.region = window.isoCodeToData[e.ISO3].region;
     });
@@ -59,7 +59,7 @@
       .rollup(function (v) {
         return {
           happiness_rank: v[0].happiness_rank,
-          ISO3: v[0].ISO3, 
+          ISO3: v[0].ISO3,
           region: v[0].region
         };
       })
@@ -82,11 +82,11 @@
       })
       .entries(window.indicators);
 
-    
+
     window.regScale = d3.scaleOrdinal()
-      .domain(window.regionSummaries.map((e)=> e.key))
+      .domain(window.regionSummaries.map((e) => e.key))
       .range(d3.quantize(d3.interpolateRainbow, 20))
-    bumpChart();
     mapDraw();
+    bumpChart();
   })
 })(window);

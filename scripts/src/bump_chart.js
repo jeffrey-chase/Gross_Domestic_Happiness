@@ -472,6 +472,9 @@ function bumpChart() {
 
     let points = svg.selectAll("[data-cCode=" + country + "]" + '.point')
     pulse(country);
+    
+    console.log(window.isoCodeToLayer[country]);
+    window.isoCodeToLayer[country].fire('mouseover', {origin: 'map'});
 
 
     function pulse(country) {

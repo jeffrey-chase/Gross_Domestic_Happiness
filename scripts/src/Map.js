@@ -92,9 +92,11 @@ function mapDraw() {
       style: countryStyle
     });
 
+    window.isoCodeToLayer = {};
     countriesLayer.eachLayer(function (l) {
-
       let id = "[data-cCode=" + l.feature.properties.iso_a3 + "]";
+      window.isoCodeToLayer[l.feature.properties.iso_a3] = l;
+
       let center = l.feature.properties.center;
 
       l.on('mouseover', function (e) {
@@ -142,7 +144,10 @@ function mapDraw() {
           weight: 4,
           dashArray: null
         });
-        d3.select(".label" + id).dispatch('mouseover');
+
+        if (origin === undefined) {
+          d3.select(".label" + id).dispatch('mouseover');
+        }
 
       });
 
@@ -168,7 +173,7 @@ function mapDraw() {
               .style('fill', null)
               .duration(1000)
               .delay(0);
-          label.dispatch('mouseover')
+            label.dispatch('mouseover')
           });
 
 
