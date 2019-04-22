@@ -250,13 +250,7 @@ function bumpChart(width) {
     .attr('y', -20)
 
   xaxisContainer.call(xaxis2);
-
-
-
-
-
-  let regions = false;
-
+  
   function attrSwitch(self, attr, regAttr) {
     if (regions) {
       return self.attr(regAttr);
@@ -266,7 +260,7 @@ function bumpChart(width) {
   }
 
   d3.select('#aggregationSwitch').on('click', function (e) {
-    regions = !regions;
+    window.regions = !window.regions;
     svg.selectAll('path.rank')
       .transition()
       .duration(2000)
@@ -279,7 +273,7 @@ function bumpChart(width) {
         let self = d3.select(this)
         return attrSwitch(self, 'data-stroke', 'data-reg-stroke');
       })
-      .attr('stroke-width', regions ? 0.1 : 3);
+      .attr('stroke-width', window.regions ? 0.1 : 3);
 
     svg.selectAll('.label')
       .transition()
@@ -304,7 +298,7 @@ function bumpChart(width) {
             });
         }
       });
-    if (regions) {
+    if (window.regions) {
       svg.selectAll('.y2').attr('display', null);
       svg.selectAll('.y').attr('display', 'none');
 
@@ -345,6 +339,9 @@ function bumpChart(width) {
     }
   });
 
+  if(window.regions){
+    d3.select('#aggregationSwitch').dispatch('click');
+  }
 
   function activate() {
     if (this.classList.contains('activated')) {
@@ -367,9 +364,6 @@ function bumpChart(width) {
 
     let data = window.isoCodeToDataAllYears[country];
 
-    let x = d3.event.pageX;
-    let y = d3.event.pageY;
-
     let self = d3.select(this);
     let location = self.node().getBoundingClientRect();
 
@@ -378,11 +372,11 @@ function bumpChart(width) {
     let leftOfScreen = location.left < 0;
     let rightOfScreen = location.left > window.innerWidth;
 
-    y = aboveScreen ? window.scrollY + 190 :
+    let y = aboveScreen ? window.scrollY + 190 :
       belowScreen ? window.innerHeight + 10 :
       location.top + window.scrollY;
 
-    x = leftOfScreen ? 0 :
+    let x = leftOfScreen ? 0 :
       rightOfScreen ? window.innerWidth - 120 :
       location.left + window.scrollX;
 

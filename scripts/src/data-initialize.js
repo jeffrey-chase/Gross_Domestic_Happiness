@@ -86,27 +86,27 @@
     window.regScale = d3.scaleOrdinal()
       .domain(window.regionSummaries.map((e) => e.key))
       .range(d3.quantize(d3.interpolateRainbow, 20))
+    
+    window.regions = false;
+    
     mapDraw();
     bumpChart();
 
     function resizer(e, cutoff, growCutoff) {
       if (window.innerWidth > 1201 || (window.innerWidth > cutoff && window.innerWidth < growCutoff)) {
         return false;
-      } else {
-        console.log('cutoff: ' + cutoff + ' growCutoff: '+ growCutoff)
       }
+      
       let newWidth = cutoff === 1000 ? 300 : 250;
       
       let enlargeWidth = window.innerWidth >= 1000 ? 400 : 300;
 
       if (window.innerWidth < cutoff) {
-        console.log('shrink')
         bumpChart(newWidth);
         window.onresize = (e) => {
           resizer(e, cutoff-200, cutoff);
         }
       } else if (window.innerWidth > growCutoff) {
-        console.log('expand ' + enlargeWidth);
         bumpChart(enlargeWidth);
         window.onresize = (e) => {
           resizer(e, cutoff, cutoff+200);
@@ -117,7 +117,6 @@
     window.onresize = function (e) {
       resizer(e, 1000, 1200)
     }
-    
     window.onresize();
 //    d3.select('#aggregationSwitch').dispatch('click');
   })

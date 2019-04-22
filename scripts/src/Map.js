@@ -1,5 +1,4 @@
 function mapDraw() {
-  console.log('mapdraw');
   let center = new L.LatLng(30, 0);
   const mymap = L.map('maparea', {
     zoomSnap: 0.25
@@ -18,7 +17,6 @@ function mapDraw() {
     maxBoundsViscosity: 1.0
   }).addTo(mymap).setZIndex(1);
 
-  console.log(window.indicators);
   let info = window.indicators;
 
   info = info.filter(function (d) {
@@ -32,8 +30,6 @@ function mapDraw() {
     if (selectedVar === undefined) {
       selectedVar = 'happiness_rank';
     }
-
-    console.log('refresh layers')
 
     let fillScale = d3.scaleLinear()
       .domain(d3.extent(info.map(function (d) {
@@ -63,7 +59,6 @@ function mapDraw() {
       try {
         fill = getFill(+mapping[feature.properties.iso_a3][selectedVar]);
       } catch (err) {
-        //        console.log('failed for ' + feature.properties.iso_a3);
         fill = '#555'
       }
 
@@ -177,10 +172,8 @@ function mapDraw() {
 
 
         let svg = document.querySelector('#bump-chart svg');
-        console.log('scroll');
 
         let elemY = parseFloat(document.querySelector(".label" + id).getAttribute('y'));
-        console.log(elemY);
         let svgY = svg.getBoundingClientRect().y
         let y = -document.body.getBoundingClientRect().top + (svgY + elemY);
 
@@ -189,7 +182,6 @@ function mapDraw() {
 
         let newPosition = y - middle;
 
-        console.log(y + ' ' + middle);
         window.scrollTo({
           top: newPosition,
           behavior: 'smooth'

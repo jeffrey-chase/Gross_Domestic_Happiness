@@ -3,17 +3,17 @@ html {
 }
 
 header {
-  color: #f442e8;
-  top: 0;
-  left: 0;
-  position: fixed;
-  height: 60px;
-  width: 100%;
-  transition-duration: 1s;
-  border-bottom: 5px solid #aaa;
   background: #2d1f36;
+  border-bottom: 5px solid #aaa;
+  color: #f442e8;
+  height: 60px;
+  left: 0;
   margin: 0;
   padding: 10px;
+  position: fixed;
+  transition-duration: 1s;
+  top: 0;
+  width: 100%;
   z-index: 100;
 
 }
@@ -239,6 +239,7 @@ article > div {
   font-size: 0.75em;
   flex: 1 1 0;
   margin: 0 2.5px;
+  max-width: 90px;
   padding: 5px;
   transition-duration: 1s;
 }
@@ -328,7 +329,6 @@ article > div {
 
 #content p {
   font-weight: bold;
-  
 }
 
 #tooltip.upsideDown .leaflet-popup-tip-container {
@@ -337,7 +337,6 @@ article > div {
 }
 
 #bump-chart svg {
-
   margin-top: 20px;
 }
 
@@ -519,19 +518,21 @@ span.popup-value {
   #maparea {
     width: calc(90% - 350px);
   }
+
   #mapcontrols {
     width: calc(90% - 450px);
   }
-  
+
   #bump-chart {
     right: 0;
   }
-  
+
   #mapcontrols {
     font-size: 10pt;
   }
+
   header:not(.intro) {
-    font-size: 0.75em ;
+    font-size: 0.75em;
     white-space: nowrap;
   }
 }
@@ -540,25 +541,26 @@ span.popup-value {
   #maparea {
     width: calc(90% - 250px);
   }
+
   #mapcontrols {
     width: calc(90% - 300px);
   }
-  
+
   #bump-chart {
     right: 0;
   }
-  
+
   #mapcontrols {
     font-size: 6pt;
     flex-flow: row wrap;
   }
-  
+
   .dropdown ul ul li {
     flex-flow: column nowrap;
   }
-  
+
   .x.axis text {
     font-size: 5pt;
   }
-  
+
 }
