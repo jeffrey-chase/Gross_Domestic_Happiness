@@ -270,7 +270,7 @@ article > div {
 #maparea {
   position: fixed;
   left: 1%;
-/*  left: 4%;*/
+  /*  left: 4%;*/
   height: 500px;
   /*  width: 600px;*/
   /*  height: 375px;*/
@@ -292,10 +292,25 @@ article > div {
   background: black;
   color: white;
   position: absolute;
-  top: 0; right: 25%; left: 25%;
+  top: 0;
+  right: 25%;
+  left: 25%;
   width: 200px;
 }
 
+#aggregationSwitch:hover {
+  background: black;
+  color: #F5CDFF;
+  border-color: #F5CDFF;
+
+}
+
+#aggregationSwitch:active {
+  background: #F5CDFF;
+  color: black;
+  border-color: #F5CDFF;
+
+}
 
 #bump-chart svg {
   margin-top: 20px;
@@ -316,7 +331,8 @@ article > div {
   font-weight: bold;
 }
 
-.x.axis text, .x2.axis text {
+.x.axis text,
+.x2.axis text {
   font-size: 10pt;
 }
 
@@ -339,7 +355,7 @@ text {
     Helvetica, Arial,
     "Lucida Grande",
     sans-serif;
-/*  fill: white;*/
+  /*  fill: white;*/
   font-weight: bold;
   font-size: 6pt;
   text-transform: uppercase;

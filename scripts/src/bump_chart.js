@@ -95,6 +95,11 @@ function bumpChart() {
     .ticks(nested.length)
     .tickSize(-(width - 150))
     .tickFormat(d3.format(""));
+  
+  let y2axis = d3.axisLeft()
+    .scale(yScale)
+    .ticks(16)
+    .tickSize(2)
 
   g.append("g")
     .attr('class', 'y axis')
@@ -105,6 +110,13 @@ function bumpChart() {
     .attr("class", "x2 axis")
     .attr("transform", "translate(0," + (height - 20) + ")")
     .call(xaxis);
+  
+  g.append("g")
+    .attr("class", "y2 axis")
+    .attr("transform", "translate(" + 30 + ", 0)")
+    .attr('display', 'none')
+    .call(y2axis);
+
 
   let circles = g.append('g').selectAll("circle.point").data(data).enter()
     .append('circle')
@@ -307,6 +319,7 @@ function bumpChart() {
       })
       .attr('stroke', function (d) {
         let self = d3.select(this)
+        
         return attrSwitch(self, 'data-stroke', 'data-reg-stroke');
       })
       .attr('stroke-width', regions ? 0.1 : 3);
@@ -317,7 +330,8 @@ function bumpChart() {
       .delay(500)
       .attr('fill', function (d) {
         let self = d3.select(this);
-        return attrSwitch(self, 'data-fill', 'data-reg-fill');
+        let region = self.attr('data-reg-text');
+        return region === '' || region == undefined ? '#aaa' : attrSwitch(self, 'data-fill', 'data-reg-fill');
       })
       .attr('y', function (d) {
         let self = d3.select(this);
@@ -330,11 +344,15 @@ function bumpChart() {
         if (regions) {
           d3.select(this)
             .text(() => {
-              return d3.select(this).attr('data-reg-text');
+              let region = d3.select(this).attr('data-reg-text');
+              return region === '' || region == undefined ? "Other" : region;
             });
         }
       });
     if (regions) {
+      svg.selectAll('.y2').attr('display', null);
+      svg.selectAll('.y').attr('display', 'none');
+      
       d3.select(this).text("Show Individual Countries");
       circles.transition()
         .duration(2000)
@@ -354,8 +372,10 @@ function bumpChart() {
         .duration(2000)
         .delay(500).attr('height', height * 0.6)
     } else {
-      d3.select(this).text("Show Individual Countries");
-
+      d3.select(this).text("Group by Region");
+      svg.selectAll('.y2').attr('display', 'none');
+      svg.selectAll('.y').attr('display', null);
+      
       circles.transition()
         .duration(2000)
         .delay(500)
