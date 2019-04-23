@@ -20,8 +20,8 @@ header {
 }
 
 footer {
-/*  position: absolute;*/
-  bottom: 0;
+  position: relative;
+  bottom: -100px;
   background: #2d1f36;
   border-top: 5px solid #aaa;
 /*  color: #f442e8;*/
@@ -29,10 +29,11 @@ footer {
   left: 0;
   margin-top: 2100px;
   padding: 10px;
+  pointer-events: none;
   text-align: center;
   transition-duration: 1s;
   width: 100%;
-  z-index: 1000;
+  z-index: 2;
 }
 
 
@@ -303,7 +304,6 @@ article > div {
   height: 500px;
   transform: translate(0, 50px);
   width: 800px;
-  z-index: -1;
 }
 
 #bump-chart {
