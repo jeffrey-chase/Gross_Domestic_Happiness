@@ -233,7 +233,7 @@ function bumpChart(width) {
         moves += ("L " +
           xScale(+data[i].key) + " " +
           // yScale(+data[i].value + Math.random() * noiseMag - noiseMag / 2) + " ");
-          (yScale(+data[i].value + (+d.values[i].value.happiness_rank - +data[0].value/2) / 60)) + ' ');
+          (yScale(+data[i].value + (+d.values[i].value.happiness_rank - +data[i].value/2) / 60)) + ' ');
       }
       return start + moves;
     });
