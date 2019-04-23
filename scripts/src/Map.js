@@ -129,7 +129,7 @@ function mapDraw() {
             center.geometry.coordinates[0]))
           .setContent(content).openOn(mymap);
         this.setStyle({
-          fillOpacity: 0.8,
+          fillOpacity: 1,
           weight: 4,
           dashArray: null
         });

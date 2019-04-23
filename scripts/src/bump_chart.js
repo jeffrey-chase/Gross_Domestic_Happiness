@@ -227,13 +227,13 @@ function bumpChart(width) {
       let start = "M " +
         xScale(+data[0].key) + " " +
         // yScale(+data[0].value + Math.random() * noiseMag - noiseMag / 2) + ' ';
-        (yScale(+data[0].value + +d.values[0].value.happiness_rank / 70)) + ' ';
+        (yScale(+data[0].value + ( +d.values[0].value.happiness_rank - +data[0].value/2) / 60)) + ' ';
       let moves = "";
       for (let i = 1; i < d.values.length; i++) {
         moves += ("L " +
           xScale(+data[i].key) + " " +
           // yScale(+data[i].value + Math.random() * noiseMag - noiseMag / 2) + " ");
-          (yScale(+data[i].value + +d.values[i].value.happiness_rank / 70)) + ' ');
+          (yScale(+data[i].value + (+d.values[i].value.happiness_rank - +data[0].value/2) / 60)) + ' ');
       }
       return start + moves;
     });
