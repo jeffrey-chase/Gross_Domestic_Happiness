@@ -70,7 +70,7 @@ function mapDraw() {
         opacity: 0.6,
         color: getColor(feature.properties.subregion),
         dashArray: '1',
-        fillOpacity: 0.8,
+        fillOpacity: 1,
         fillColor: fill
       };
     }
