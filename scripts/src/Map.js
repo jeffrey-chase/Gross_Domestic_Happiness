@@ -67,21 +67,11 @@ function mapDraw() {
         opacity: 0.6,
         color: getColor(feature.properties.subregion),
         dashArray: '1',
-        fillOpacity: 0.8,
+        fillOpacity: 1,
         fillColor: fill
       };
     }
 
-    function countryStyleEmphasized(feature) {
-      return {
-        weight: 3,
-        opacity: 1,
-        color: 'white',
-        dashArray: '1',
-        fillOpacity: 0.8,
-        fillColor: getColor(+mapping[feature.properties.iso_a3][selectedVar])
-      };
-    }
 
     let countriesLayer = L.geoJson(geoData, {
       style: countryStyle
