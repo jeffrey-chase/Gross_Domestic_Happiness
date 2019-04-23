@@ -7,13 +7,16 @@ function makeSafeId(text) {
 (function () {
   window.onload = function () {
     document.querySelector('#restart').onclick = restart;
-    
+
     animate();
     window.onscroll = animate;
-    let ar = document.querySelector("#down-arrow");
+    let ar = document.querySelectorAll(".down-arrow");
     setTimeout(function () {
-      ar.style.opacity = 1;
+      ar[0].style.opacity = 1;
     }, 600);
+    setTimeout(function () {
+      ar[1].style.opacity = 1;
+    }, 3000);
   }
 
 
@@ -32,7 +35,7 @@ function makeSafeId(text) {
     } else {
       h.style.color = d3.interpolateRgb("#f442e8", "rgb(255,255,255)")(window.scrollY / 200);
     }
-    if (window.scrollY > contentBottom + window.innerHeight) {
+    if (contentBottom < 50) {
       h.classList.remove('intro');
       content.classList.add('gone');
       guide.classList.remove('hidden');
@@ -60,8 +63,8 @@ function makeSafeId(text) {
 
       }, 100);
 
-      document.querySelector("#down-arrow").style.display = "none";
-
+      document.querySelectorAll(".down-arrow")[0].style.display = "none";
+      document.querySelectorAll(".down-arrow")[1].style.display = "none";
     }
 
   }
@@ -75,11 +78,15 @@ function makeSafeId(text) {
     mapControls.style.transform = "translateY(" + (scroll + 5) + "px)";
   }
 
-  function restart(){
-    window.scrollTo({top: 0, behavior: 'smooth'});
-//    document.location.reload(false); // force restart
-    let ar = document.querySelector("#down-arrow");
-    ar.style.opacity = 1;    
+  function restart() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    //    document.location.reload(false); // force restart
+    let ars = document.querySelectorAll(".down-arrow");
+    ars[0].style.opacity = 1;
+    ars[1].style.opacity = 1;
     
     let content = document.querySelector("header .container");
     let guide = document.querySelector(".dropdown");

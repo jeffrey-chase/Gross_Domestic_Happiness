@@ -2,6 +2,7 @@ html {
   margin: 0px;
 }
 
+
 header {
   background: #2d1f36;
   border-bottom: 5px solid #aaa;
@@ -17,6 +18,24 @@ header {
   z-index: 100;
 
 }
+
+footer {
+/*  position: absolute;*/
+  bottom: 0;
+  background: #2d1f36;
+  border-top: 5px solid #aaa;
+/*  color: #f442e8;*/
+  height: 100px;
+  left: 0;
+  margin-top: 2100px;
+  padding: 10px;
+  text-align: center;
+  transition-duration: 1s;
+  width: 100%;
+  z-index: 1000;
+}
+
+
 
 .dropdown {
   cursor: help;
@@ -117,7 +136,6 @@ header {
 }
 
 .intro {
-  top: 0;
   position: absolute;
   height: calc(2000px + 100vh);
 }
@@ -190,9 +208,10 @@ h1 {
   text-transform: uppercase;
 }
 
-#down-arrow {
+.down-arrow {
   display: block;
   color: #f442e8;
+  text-align: center;
   transition-duration: 3s;
   font-size: 90px;
   opacity: 0;
@@ -211,6 +230,16 @@ article {
 button,
 a {
   cursor: pointer;
+}
+
+a, a:active, a:visited {
+  color: #F5CDFF ;
+  text-decoration: none ;
+}
+
+a:hover {
+  border-bottom: 2px solid #f442e8;
+  color: #f442e8;
 }
 
 article > div {
@@ -271,12 +300,10 @@ article > div {
 #maparea {
   position: fixed;
   left: 1%;
-  /*  left: 4%;*/
   height: 500px;
-  /*  width: 600px;*/
-  /*  height: 375px;*/
   transform: translate(0, 50px);
   width: 800px;
+  z-index: -1;
 }
 
 #bump-chart {

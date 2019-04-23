@@ -371,7 +371,7 @@ function bumpChart(width) {
     let aboveScreen = location.top < 0;
     let belowScreen = location.bottom > window.innerHeight;
     let leftOfScreen = location.left < 0;
-    let rightOfScreen = location.left > window.innerWidth;
+    let rightOfScreen =  location.left > window.innerWidth;
 
     let y = aboveScreen ? window.scrollY + 190 :
       belowScreen ? window.innerHeight + 10 :

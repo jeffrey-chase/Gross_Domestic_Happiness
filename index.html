@@ -25,29 +25,26 @@
 <body>
   <header class="intro">
     <h1>Gross Domestic Happiness
-      <span id="down-arrow">↓</span></h1>
+      <span class="down-arrow">↓</span></h1>
 
 
     <div class="container">
+      <p>
+        The dataset used to generate this visualization comes from the <a href="https://worldhappiness.report/ed/2019/" target="_blank"> 2019 World Happiness Report </a> (data sources: <a href="https://s3.amazonaws.com/happiness-report/2019/Chapter2OnlineData.xls"> 2018</a>, <a href="https://www.kaggle.com/unsdsn/world-happiness">2015-17</a>) produced by the United Nations Sustainable Development Solutions Network.
+      </p>
 
-      <!--      <button>Welcome to our Visualization</button>-->
+      <p> The project involved a survey of people's personal subjective happiness in 155 countries around the world from 2015&mdash;2018. A total happiness score was generated for each country by taking these personal ratings (on an ordinal scale of 1&mdash;10) and then aggregating them. </p>
 
-      <!--//text is just place holder for now-->
+      <p> This variable was then compared to various country-level predictors of a country's happiness to score and each variable was then normalized based on its predicted contribution to the happiness score. Note that as they are scored based on their relation to the happiness score, the variables are not in their original values.</p>
 
-      <p>The data set used to produce this visualization is in the form of a table with 155 rows each representing a different country (primary item type)
-        and six different columns each representing a unique ordinal attribute served quantitatively by numbers representing the attribute's value for the
-        corresponding item</p>
-
-      <p>These numbers are an estimate magnitude of six factors:</p>
-      <p><b>1.</b> Gross Domestic Product</p>
-      <p><b>2.</b> Social Support</p>
-      <p><b>3.</b> Expectancy</p>
-      <p><b>4.</b> Freedom</p>
-      <p><b>5.</b> Generosity</p>
-      <p><b>6.</b> Gov. Corruption</p>
-
-      <p>When combined these attributes have produced a list of the happiest countries in the world.</p>
-
+      <p>These are the six predictors that they identified and scored:</p>
+      <p><b>1. Economy:</b> measured as the country's gross domestic product per capita</p>
+      <p><b>2. Family:</b> measured as the level of social support</p>
+      <p><b>3. Health: </b>measured as the average life expectancy of the country's population</p>
+      <p><b>4. Freedom:</b> measured from survey questions on whether people felt satisified with their levels of personal freedom</p>
+      <p><b>5. Generosity:</b> measured by comparing GDP per capita to the proportion of people who reported donating to a charity</p>
+      <p><b>6. Trust:</b> measured by the proportion of people who view the government or businesses as corrupt</p>
+      <p><span class="down-arrow">↓</span></p>
     </div>
     <button class='hidden' id="restart" title="Back to top. Click to review the introduction again">↑</button>
   </header>
@@ -69,7 +66,6 @@
               <span> <strong>Hover:</strong> temporarily highlight </span>
               <span> <strong>Click:</strong> toggle permanent highlight</span>
               <span> <strong>Click Button:</strong> switch between country and regional views</span>
-
             </li>
           </ul>
         </li>
@@ -79,13 +75,13 @@
   <article>
 
     <div id="mapcontrols">
-      <button id="score-button" data-var='happiness_score' class="picked" title="insert description here">Happiness Score</button>
-      <button id="gdp-button" data-var='economy' title="GDP per Capita is in terms of Purchasing Power Parity (PPP) adjusted to constant 2011 international dollars, taken from the World Development Indicators (WDI) Released by the World Bank in August 2016.">Economy</button>
-      <button id="soc-support-button" data-var='family' title="Social Support is the national average of the binary responses (either 0 or 1) to the Gallup World Poll (GWP) question: If you were in trouble, do you have relatives or friends you can count on to help you where you need them, or not.">Family</button>
-      <button id="health-button" data-var='health' title="The time series of healthy life expectancy at birth are constructed based in data from the World Health Organization (WHO).">Health</button>
-      <button id='freedom-button' data-var='freedom' title="Freedom to make life choices is the national average of binary responses to the WGP question: Are you satisfied or dissatisfied with your freedom to choose what you do with your life."> Freedom </button>
-      <button id='generosity-button' data-var='generosity' title="Generosity is the residual or regressing the national average of GWP responses to the question: Have you donated money to a charity in the past month? on GDP per capita.">Generosity</button>
-      <button id='corruption-button' data-var='trust' title="Perceptions of corruption are the average of binary responses to two GWP questions: 1. Is corruption widespread throughout the government or not? 2. Is corruption widespread within businesses or not?.">Trust</button>
+      <button id="score-button" data-var='happiness_score' class="picked" title="Average happiness score based on surveying individuals and asking them to rank how subjectively happy they felt on a scale of 1–10">Happiness Score</button>
+      <button id="gdp-button" data-var='economy' title="Measured as GDP per capita in terms of Purchasing Power Parity (PPP) adjusted to constant 2011 international dollars. This was originally  taken from the World Development Indicators (WDI) released by the World Bank.">Economy</button>
+      <button id="soc-support-button" data-var='family' title='Measured as the level of social support, which is the national average of the binary responses (either 0 or 1) to the Gallup World Poll question: "If you were in trouble, do you have relatives or friends you can count on to help you where you need them, or not."'>Family</button>
+      <button id="health-button" data-var='health' title="Measured as the average life expectancy of the country's population based on data from the World Health Organization (WHO).">Health</button>
+      <button id='freedom-button' data-var='freedom' title='Measured as the national average of binary responses to the Gallup World Poll question: "Are you satisfied or dissatisfied with your freedom to choose what you do with your life".'> Freedom </button>
+      <button id='generosity-button' data-var='generosity' title='Generosity is the residual or regressing the national average of Gallup World Poll responses to the question: "Have you donated money to a charity in the past month?" on GDP per capita.'>Generosity</button>
+      <button id='corruption-button' data-var='trust' title='Perceptions of corruption are the average of binary responses to two Gallup World Poll questions: "1. Is corruption widespread throughout the government or not?" and 2. "Is corruption widespread within businesses or not?."'>Trust</button>
     </div>
 
     <div id="maparea">
@@ -101,14 +97,13 @@
 <script defer src="scripts/src/Map.js"></script>
 <script defer src="scripts/src/data-initialize.js"></script>
 <footer>
-  <!--
-    <div class ="wrapper">
-      <ul>
-         <p>These numbers are an estimate magnitude of six factors:</p>
-
-      </ul>
-    </div>
--->
+  <div id="authors">
+    Made by <a href="https://jeffrey-chase.github.io/" target="_blank">Jeffrey Chase</a> and Steve Rodriguez at American University
+  </div>
+  <div id="acknowledgements">
+    A project in CSC-496: Introduction to Information Visualization taught by Professor Alex Godwin.
+  </div>
+  <div id='link'><a href="https://github.com/jeffrey-chase/Gross_Domestic_Happiness">Github Repository</a></div>
 </footer>
 
 </html>
