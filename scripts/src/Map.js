@@ -19,9 +19,12 @@ function mapDraw() {
 
   let info = window.indicators;
 
+
   info = info.filter(function (d) {
     return d.year === "2018";
   });
+
+  mymap.createPane('countries');
 
   let mapping = window.isoCodeToData;
   let geoData = window.geoData;
@@ -67,14 +70,15 @@ function mapDraw() {
         opacity: 0.6,
         color: getColor(feature.properties.subregion),
         dashArray: '1',
-        fillOpacity: 1,
+        fillOpacity: 0.8,
         fillColor: fill
       };
     }
 
 
     let countriesLayer = L.geoJson(geoData, {
-      style: countryStyle
+      style: countryStyle,
+      pane: 'countries'
     });
 
     window.isoCodeToLayer = {};
@@ -125,13 +129,17 @@ function mapDraw() {
             center.geometry.coordinates[0]))
           .setContent(content).openOn(mymap);
         this.setStyle({
-          fillOpacity: 1,
+          fillOpacity: 0.8,
           weight: 4,
           dashArray: null
         });
 
 
-        d3.select(".label" + id).dispatch('mouseover', {detail: {fromMap: true}});
+        d3.select(".label" + id).dispatch('mouseover', {
+          detail: {
+            fromMap: true
+          }
+        });
 
       });
 
