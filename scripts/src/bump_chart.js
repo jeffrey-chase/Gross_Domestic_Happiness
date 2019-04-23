@@ -443,7 +443,7 @@ function bumpChart(width) {
   }
 
   function unhighlight() {
-    if (this.classList.contains('activated')) return false;
+//    if (this.classList.contains('activated')) return false;
     let country = this.getAttribute('data-cCode');
     svg.selectAll("[data-cCode=" + country + "]").classed('hover', false);
 
