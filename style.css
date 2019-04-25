@@ -22,7 +22,7 @@ header {
 footer {
   background: #1c1322;
   border-top: 5px solid #333;
-    color: #B0ABB4;
+  color: #B0ABB4;
   height: 100px;
   margin-top: 30px;
   padding: 10px;
@@ -255,7 +255,7 @@ article > div {
   position: fixed;
   left: calc(1% + 50px);
   transform: translate(0, 55px);
-  width: 700px;
+  width: calc(100% - 500px);
   z-index: 1;
 
 }
@@ -302,7 +302,7 @@ article > div {
   left: 1%;
   height: 500px;
   transform: translate(0, 50px);
-  width: 800px;
+  width: calc(100% - 500px);
 }
 
 #bump-chart {
