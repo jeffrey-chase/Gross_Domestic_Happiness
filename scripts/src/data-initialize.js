@@ -115,7 +115,7 @@
     }
 
     window.onresize = function (e) {
-      resizer(e, 1000, 1200)
+      resizer(e, 1000, 1200);
     }
     window.onresize();
 //    d3.select('#aggregationSwitch').dispatch('click');

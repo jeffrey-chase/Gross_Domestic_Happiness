@@ -462,7 +462,7 @@ function bumpChart(width) {
 
 
   window.addEventListener('scroll', function (e) {
-    let y = parseInt(window.scrollY);
+    let y = parseFloat(window.scrollY);
     //      let scale = d3.scaleLinear()
     //        .domain([0, document.getElementById('bump-chart').getBoundingClientRect().height -600])
     //        .range([0, height-window.innerHeight]);
